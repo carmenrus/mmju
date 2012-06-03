@@ -1,0 +1,32 @@
+body, input {
+        font-family: Myanmar3;
+        font-size: 13px;
+}
+
+#left {
+        float: left;
+        width: 400px;
+        padding: 10px 10px 10px 20px;
+}
+
+#right {
+        float: right;
+        width:400px;
+        padding: 20px 10px 10px 10px;
+}
+
+.lineTbl {
+	width:100%;
+	border: solid 1px #000000; border-collapse: collapse;
+}
+
+.lineTbl thead tr {
+	background-color: tan;
+}
+
+.lineTbl td {
+border: solid 1px #ff0000;
+vertical-align: top;
+padding-left: 10px;
+}
+
