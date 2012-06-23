@@ -15,6 +15,16 @@
   <url-pattern>/ep3/*</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  <servlet-name>episode4</servlet-name>
+  <servlet-class>com.mmju.jsp.ep4.BLController</servlet-class>
+  <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>episode4</servlet-name>
+  <url-pattern>*.ep4</url-pattern>
+  </servlet-mapping>
+
   <welcome-file-list>
   <welcome-file>index.html</welcome-file>
   </welcome-file-list>
