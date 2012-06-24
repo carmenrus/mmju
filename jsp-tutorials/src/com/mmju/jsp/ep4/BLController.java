@@ -54,13 +54,20 @@ public class BLController extends HttpServlet {
 			throws ServletException, IOException {
 
 		String action = this.getKey(req.getRequestURI());
-
+		req.setAttribute("action-type", req);
+		
 		if ("list".equals(action)) {
 			this.showCarList(req, resp);
 		} else if ("add".equals(action)) {
 			this.addCar(req, resp);
-		} else if ("confirm".equals(action)) {
+		} else if ("confirm".equals(action) || "details".equals(action)) {
 			this.comfirm(req, resp);
+		} else if ("update".equals(action)) {
+			
+		} else if ("delete".equals(action)) {
+			
+		} else if ("edit".equals(action)) {
+			
 		}
 
 		this.getDispetcher(req.getRequestURI()).forward(req, resp);
