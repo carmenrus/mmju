@@ -17,15 +17,15 @@
 			<table>
 				<tr>
 					<td width="180px">ကားအမည်</td>
-					<td><input type="text" name="model"></input></td>
+					<td><input type="text" name="model" /></td>
 				</tr>
 				<tr>
 					<td>ကားကုမ္ပဏီ</td>
-					<td><input type="text" name="brand"></input></td>
+					<td><input type="text" name="brand" /></td>
 				</tr>
 				<tr>
 					<td>ထုတ်လုပ်သည့်နှစ်</td>
-					<td><input type="text" name="year"></input></td>
+					<td><input type="text" name="year" /></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -34,9 +34,10 @@
 			</table>
 		</form>
 	</div>
-	
+
 	<c:import url="../episode3/ep3-14.jsp">
 		<c:param name="p" value="11"></c:param>
 	</c:import>
+
 </body>
 </html>

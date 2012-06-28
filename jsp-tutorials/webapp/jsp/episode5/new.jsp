@@ -4,6 +4,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript"  src="/js/new.js" charset="utf-8"></script>
 <c:import url="/jsp/header.jsp"></c:import>
 </head>
 <body>
@@ -13,7 +16,7 @@
 	<h3>ကားအသစ် စာရင်းသွင်းရန်</h3>
 	<div id="left">
 		<c:out value="${param.error_message}" />
-		<form action="/episode4/confirm.ep4" method="post">
+		<form action="/episode5/confirm.ep4" method="post">
 			<table>
 				<tr>
 					<td width="180px">ကားအမည်</td>
@@ -34,9 +37,6 @@
 			</table>
 		</form>
 	</div>
-	
-	<c:import url="../episode3/ep3-14.jsp">
-		<c:param name="p" value="11"></c:param>
-	</c:import>
+
 </body>
 </html>

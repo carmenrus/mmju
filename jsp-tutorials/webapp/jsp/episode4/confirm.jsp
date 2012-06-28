@@ -19,15 +19,15 @@
 			<table>
 				<tr>
 					<td width="180px">ကားအမည်</td>
-					<td><c:out value="${sessionScope.new_car.model }" /></td>
+					<td><c:out value="${new_car.model }" /></td>
 				</tr>
 				<tr>
 					<td>ကားကုမ္ပဏီ</td>
-					<td><c:out value="${sessionScope.new_car.brand }" /></td>
+					<td><c:out value="${new_car.brand }" /></td>
 				</tr>
 				<tr>
 					<td>ထုတ်လုပ်သည့်နှစ်</td>
-					<td><c:out value="${sessionScope.new_car.year }" /></td>
+					<td><c:out value="${new_car.year }" /></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input onclick="javascript:history.back();"

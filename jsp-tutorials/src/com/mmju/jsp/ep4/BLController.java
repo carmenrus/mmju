@@ -16,7 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.mmju.jsp.ep2.Car;
 
@@ -55,85 +54,80 @@ public class BLController extends HttpServlet {
 
 		String action = this.getKey(req.getRequestURI());
 		req.setAttribute("action-type", req);
-		
-		if ("list".equals(action)) {
-			this.showCarList(req, resp);
-		} else if ("add".equals(action)) {
-			this.addCar(req, resp);
+
+		if ("add".equals(action)) {
+			this.addCar(this.getCarFromRequest(req));
 		} else if ("confirm".equals(action) || "details".equals(action)) {
-			this.comfirm(req, resp);
+			req.setAttribute("new_car", this.getCarFromRequest(req));
 		} else if ("update".equals(action)) {
-			
+			System.out.println("UPDATE is called");
+			this.deleteCar(this.getCarFromRequest(req));
+			this.addCar(this.getEdCarFromRequest(req));
 		} else if ("delete".equals(action)) {
-			
-		} else if ("edit".equals(action)) {
-			
+			this.deleteCar(this.getCarFromRequest(req));
 		}
+
+		req.setAttribute("ref_key", this.getKey(req.getHeader("Referer")));
+		req.setAttribute(CAR_LIST, this.carList);
 
 		this.getDispetcher(req.getRequestURI()).forward(req, resp);
-	}
-
-	/**
-	 * This method do to show car list
-	 * 
-	 * @param req
-	 * @param resp
-	 * @throws ServletException
-	 * @throws IOException
-	 */
-	private void showCarList(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		req.setAttribute(CAR_LIST, this.carList);
-	}
-
-	/**
-	 * Check the car to add, and if the car is not on the list<br />
-	 * Add this car to list and show the car list.
-	 * 
-	 * @param req
-	 * @param resp
-	 * @throws ServletException
-	 * @throws IOException
-	 */
-	private void addCar(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		boolean isNew = true;
-		HttpSession session = req.getSession(true);
-		Car inCar = (Car) session.getAttribute("new_car");
-
-		if (null != inCar) {
-			for (Car car : this.carList) {
-				if (car.getBrand().equals(inCar.getBrand())
-						&& car.getModel().equals(inCar.getModel())
-						&& car.getYear().equals(inCar.getYear())) {
-					isNew = false;
-				}
-			}
-
-			if (isNew) {
-				this.carList.add(inCar);
-				this.save();
-			}
-		}
-
-		req.setAttribute(CAR_LIST, this.carList);
-	}
-
-	private void comfirm(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		HttpSession session = req.getSession(true);
-		session.removeAttribute("new_car");
-		Car car = new Car();
-		car.setBrand(req.getParameter("brand"));
-		car.setModel(req.getParameter("model"));
-		car.setYear(req.getParameter("year"));
-		session.setAttribute("new_car", car);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		this.doGet(req, resp);
+	}
+
+	private Car getEdCarFromRequest(HttpServletRequest req) {
+		Car car = new Car();
+		car.setBrand(req.getParameter("ed_brand"));
+		car.setModel(req.getParameter("ed_model"));
+		car.setYear(req.getParameter("ed_year"));
+		return car;
+	}
+
+	private Car getCarFromRequest(HttpServletRequest req) {
+		Car car = new Car();
+		car.setBrand(req.getParameter("brand"));
+		car.setModel(req.getParameter("model"));
+		car.setYear(req.getParameter("year"));
+		return car;
+	}
+
+	private void addCar(Car inCar) {
+		boolean isNew = true;
+
+		for (Car car : this.carList) {
+			if (car.getBrand().equals(inCar.getBrand())
+					&& car.getModel().equals(inCar.getModel())
+					&& car.getYear().equals(inCar.getYear())) {
+				isNew = false;
+			}
+		}
+		
+		if (isNew) {
+			this.carList.add(inCar);
+			this.save();
+		}
+	}
+
+	private void deleteCar(Car inCar) {
+		int index = 0;
+		for (Car car : this.carList) {
+
+			if (car.getBrand().equals(inCar.getBrand())
+					&& car.getModel().equals(inCar.getModel())
+					&& car.getYear().equals(inCar.getYear())) {
+				break;
+			}
+			index++;
+		}
+
+		if (index < this.carList.size()) {
+			this.carList.remove(index);
+			this.save();
+		}
 	}
 
 	private void save() {

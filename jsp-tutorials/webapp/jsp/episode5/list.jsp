@@ -48,10 +48,5 @@
 		</table>
 	</form>
 	</div>
-
-	<c:import url="../episode3/ep3-14.jsp">
-		<c:param name="p" value="10"></c:param>
-	</c:import>
-
 </body>
 </html>
