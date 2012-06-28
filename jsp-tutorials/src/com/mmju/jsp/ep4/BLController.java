@@ -97,15 +97,19 @@ public class BLController extends HttpServlet {
 
 	private void addCar(Car inCar) {
 		boolean isNew = true;
-
-		for (Car car : this.carList) {
-			if (car.getBrand().equals(inCar.getBrand())
-					&& car.getModel().equals(inCar.getModel())
-					&& car.getYear().equals(inCar.getYear())) {
-				isNew = false;
+		try {
+			for (Car car : this.carList) {
+				if (car.getBrand().equals(inCar.getBrand())
+						&& car.getModel().equals(inCar.getModel())
+						&& car.getYear().equals(inCar.getYear())) {
+					isNew = false;
+				}
 			}
+		} catch (NullPointerException e) {
+			this.carList.clear();
+			this.save();
 		}
-		
+
 		if (isNew) {
 			this.carList.add(inCar);
 			this.save();
