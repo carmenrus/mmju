@@ -15,7 +15,7 @@
 <body>
 
 	<c:if test="${fn:length(car_list) == 0}">
-		<c:redirect url="/episode4/edit.ep4">
+		<c:redirect url="/episode5/edit.ep4">
 			<c:param name="error_message"
 				value="There is No Car in the List! Please add the car."></c:param>
 		</c:redirect>
