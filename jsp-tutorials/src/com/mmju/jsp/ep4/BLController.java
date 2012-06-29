@@ -60,7 +60,6 @@ public class BLController extends HttpServlet {
 		} else if ("confirm".equals(action) || "details".equals(action)) {
 			req.setAttribute("new_car", this.getCarFromRequest(req));
 		} else if ("update".equals(action)) {
-			System.out.println("UPDATE is called");
 			this.deleteCar(this.getCarFromRequest(req));
 			this.addCar(this.getEdCarFromRequest(req));
 		} else if ("delete".equals(action)) {
