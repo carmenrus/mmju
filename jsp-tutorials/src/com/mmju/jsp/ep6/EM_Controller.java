@@ -92,7 +92,7 @@ public class EM_Controller extends HttpServlet {
 
 		// getModel
 		List<EM_Model> models = this
-		        .getModels(getBusinessID(req.getPathInfo()));
+		        .getModels(getBusinessID(req.getRequestURI()));
 
 		for (EM_Model model : models) {
 			// model#setInput
@@ -102,8 +102,7 @@ public class EM_Controller extends HttpServlet {
 			model.doBusiness();
 		}
 		// set View
-		if (models.size() > 0)
-			this.setView(models.get(models.size() - 1).getOutPuts(), req, resp);
+		this.setView(models, req, resp);
 	}
 
 	/**
@@ -118,12 +117,16 @@ public class EM_Controller extends HttpServlet {
 			String names = (String) this.modelConf.get(businessID);
 			String[] classNames = names.split(",");
 			if (null != classNames) {
-				for (String name : classNames)
-					models.add((EM_Model) Class.forName(name.trim())
-					        .newInstance());
+				for (String name : classNames) {
+					EM_Model model = (EM_Model) Class.forName(name.trim())
+					        .newInstance();
+					if(null != model)
+						models.add(model);
+				}
 			}
 			return models;
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException();
 		}
 	}
@@ -142,12 +145,17 @@ public class EM_Controller extends HttpServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	private void setView(Map<String, Object> outputs, HttpServletRequest req,
+	private void setView(List<EM_Model> models, HttpServletRequest req,
 	        HttpServletResponse resp) throws ServletException, IOException {
-		Iterator<String> itr = outputs.keySet().iterator();
-		while (itr.hasNext()) {
-			String key = itr.next();
-			req.setAttribute(key, outputs.get(key));
+		for (int i=0; i<models.size(); i++) {
+			// Outputs
+			Map<String, Object> outputs = models.get(i).getOutPuts();
+			Iterator<String> itr = outputs.keySet().iterator();
+			// Set Outputs
+			while (itr.hasNext()) {
+				String key = itr.next();
+				req.setAttribute(key, outputs.get(key));
+			}
 		}
 		this.getDispatcher(req.getRequestURI()).forward(req, resp);
 	}
@@ -185,13 +193,14 @@ public class EM_Controller extends HttpServlet {
 				if (infos[i].length() > 0) {
 					sb.append("/");
 					if (infos.length - 1 == i) {
-						String key = infos[i].replace(".ep4", "");
+						String key = infos[i].replace(".em", "");
 						sb.append(flowsProp.getProperty(key));
 					} else {
 						sb.append(infos[i]);
 					}
 				}
 			}
+			System.out.println(sb.toString());
 			return getServletContext().getRequestDispatcher(sb.toString());
 		}
 		return null;

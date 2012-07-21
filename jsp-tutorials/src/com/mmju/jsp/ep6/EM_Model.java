@@ -1,6 +1,7 @@
 package com.mmju.jsp.ep6;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.naming.Context;
@@ -11,6 +12,10 @@ public abstract class EM_Model {
 
 	protected Map<String, Object> inPuts;
 	protected Map<String, Object> outPuts;
+	
+	public EM_Model(){
+		outPuts = new HashMap<String, Object>();
+	}
 
 	public void setInputs(Map<String, Object> input) {
 		this.inPuts = input;
@@ -36,6 +41,7 @@ public abstract class EM_Model {
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ezjsp");
 			return ds.getConnection();
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException();
 		}
 	}

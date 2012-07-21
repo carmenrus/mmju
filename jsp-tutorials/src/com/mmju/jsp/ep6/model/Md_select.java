@@ -25,6 +25,7 @@ public class Md_select extends EM_Model {
 	        while(rs.next()) {
 	        	Car car = new Car();
 	        	car.setBrand(rs.getString("brand"));
+	        	System.out.println(car.getBrand());
 	        	car.setModel(rs.getString("model"));
 	        	car.setYear(rs.getString("year"));
 	        	carlist.add(car);
@@ -40,7 +41,7 @@ public class Md_select extends EM_Model {
                 }
         	}
         }
-		
+		System.out.println(carlist.size());
 		super.setOutputs("car_list", carlist);
     }
 }
