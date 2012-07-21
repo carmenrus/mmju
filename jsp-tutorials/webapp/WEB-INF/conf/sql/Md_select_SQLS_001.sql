@@ -1,0 +1,1 @@
+select brand, model, year from ezjsp.car;

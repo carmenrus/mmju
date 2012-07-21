@@ -1,35 +1,51 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-   version="2.5"> 
-  <display-name>Easy JSP</display-name>
-  
-  <servlet>
-  <servlet-name>episode3</servlet-name>
-  <servlet-class>com.mmju.jsp.ep3.Episode3Servlet</servlet-class>
-  <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-  <servlet-name>episode3</servlet-name>
-  <url-pattern>/ep3/*</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-  <servlet-name>episode4</servlet-name>
-  <servlet-class>com.mmju.jsp.ep4.BLController</servlet-class>
-  <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-  <servlet-name>episode4</servlet-name>
-  <url-pattern>*.ep4</url-pattern>
-  </servlet-mapping>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>Easy JSP</display-name>
 
-  <welcome-file-list>
-  <welcome-file>index.html</welcome-file>
-  </welcome-file-list>
-  
-  	<error-page>
+	<servlet>
+		<servlet-name>episode3</servlet-name>
+		<servlet-class>com.mmju.jsp.ep3.Episode3Servlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>episode3</servlet-name>
+		<url-pattern>/ep3/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>episode4</servlet-name>
+		<servlet-class>com.mmju.jsp.ep4.BLController</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>episode4</servlet-name>
+		<url-pattern>*.ep4</url-pattern>
+	</servlet-mapping>
+
+    <servlet>
+        <servlet-name>emc</servlet-name>
+        <servlet-class>com.mmju.jsp.ep6.EM_Controller</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>emc</servlet-name>
+        <url-pattern>*.em</url-pattern>
+    </servlet-mapping>
+
+
+	<resource-ref>
+		<res-ref-name>jdbc/ezjsp</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<error-page>
 		<error-code>404</error-code>
 		<location>/page/error_nopage.html</location>
 	</error-page>
@@ -37,5 +53,5 @@
 		<exception-type>java.lang.Exception</exception-type>
 		<location>/page/error.html</location>
 	</error-page>
-  
+
 </web-app>

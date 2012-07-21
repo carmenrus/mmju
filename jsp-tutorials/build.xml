@@ -70,7 +70,7 @@
         <run workingdir="${build.dir}/staxcat" webappdir="${webapp.dir}" port="${run.port}" environment="${run.environment}" />
     </target>
 
-    <target name="bees-classpath">
+	<target name="bees-classpath">
         <property environment="env" />
         <condition property="bees.home" value="${env.BEES_HOME}">
 			<isset property="bees.home" />
@@ -82,5 +82,7 @@
             <fileset dir="${bees.home}/lib" includes="*.jar"/>
         </path>
     </target>
+
+
 </project>
 

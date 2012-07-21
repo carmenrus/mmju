@@ -35,7 +35,7 @@ public class BLController extends HttpServlet {
 
 		try {
 			InputStream in = getServletContext().getResourceAsStream(
-					"/WEB-INF/conf/flows.properties");
+					"/WEB-INF/conf/apl/flows.properties");
 			flowsProp.load(in);
 
 			ObjectInputStream os = new ObjectInputStream(new FileInputStream(

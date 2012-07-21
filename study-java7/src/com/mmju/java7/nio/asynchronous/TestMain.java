@@ -9,9 +9,9 @@ import java.net.SocketException;
 public class TestMain {
 
 	public static void main(String[] args) {
-		
+
 		Socket socket = null;
-		
+
 		try {
 			String server = "localhost";
 			int servPort = 5000;
@@ -30,9 +30,9 @@ public class TestMain {
 			// get Server Message
 			int totalBytesRcvd = 0;
 			int bytesRcvd;
-			while (totalBytesRcvd < data.length) { 
-				if ((bytesRcvd = in.read( 
-						msg, totalBytesRcvd, data.length - totalBytesRcvd)) == -1) {
+			while (totalBytesRcvd < data.length) {
+				if ((bytesRcvd = in.read(msg, totalBytesRcvd, data.length
+				        - totalBytesRcvd)) == -1) {
 					throw new SocketException("Fail");
 				}
 				totalBytesRcvd += bytesRcvd;
@@ -40,14 +40,15 @@ public class TestMain {
 			System.out.println("Recieve：" + new String(msg));
 
 			socket.close();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			if(null != socket) {
+			if (null != socket) {
 				try {
 					socket.close();
-				} catch (IOException e) {}
+				} catch (IOException e) {
+				}
 			}
 		}
 	}
