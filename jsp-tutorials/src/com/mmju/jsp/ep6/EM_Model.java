@@ -49,4 +49,8 @@ public abstract class EM_Model {
 	protected void setOutputs(String key, Object value) {
 		outPuts.put(key, value);
 	}
+	
+	protected Map<String, Object> getInputs() {
+		return this.inPuts;
+	}
 }

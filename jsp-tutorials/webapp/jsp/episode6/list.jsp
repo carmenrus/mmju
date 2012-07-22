@@ -27,7 +27,7 @@
 	<h3>ကားစာရင်း</h3>
 
 	<div id="left">
-	<form id="details" action="/episode5/details.ep4" method="post">
+	<form id="details" action="/episode6/details.em" method="post">
 		<table class="lineTbl">
 			<thead>
 				<tr>

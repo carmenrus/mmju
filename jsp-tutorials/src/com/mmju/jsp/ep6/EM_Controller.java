@@ -89,10 +89,13 @@ public class EM_Controller extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	        throws ServletException, IOException {
+		
+		// set param ref_key
+		String businessID = this.getBusinessID(req.getRequestURI());
+		req.setAttribute("ref_key", businessID);
 
 		// getModel
-		List<EM_Model> models = this
-		        .getModels(getBusinessID(req.getRequestURI()));
+		List<EM_Model> models = this.getModels(businessID);
 
 		for (EM_Model model : models) {
 			// model#setInput
@@ -200,7 +203,6 @@ public class EM_Controller extends HttpServlet {
 					}
 				}
 			}
-			System.out.println(sb.toString());
 			return getServletContext().getRequestDispatcher(sb.toString());
 		}
 		return null;

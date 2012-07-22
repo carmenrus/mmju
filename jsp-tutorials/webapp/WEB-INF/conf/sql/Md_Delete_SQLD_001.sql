@@ -1,0 +1,1 @@
+Delete from ezjsp.car where brand=? and model=? and year=?;
