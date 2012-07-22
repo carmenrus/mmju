@@ -59,11 +59,11 @@ public class EM_Controller extends HttpServlet {
 				br = new BufferedReader(new InputStreamReader(
 				        new FileInputStream(sqlFiles[i])));
 				String line = null;
-				
-				while(null != (line = br.readLine())) {
+
+				while (null != (line = br.readLine())) {
 					sb.append(line);
 				}
-				
+
 				EM_SqlConf.put(name, sb.toString());
 			}
 
@@ -72,9 +72,9 @@ public class EM_Controller extends HttpServlet {
 		} finally {
 			if (null != br) {
 				try {
-	                br.close();
-                } catch (IOException e) {
-                }
+					br.close();
+				} catch (IOException e) {
+				}
 			}
 		}
 	}
@@ -89,7 +89,7 @@ public class EM_Controller extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 	        throws ServletException, IOException {
-		
+
 		// set param ref_key
 		String businessID = this.getBusinessID(req.getRequestURI());
 		req.setAttribute("ref_key", businessID);
@@ -118,13 +118,16 @@ public class EM_Controller extends HttpServlet {
 		try {
 			List<EM_Model> models = new ArrayList<EM_Model>();
 			String names = (String) this.modelConf.get(businessID);
-			String[] classNames = names.split(",");
-			if (null != classNames) {
-				for (String name : classNames) {
-					EM_Model model = (EM_Model) Class.forName(name.trim())
-					        .newInstance();
-					if(null != model)
-						models.add(model);
+			if (null != names) {
+				String[] classNames = names.split(",");
+				if (null != classNames) {
+					for (String name : classNames) {
+						System.out.println(name);
+						EM_Model model = (EM_Model) Class.forName(name.trim())
+						        .newInstance();
+						if (null != model)
+							models.add(model);
+					}
 				}
 			}
 			return models;
@@ -150,7 +153,7 @@ public class EM_Controller extends HttpServlet {
 	 */
 	private void setView(List<EM_Model> models, HttpServletRequest req,
 	        HttpServletResponse resp) throws ServletException, IOException {
-		for (int i=0; i<models.size(); i++) {
+		for (int i = 0; i < models.size(); i++) {
 			// Outputs
 			Map<String, Object> outputs = models.get(i).getOutPuts();
 			Iterator<String> itr = outputs.keySet().iterator();

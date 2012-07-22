@@ -16,7 +16,7 @@
 	<h3>ကားအသစ် စာရင်းသွင်းရန်</h3>
 	<div id="left">
 		<c:out value="${param.error_message}" />
-		<form action="/episode5/confirm.ep4" method="post">
+		<form action="/episode6/confirm.em" method="post">
 			<table>
 				<tr>
 					<td width="180px">ကားအမည်</td>

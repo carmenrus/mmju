@@ -21,27 +21,27 @@
 
 	<div id="left">
 		<form id="car_form" method="post">
-			<input type="hidden" name="model" value="${new_car.model}" /> <input
-				type="hidden" name="brand" value="${new_car.brand}" /> <input
-				type="hidden" name="year" value="${new_car.year}" />
+			<input type="hidden" name="model" value="${param.model}" /> <input
+				type="hidden" name="brand" value="${param.brand}" /> <input
+				type="hidden" name="year" value="${param.year}" />
 			<table>
 				<tr>
 					<td width="180px">ကားအမည်</td>
 					<td id="ed_model" class="member"><c:out
-							value="${new_car.model}" /></td>
+							value="${param.model}" /></td>
 				</tr>
 				<tr>
 					<td>ကားကုမ္ပဏီ</td>
 					<td id="ed_brand" class="member"><c:out
-							value="${new_car.brand}" /></td>
+							value="${param.brand}" /></td>
 				</tr>
 				<tr>
 					<td>ထုတ်လုပ်သည့်နှစ်</td>
-					<td id="ed_year" class="member"><c:out value="${new_car.year}" /></td>
+					<td id="ed_year" class="member"><c:out value="${param.year}" /></td>
 				</tr>
 				<tr>
 					<td colspan="2"><c:choose>
-							<c:when test="${ref_key eq 'edit'}">
+							<c:when test="${ref_key eq 'confirm'}">
 								<input type="button" onclick="javascript:history.back()"
 									value="ပြန်ပြင်မည်" />
 								<input type="button" class="action" name="/episode6/add.em"

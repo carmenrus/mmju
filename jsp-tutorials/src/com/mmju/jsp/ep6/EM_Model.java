@@ -53,4 +53,14 @@ public abstract class EM_Model {
 	protected Map<String, Object> getInputs() {
 		return this.inPuts;
 	}
+	
+	protected String getStringValue(String key) {
+		Object value = this.inPuts.get(key);
+		if(null != value && value instanceof String []) {
+			String [] params = (String [])value;
+			if(params.length > 0)
+				return params[0];
+		}
+		return null;
+	}
 }
