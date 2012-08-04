@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div style="width: 100%; text-align: right">
+    <a href="javascript:history.back();">ယခင် စာမျက်နှာသို့</a>
+</div>
 <h3>7.1 Body မသုံးသော Tag</h3>
 <div>
 <mytag:HelloTag/></div>
