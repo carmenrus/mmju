@@ -200,7 +200,11 @@ public class EM_Controller extends HttpServlet {
 					sb.append("/");
 					if (infos.length - 1 == i) {
 						String key = infos[i].replace(".em", "");
-						sb.append(flowsProp.getProperty(key));
+						String flow = flowsProp.getProperty(key);
+						if(null == flow || flow.isEmpty()) {
+							flow = key + ".jsp";
+						}
+						sb.append(flow);
 					} else {
 						sb.append(infos[i]);
 					}
