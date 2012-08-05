@@ -37,15 +37,15 @@ public class EM_Controller extends HttpServlet {
 		try {
 			// load flows
 			flowsProp.load(getServletContext().getResourceAsStream(
-			        "/WEB-INF/conf/apl/flows.properties"));
+					"/WEB-INF/conf/apl/flows.properties"));
 
 			// load models
 			modelConf.load(getServletContext().getResourceAsStream(
-			        "/WEB-INF/conf/apl/model.properties"));
+					"/WEB-INF/conf/apl/model.properties"));
 
 			// load sql
 			File sqlPath = new File(getServletContext().getRealPath(
-			        "/WEB-INF/conf/sql"));
+					"/WEB-INF/conf/sql"));
 			File[] sqlFiles = sqlPath.listFiles(new FilenameFilter() {
 				@Override
 				public boolean accept(File dir, String name) {
@@ -57,7 +57,7 @@ public class EM_Controller extends HttpServlet {
 				String name = sqlFiles[i].getName().replace(_extension, "");
 				StringBuilder sb = new StringBuilder();
 				br = new BufferedReader(new InputStreamReader(
-				        new FileInputStream(sqlFiles[i])));
+						new FileInputStream(sqlFiles[i])));
 				String line = null;
 
 				while (null != (line = br.readLine())) {
@@ -81,14 +81,14 @@ public class EM_Controller extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-	        throws ServletException, IOException {
+			throws ServletException, IOException {
 		this.doPost(req, resp);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-	        throws ServletException, IOException {
+			throws ServletException, IOException {
 
 		// set param ref_key
 		String businessID = this.getBusinessID(req.getRequestURI());
@@ -124,7 +124,7 @@ public class EM_Controller extends HttpServlet {
 					for (String name : classNames) {
 						System.out.println(name);
 						EM_Model model = (EM_Model) Class.forName(name.trim())
-						        .newInstance();
+								.newInstance();
 						if (null != model)
 							models.add(model);
 					}
@@ -152,7 +152,7 @@ public class EM_Controller extends HttpServlet {
 	 * @throws IOException
 	 */
 	private void setView(List<EM_Model> models, HttpServletRequest req,
-	        HttpServletResponse resp) throws ServletException, IOException {
+			HttpServletResponse resp) throws ServletException, IOException {
 		for (int i = 0; i < models.size(); i++) {
 			// Outputs
 			Map<String, Object> outputs = models.get(i).getOutPuts();
@@ -201,7 +201,7 @@ public class EM_Controller extends HttpServlet {
 					if (infos.length - 1 == i) {
 						String key = infos[i].replace(".em", "");
 						String flow = flowsProp.getProperty(key);
-						if(null == flow || flow.isEmpty()) {
+						if (null == flow || flow.isEmpty()) {
 							flow = key + ".jsp";
 						}
 						sb.append(flow);

@@ -18,7 +18,7 @@ public class Md_Update extends EM_Model {
 		try {
 			conn = getConnection();
 			PreparedStatement pst = conn.prepareStatement(EM_SqlConf
-			        .getSql("Md_Update_SQLU_001"));
+					.getSql("Md_Update_SQLU_001"));
 
 			pst.setString(1, getStringValue("ed_brand"));
 			pst.setString(2, getStringValue("ed_model"));

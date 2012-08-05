@@ -18,22 +18,22 @@ public class Md_add extends EM_Model {
 		try {
 			conn = getConnection();
 			PreparedStatement pst = conn.prepareStatement(EM_SqlConf
-			        .getSql("Md_add_SQLI_001"));
+					.getSql("Md_add_SQLI_001"));
 			pst.setString(1, getStringValue("brand"));
 			pst.setString(2, getStringValue("model"));
 			pst.setString(3, getStringValue("year"));
-			
-			if(pst.executeUpdate() < 0) {
+
+			if (pst.executeUpdate() < 0) {
 				throw new RuntimeException("Fail to insert Query.");
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e.getMessage());
 		} finally {
-			if(null != conn) {
+			if (null != conn) {
 				try {
-	                conn.close();
-                } catch (SQLException e) {
-                }
+					conn.close();
+				} catch (SQLException e) {
+				}
 			}
 		}
 	}

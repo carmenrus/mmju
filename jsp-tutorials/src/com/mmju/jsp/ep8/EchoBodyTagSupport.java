@@ -8,7 +8,7 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 
 public class EchoBodyTagSupport extends BodyTagSupport {
 
-    private static final long serialVersionUID = -7851512871222689936L;
+	private static final long serialVersionUID = -7851512871222689936L;
 
 	private String message = null;
 	private String title = null;
@@ -16,55 +16,55 @@ public class EchoBodyTagSupport extends BodyTagSupport {
 	private Integer var = 0;
 
 	@Override
-    public int doAfterBody() throws JspException {
+	public int doAfterBody() throws JspException {
 
 		BufferedReader br = new BufferedReader(bodyContent.getReader());
 		try {
-			if(null == title)
+			if (null == title)
 				title = br.readLine();
-        } catch (IOException e) {
-	        e.printStackTrace();
-        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		this.outBody(this.getRow(title, message));
-		if( ++var < times) {
+		if (++var < times) {
 			return EVAL_BODY_AGAIN;
 		}
 		return SKIP_BODY;
-    }
+	}
 
 	@Override
-    public int doEndTag() throws JspException {
+	public int doEndTag() throws JspException {
 		out("</table>");
-	    return EVAL_PAGE;
-    }
+		return EVAL_PAGE;
+	}
 
 	@Override
-    public void doInitBody() throws JspException {
-    }
+	public void doInitBody() throws JspException {
+	}
 
 	@Override
-    public int doStartTag() throws JspException {
+	public int doStartTag() throws JspException {
 		out("<table>");
-	    return EVAL_BODY_BUFFERED;
-    }
+		return EVAL_BODY_BUFFERED;
+	}
 
 	private void out(String str) {
 		try {
 			super.pageContext.getOut().println(str);
-        } catch (IOException e) {
-	        e.printStackTrace();
-        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	private void outBody(String str) {
 		try {
 			super.bodyContent.getEnclosingWriter().println(str);
-        } catch (IOException e) {
-	        e.printStackTrace();
-        }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	private String getRow(String title, String message) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<tr><td>");
@@ -76,10 +76,10 @@ public class EchoBodyTagSupport extends BodyTagSupport {
 	}
 
 	public void setMessage(String message) {
-    	this.message = message;
-    }
+		this.message = message;
+	}
 
 	public void setTimes(Integer times) {
-    	this.times = times;
-    }
+		this.times = times;
+	}
 }

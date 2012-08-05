@@ -18,7 +18,7 @@ public class Md_Delete extends EM_Model {
 		try {
 			conn = getConnection();
 			PreparedStatement pst = conn.prepareStatement(EM_SqlConf
-			        .getSql("Md_Delete_SQLD_001"));
+					.getSql("Md_Delete_SQLD_001"));
 			pst.setString(1, getStringValue("brand"));
 			pst.setString(2, getStringValue("model"));
 			pst.setString(3, getStringValue("year"));

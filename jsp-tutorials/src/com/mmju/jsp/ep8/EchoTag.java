@@ -8,7 +8,7 @@ import javax.servlet.jsp.tagext.IterationTag;
 import javax.servlet.jsp.tagext.Tag;
 
 public class EchoTag implements IterationTag {
-	
+
 	private PageContext ctx = null;
 	private Tag parent = null;
 	private String message = null;
@@ -54,7 +54,7 @@ public class EchoTag implements IterationTag {
 		out(message);
 		out("</td>");
 		out("</tr>");
-		if(var < times) {
+		if (var < times) {
 			out("<tr>");
 			out("<td>");
 			return EVAL_BODY_AGAIN;
@@ -63,27 +63,27 @@ public class EchoTag implements IterationTag {
 	}
 
 	public String getMessage() {
-    	return message;
-    }
+		return message;
+	}
 
 	public void setMessage(String message) {
-    	this.message = message;
-    }
+		this.message = message;
+	}
 
 	public Integer getTimes() {
-    	return times;
-    }
+		return times;
+	}
 
 	public void setTimes(Integer times) {
-    	this.times = times;
-    }
-	
+		this.times = times;
+	}
+
 	private void out(String str) {
 		try {
-	        this.ctx.getOut().println(str);
-        } catch (IOException e) {
-	        e.printStackTrace();
-        }
+			this.ctx.getOut().println(str);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

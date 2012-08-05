@@ -27,13 +27,11 @@
 			<table>
 				<tr>
 					<td width="180px">ကားအမည်</td>
-					<td id="ed_model" class="member"><c:out
-							value="${param.model}" /></td>
+					<td id="ed_model" class="member"><c:out value="${param.model}" /></td>
 				</tr>
 				<tr>
 					<td>ကားကုမ္ပဏီ</td>
-					<td id="ed_brand" class="member"><c:out
-							value="${param.brand}" /></td>
+					<td id="ed_brand" class="member"><c:out value="${param.brand}" /></td>
 				</tr>
 				<tr>
 					<td>ထုတ်လုပ်သည့်နှစ်</td>

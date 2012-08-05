@@ -16,9 +16,9 @@
 
 	<div id="left">
 		<form action="/episode4/add.ep4" method="post">
-		<input type="hidden" name="model" value="${new_car.model}" />
-		<input type="hidden" name="brand" value="${new_car.brand}" />
-		<input type="hidden" name="year" value="${new_car.year}" />		
+			<input type="hidden" name="model" value="${new_car.model}" /> <input
+				type="hidden" name="brand" value="${new_car.brand}" /> <input
+				type="hidden" name="year" value="${new_car.year}" />
 			<table>
 				<tr>
 					<td width="180px">ကားအမည်</td>

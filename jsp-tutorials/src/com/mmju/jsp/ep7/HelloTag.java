@@ -7,19 +7,19 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
 
 public class HelloTag implements Tag {
-	
+
 	private PageContext ctx = null;
 	private Tag parrent = null;
 
 	@Override
 	public int doEndTag() throws JspException {
-		
+
 		try {
-	        ctx.getOut().print("Hello Custom Tag!");
-        } catch (IOException e) {
-	        e.printStackTrace();
-        }
-		
+			ctx.getOut().print("Hello Custom Tag!");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		return EVAL_PAGE;
 	}
 

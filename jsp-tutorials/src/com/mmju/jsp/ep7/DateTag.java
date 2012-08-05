@@ -17,9 +17,9 @@ public class DateTag implements Tag {
 	public int doEndTag() throws JspException {
 		try {
 			ctx.getOut().print(
-			        " Now is "
-			                + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
-			                        .format(new Date()));
+					" Now is "
+							+ new SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+									.format(new Date()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

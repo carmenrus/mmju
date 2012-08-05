@@ -18,54 +18,56 @@
 	<%
 		List<Car> carList = (List<Car>) application
 				.getAttribute("car-list");
-		Car car = (Car)session.getAttribute("car");
-		
-		if(null == carList)
+		Car car = (Car) session.getAttribute("car");
+
+		if (null == carList)
 			carList = new ArrayList<Car>();
-		
-		if(null != car) {
+
+		if (null != car) {
 			carList.add(car);
 			application.setAttribute("car-list", carList);
 			session.removeAttribute("car");
 		}
-		
+
 		if (null == carList || carList.size() == 0) {
 	%>
 	<jsp:forward page="./ep2-11.jsp">
-		<jsp:param value="ဖော်ပြစရာကား စရင်းမရှိပါ သဖြင့် ကားအသစ်များကို စာရင်းသွင်းပါ။" name="msg"/>
+		<jsp:param
+			value="ဖော်ပြစရာကား စရင်းမရှိပါ သဖြင့် ကားအသစ်များကို စာရင်းသွင်းပါ။"
+			name="msg" />
 	</jsp:forward>
 	<%
 		} else {
 	%>
 	<div id="left">
-	<table class="lineTbl">
-		<thead>
-			<tr>
-				<td>ကားကုမ္ပဏီ</td>
-				<td>ကားအမျိုးအစား</td>
-				<td>ထုတ်လုပ်သည့်နှစ်</td>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				for (Car c : carList) {
-			%>
-			<tr>
-				<td><%=c.getBrand()%></td>
-				<td><%=c.getModel()%></td>
-				<td><%=c.getYear()%></td>
-			</tr>
-			<%
-				}
-			%>
-		</tbody>
-	</table>
+		<table class="lineTbl">
+			<thead>
+				<tr>
+					<td>ကားကုမ္ပဏီ</td>
+					<td>ကားအမျိုးအစား</td>
+					<td>ထုတ်လုပ်သည့်နှစ်</td>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					for (Car c : carList) {
+				%>
+				<tr>
+					<td><%=c.getBrand()%></td>
+					<td><%=c.getModel()%></td>
+					<td><%=c.getYear()%></td>
+				</tr>
+				<%
+					}
+				%>
+			</tbody>
+		</table>
 	</div>
 	<%
 		}
 	%>
 	<jsp:include page="./ep2-14.jsp">
-		<jsp:param value="10" name="p"/>
+		<jsp:param value="10" name="p" />
 	</jsp:include>
 </body>
 </html>
