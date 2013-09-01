@@ -11,32 +11,40 @@
 <AnchorPane prefHeight="476.0" prefWidth="694.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.dtc.address_ui.AddressUIMain">
   <!-- TODO Add Nodes -->
   <children>
-    <Text fill="#ff3d00" layoutX="40.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address Book">
-      <effect>
-        <Reflection bottomOpacity="0.023809523809523808" fraction="0.5912698412698413" topOffset="-10.0" topOpacity="0.5634920634920635" />
-      </effect>
-      <font>
-        <Font name="Kokila" size="30.0" />
-      </font>
-    </Text>
-    <ListView fx:id="list" layoutX="40.0" layoutY="95.0" orientation="VERTICAL" prefHeight="304.0" prefWidth="200.0" />
-    <Label layoutX="290.0" layoutY="95.0" text="Name" />
-    <TextField fx:id="name" layoutX="393.0" layoutY="92.0" prefWidth="200.0" promptText="Set User Name" />
-    <Label layoutX="290.0" layoutY="124.0" text="Phone" />
-    <TextField fx:id="phone" layoutX="393.0" layoutY="121.0" prefWidth="200.0" promptText="Set Phone Number" />
-    <Label layoutX="290.0" layoutY="154.0" text="E Mail" />
-    <TextField fx:id="email" layoutX="393.0" layoutY="151.0" prefWidth="200.0" promptText="Set Email Address" />
-    <Label layoutX="290.0" layoutY="183.0" text="Address" />
-    <ComboBox id="address" fx:id="divisions" layoutX="393.0" layoutY="181.0" prefHeight="21.0" prefWidth="200.0" promptText="Select Division" />
-    <ComboBox fx:id="townships" layoutX="393.0" layoutY="210.0" prefHeight="21.0" prefWidth="200.0" promptText="Select Township" />
-    <TextField fx:id="address" layoutX="393.0" layoutY="238.0" prefWidth="287.0" promptText="Set Address" />
-    <Label layoutX="290.0" layoutY="271.0" text="Memo" />
-    <TextArea fx:id="memo" layoutX="393.0" layoutY="271.0" prefHeight="128.0" prefWidth="287.0" promptText="Optionally Memo" wrapText="true" />
+    <ListView fx:id="list" layoutX="14.0" layoutY="95.0" orientation="VERTICAL" prefHeight="332.0" prefWidth="195.0" />
+    <Label layoutX="244.0" layoutY="95.0" text="Name" />
+    <TextField fx:id="name" layoutX="303.0" layoutY="95.0" prefWidth="200.0" promptText="Set User Name" />
+    <TextField fx:id="phone" layoutX="303.0" layoutY="124.0" prefWidth="200.0" promptText="Set Phone Number" />
+    <Label layoutX="244.0" layoutY="154.0" text="E Mail" />
+    <TextField fx:id="email" layoutX="303.0" layoutY="151.0" prefWidth="200.0" promptText="Set Email Address" />
+    <Label layoutX="244.0" layoutY="183.0" text="Address" />
+    <ComboBox id="address" fx:id="divisions" layoutX="303.0" layoutY="183.0" prefHeight="21.0" prefWidth="200.0" promptText="Select Division" />
+    <ComboBox fx:id="townships" layoutX="303.0" layoutY="210.0" prefHeight="21.0" prefWidth="200.0" promptText="Select Township" />
+    <TextField fx:id="address" layoutX="303.0" layoutY="238.0" prefWidth="377.0" promptText="Set Address" />
+    <Label layoutX="243.0" layoutY="271.0" text="Memo" />
+    <TextArea fx:id="memo" layoutX="303.0" layoutY="271.0" prefHeight="128.0" prefWidth="377.0" promptText="Optionally Memo" wrapText="true" />
     <Button fx:id="delete" layoutX="475.0" layoutY="406.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
     <Button fx:id="add" layoutX="537.0" layoutY="406.0" mnemonicParsing="false" onAction="#addNew" text="Add" />
     <Button fx:id="edit" layoutX="586.0" layoutY="406.0" mnemonicParsing="false" onAction="#edit" text="Edit" />
     <Button fx:id="save" layoutX="635.0" layoutY="406.0" mnemonicParsing="false" onAction="#save" text="Save" />
     <Button fx:id="cancel" layoutX="410.0" layoutY="406.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-    <Label fx:id="message" layoutX="40.0" layoutY="449.0" prefWidth="640.0" text="" />
+    <Label layoutX="244.0" layoutY="124.0" text="Phone" />
+    <AnchorPane layoutX="0.0" layoutY="435.0" prefHeight="41.0" prefWidth="694.0" style="-fx-background-color:#F6FAE7">
+      <children>
+        <Label fx:id="message" layoutX="14.0" layoutY="13.0" prefWidth="666.0" text="" />
+      </children>
+    </AnchorPane>
+    <AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="67.0" prefWidth="694.0" style="-fx-background-color:#E1D7C5">
+      <children>
+        <Text fill="#404040" layoutX="14.0" layoutY="36.0" stroke="#32000000" strokeType="INSIDE" strokeWidth="1.3" text="Address Book">
+          <effect>
+            <Reflection fraction="0.8095238095238095" topOffset="-20.0" />
+          </effect>
+          <font>
+            <Font name="Kokila" size="30.0" />
+          </font>
+        </Text>
+      </children>
+    </AnchorPane>
   </children>
 </AnchorPane>
