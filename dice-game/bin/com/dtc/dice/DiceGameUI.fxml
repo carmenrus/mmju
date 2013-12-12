@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="313.0" prefWidth="546.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.dtc.dice.controller.GameController">
+  <children>
+    <HBox alignment="CENTER" pickOnBounds="true" prefHeight="36.0" prefWidth="472.0" spacing="10.0" style="-fx-background-color:black;">
+      <children>
+        <Label style="" text="Dice Game" textFill="WHITE">
+          <font>
+            <Font name="System Bold" size="12.0" fx:id="x1" />
+          </font>
+        </Label>
+        <Label fx:id="result" prefWidth="448.0" text="" textFill="#fff500" />
+      </children>
+      <padding>
+        <Insets left="10.0" fx:id="x2" />
+      </padding>
+    </HBox>
+    <HBox prefHeight="223.0" prefWidth="546.0">
+      <children>
+        <AnchorPane prefHeight="223.0" prefWidth="273.0">
+          <children>
+            <Label font="$x1" layoutX="26.0" layoutY="22.0" text="System Player" />
+            <Label layoutX="26.0" layoutY="60.0" text="Total Money" />
+            <Line endX="142.0" endY="0.0" layoutX="115.0" layoutY="90.0" startX="-100.0" />
+            <Label layoutX="26.0" layoutY="104.0" text="Dice 1" />
+            <Label layoutX="26.0" layoutY="129.0" text="Dice 2" />
+            <Label fx:id="sys_money" layoutX="123.0" layoutY="60.0" prefWidth="136.0" text="" />
+            <Label fx:id="sys_d1" layoutX="123.0" layoutY="104.0" prefWidth="122.0" text="" />
+            <Label fx:id="sys_d2" layoutX="123.0" layoutY="132.0" prefWidth="108.0" text="" />
+            <StackPane fx:id="sys_stk1" layoutX="54.0" layoutY="148.0" prefHeight="64.0" prefWidth="79.0" style="" />
+            <StackPane fx:id="sys_stk2" layoutX="152.0" layoutY="148.0" prefHeight="64.0" prefWidth="79.0" style="" />
+          </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="223.0" prefWidth="273.0">
+          <children>
+            <Label font="$x1" layoutX="26.0" layoutY="22.0" text="Game Player" />
+            <Label layoutX="26.0" layoutY="60.0" text="Total Money" />
+            <Line endX="142.0" endY="0.0" layoutX="115.0" layoutY="90.0" startX="-100.0" />
+            <Label layoutX="26.0" layoutY="104.0" text="Dice 1" />
+            <Label layoutX="26.0" layoutY="129.0" text="Dice 2" />
+            <Label id="sys_money" fx:id="user_money" layoutX="123.0" layoutY="60.0" prefWidth="136.0" text="" />
+            <Label id="sys_d1" fx:id="user_d1" layoutX="123.0" layoutY="104.0" prefWidth="122.0" text="" />
+            <Label id="sys_d2" fx:id="user_d2" layoutX="123.0" layoutY="132.0" prefWidth="108.0" text="" />
+            <StackPane id="sys_stk1" fx:id="use_stk1" layoutX="54.0" layoutY="148.0" prefHeight="64.0" prefWidth="79.0" style="" />
+            <StackPane fx:id="use_stk2" layoutX="152.0" layoutY="148.0" prefHeight="64.0" prefWidth="79.0" style="" />
+          </children>
+        </AnchorPane>
+      </children>
+    </HBox>
+    <HBox alignment="CENTER_LEFT" padding="$x2" prefHeight="54.0" prefWidth="546.0" spacing="10.0" style="-fx-background-color:gray;">
+      <children>
+        <Label text="Vote Money" />
+        <TextField fx:id="vote_money" prefWidth="200.0" />
+        <Button mnemonicParsing="false" onAction="#doPlay" text="Play" />
+        <Button mnemonicParsing="false" onAction="#doReset" text="Reset" />
+      </children>
+    </HBox>
+  </children>
+</VBox>

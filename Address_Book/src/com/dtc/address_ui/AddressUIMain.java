@@ -37,32 +37,17 @@ public class AddressUIMain extends Application implements Initializable {
 	@FXML
 	private ListView<Auser> list;
 	@FXML
-	private TextField name;
+	private TextField name, phone,  email, address;
 	@FXML
-	private TextField phone;
-	@FXML
-	private TextField email;
+	private Button save, add, edit, delete, cancel;
 	@FXML
 	private ComboBox<Division> divisions;
 	@FXML
 	private ComboBox<Townships> townships;
 	@FXML
-	private TextField address;
-	@FXML
 	private TextArea memo;
 	@FXML
 	private Label message;
-
-	@FXML
-	private Button save;
-	@FXML
-	private Button add;
-	@FXML
-	private Button edit;
-	@FXML
-	private Button delete;
-	@FXML
-	private Button cancel;
 
 	private Node[] nodes = new Node[7];
 
