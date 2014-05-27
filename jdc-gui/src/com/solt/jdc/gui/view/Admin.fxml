@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.solt.jdc.gui.view.AdminController">
+   <children>
+      <TabPane prefHeight="658.0" prefWidth="1272.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="JDC Class">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="54.0" layoutY="44.0" text="JDC Class">
+                           <font>
+                              <Font name="Playbill" size="48.0" />
+                           </font>
+                        </Label>
+                        <HBox layoutX="54.0" layoutY="136.0" prefHeight="502.0" prefWidth="1142.0">
+                           <children>
+                              <VBox prefHeight="502.0" prefWidth="346.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Date From" />
+                                    <DatePicker fx:id="dateFrom" />
+                                    <Label text="Course" />
+                                    <ComboBox fx:id="courses" prefHeight="25.0" prefWidth="290.0" />
+                                    <Label text="Time" />
+                                    <ComboBox fx:id="timeTables" prefHeight="25.0" prefWidth="290.0" />
+                                    <Label text="Status" />
+                                    <ComboBox fx:id="status" prefHeight="25.0" prefWidth="290.0" />
+                                    <Button fx:id="classButton" mnemonicParsing="false" prefHeight="53.0" prefWidth="152.0" text="Submit" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </VBox>
+                              <TableView fx:id="classTable" prefHeight="502.0" prefWidth="904.0">
+                                 <columns>
+                                    <TableColumn fx:id="clCourse" prefWidth="146.0" text="Course" />
+                                    <TableColumn fx:id="clTimetable" minWidth="0.0" prefWidth="212.0" text="Time" />
+                                    <TableColumn fx:id="clDateFrom" prefWidth="166.0" text="Date From" />
+                                    <TableColumn fx:id="clStatus" prefWidth="118.0" text="Status" />
+                                    <TableColumn fx:id="clDuration" prefWidth="205.0" text="Duration" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+          <Tab text="Courses">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="54.0" layoutY="44.0" text="JDC Cources">
+                           <font>
+                              <Font name="Playbill" size="48.0" />
+                           </font>
+                        </Label>
+                        <HBox layoutX="54.0" layoutY="136.0" prefHeight="502.0" prefWidth="1142.0">
+                           <children>
+                              <VBox prefHeight="502.0" prefWidth="346.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Name" />
+                                    <TextField fx:id="courseName" />
+                                    <Label text="Requriement" />
+                                    <ComboBox fx:id="requirement" prefHeight="25.0" prefWidth="290.0">
+						              <items>
+						                <FXCollections fx:factory="observableArrayList">
+						                  <String fx:value="Java SE" />
+						                  <String fx:value="Java EE" />
+						                </FXCollections>
+						              </items>
+                                    </ComboBox>
+                                    <Label text="Duration" />
+                                    <ComboBox fx:id="duration" prefHeight="25.0" prefWidth="290.0">
+						              <items>
+						                <FXCollections fx:factory="observableArrayList">
+						                  <String fx:value="2 Months" />
+						                  <String fx:value="3 Months" />
+						                  <String fx:value="5 Months" />
+						                </FXCollections>
+						              </items>
+                                    </ComboBox>
+                                    <Label text="Description" />
+                                    <TextArea fx:id="courseDescription" prefHeight="212.0" prefWidth="292.0" />
+                                    <Button fx:id="courseButton" mnemonicParsing="false" prefHeight="53.0" prefWidth="152.0" text="Create" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </VBox>
+                              <TableView fx:id="courseTable" prefHeight="502.0" prefWidth="904.0">
+                                <columns>
+                                  <TableColumn fx:id="coName" prefWidth="146.0" text="Name" />
+                                  <TableColumn fx:id="coRequirement" minWidth="0.0" prefWidth="148.0" text="Requirement" />
+                                    <TableColumn fx:id="coDuration" prefWidth="149.0" text="Duration" />
+                                    <TableColumn fx:id="coDescription" prefWidth="405.0" text="Description" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Time Table">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="54.0" layoutY="44.0" text="Time Table">
+                           <font>
+                              <Font name="Playbill" size="48.0" />
+                           </font>
+                        </Label>
+                        <HBox layoutX="54.0" layoutY="136.0" prefHeight="502.0" prefWidth="1142.0">
+                           <children>
+                              <VBox prefHeight="502.0" prefWidth="346.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Days" />
+                                    <ComboBox fx:id="days" prefHeight="25.0" prefWidth="282.0">
+						              <items>
+						                <FXCollections fx:factory="observableArrayList">
+						                  <String fx:value="TUE-THU" />
+						                  <String fx:value="SAT-SUN" />
+						                  <String fx:value="OTHER" />
+						                </FXCollections>
+						              </items>
+                                    </ComboBox>
+                                    <Label text="Time From" />
+                                    <ComboBox fx:id="timeFrom" prefHeight="25.0" prefWidth="290.0">
+						              <items>
+						                <FXCollections fx:factory="observableArrayList">
+						                  <String fx:value="7:00 AM" />
+						                  <String fx:value="9:00 AM" />
+						                  <String fx:value="1:00 PM" />
+						                  <String fx:value="3:00 PM" />
+						                  <String fx:value="5:00 PM" />
+						                  <String fx:value="OTHER" />
+						                </FXCollections>
+						              </items>
+                                    </ComboBox>
+                                    <Label text="Time To" />
+                                    <ComboBox fx:id="timeTo" prefHeight="25.0" prefWidth="290.0">
+						              <items>
+						                <FXCollections fx:factory="observableArrayList">
+						                  <String fx:value="9:00 AM" />
+						                  <String fx:value="12:00 AM" />
+						                  <String fx:value="3:00 PM" />
+						                  <String fx:value="5:00 PM" />
+						                  <String fx:value="7:00 pM" />
+						                  <String fx:value="OTHER" />
+						                </FXCollections>
+						              </items>
+                                    </ComboBox>
+                                    <Label text="Description" />
+                                    <TextArea fx:id="description" prefHeight="212.0" prefWidth="292.0" />
+                                    <Button fx:id="timeButton" mnemonicParsing="false" prefHeight="53.0" prefWidth="152.0" text="Create" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </VBox>
+                              <TableView fx:id="timetable" prefHeight="502.0" prefWidth="904.0">
+                                 <columns>
+                                    <TableColumn fx:id="timeDays" prefWidth="146.0" text="Days" />
+                                    <TableColumn fx:id="timeTimeFrom" minWidth="0.0" prefWidth="148.0" text="Time From" />
+                                    <TableColumn fx:id="timeTimeTo" prefWidth="149.0" text="Time To" />
+                                    <TableColumn fx:id="timeTimeDes" prefWidth="405.0" text="Description" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</HBox>
