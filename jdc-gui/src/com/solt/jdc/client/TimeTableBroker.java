@@ -9,8 +9,17 @@ import com.solt.jdc.entity.TimeTable;
 
 public class TimeTableBroker extends AbstractBroker<TimeTable> {
 
-	public TimeTableBroker() {
+	private static TimeTableBroker broker;
+	
+	private TimeTableBroker() {
 		super(TimeTable.class);
+	}
+	
+	public synchronized static TimeTableBroker getInstance() {
+		if(null == broker) {
+			broker = new TimeTableBroker();
+		}
+		return broker;
 	}
 
 	@Override

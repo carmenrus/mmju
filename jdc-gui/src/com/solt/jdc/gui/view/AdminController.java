@@ -2,6 +2,7 @@ package com.solt.jdc.gui.view;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -21,6 +22,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import com.solt.jdc.client.CourseBroker;
 import com.solt.jdc.client.JdcClassBroker;
 import com.solt.jdc.client.TimeTableBroker;
+import com.solt.jdc.common.ApplicationContext;
+import com.solt.jdc.common.ApplicationContext.CommonList;
 import com.solt.jdc.entity.Course;
 import com.solt.jdc.entity.JdcClass;
 import com.solt.jdc.entity.JdcClass.Status;
@@ -87,7 +90,7 @@ public class AdminController extends AbstractController {
 	private ComboBox<TimeTable> timeTables;
 	@FXML
 	private ComboBox<Status> status;
-	
+
 	@FXML
 	private Button classButton;
 
@@ -105,14 +108,16 @@ public class AdminController extends AbstractController {
 	private TableColumn<JdcClass, String> clDuration;
 
 	private JdcClassBroker classBroker;
-	
-	public enum TableType {COURSE, CLASS, TIME}
+
+	public enum TableType {
+		COURSE, CLASS, TIME
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		timeBroker = new TimeTableBroker();
-		courseBroker = new CourseBroker();
-		classBroker = new JdcClassBroker();
+		timeBroker = TimeTableBroker.getInstance();
+		courseBroker = CourseBroker.getInstance();
+		classBroker = JdcClassBroker.getInstancce();
 
 		// time table
 		this.timeDays.setCellValueFactory(new PropertyValueFactory<>("days"));
@@ -151,7 +156,7 @@ public class AdminController extends AbstractController {
 				.getValue().getCourse().getDuration()));
 
 		this.loadJdcClass();
-		
+
 		// update button
 		this.classButton.setOnAction(AdminController.this::addJdcClass);
 		this.courseButton.setOnAction(AdminController.this::addCourse);
@@ -168,7 +173,7 @@ public class AdminController extends AbstractController {
 		MenuItem update = new MenuItem("Update");
 		MenuItem delete = new MenuItem("Delete");
 
-		switch(tableName) {
+		switch (tableName) {
 		case CLASS:
 			update.setOnAction(AdminController.this::updateClass);
 			delete.setOnAction(AdminController.this::updateClass);
@@ -193,7 +198,8 @@ public class AdminController extends AbstractController {
 
 	private void updateTime(ActionEvent event) {
 		MenuItem menu = (MenuItem) event.getSource();
-		TimeTable selectedItem = this.timetable.getSelectionModel().getSelectedItem();
+		TimeTable selectedItem = this.timetable.getSelectionModel()
+				.getSelectedItem();
 		if ("Update".equalsIgnoreCase(menu.getText())) {
 			this.setTimeTable(selectedItem);
 			this.timeButton.setText("Update");
@@ -201,10 +207,11 @@ public class AdminController extends AbstractController {
 			this.timeBroker.delete(String.valueOf(selectedItem.getId()));
 		}
 	}
-	
+
 	private void updateCourse(ActionEvent event) {
 		MenuItem menu = (MenuItem) event.getSource();
-		Course selectedItem = this.courseTable.getSelectionModel().getSelectedItem();
+		Course selectedItem = this.courseTable.getSelectionModel()
+				.getSelectedItem();
 		if ("Update".equalsIgnoreCase(menu.getText())) {
 			this.setCourse(selectedItem);
 			this.courseButton.setText("Update");
@@ -215,7 +222,8 @@ public class AdminController extends AbstractController {
 
 	private void updateClass(ActionEvent event) {
 		MenuItem menu = (MenuItem) event.getSource();
-		JdcClass selectedItem = this.classTable.getSelectionModel().getSelectedItem();
+		JdcClass selectedItem = this.classTable.getSelectionModel()
+				.getSelectedItem();
 		if ("Update".equalsIgnoreCase(menu.getText())) {
 			this.setJdcClass(selectedItem);
 			this.classButton.setText("Update");
@@ -224,22 +232,26 @@ public class AdminController extends AbstractController {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void loadClassCombo() {
 		this.timeTables.getItems().clear();
 		this.status.getItems().clear();
 		this.courses.getItems().clear();
-		this.timeTables.getItems().addAll(this.timeBroker.getAll());
+		this.timeTables.getItems().addAll((List<TimeTable>)ApplicationContext.get(CommonList.TimeTable));
 		this.status.getItems().addAll(Status.values());
-		this.courses.getItems().addAll(courseBroker.getAll());
+		this.courses.getItems().addAll((List<Course>)ApplicationContext.get(CommonList.Course));
 	}
 
+	@SuppressWarnings("unchecked")
 	private void loadTimeTable() {
 		this.timetable.getItems().clear();
-		this.timetable.getItems().addAll(this.timeBroker.getAll());
+		this.timetable.getItems().addAll((List<TimeTable>) ApplicationContext.get(CommonList.TimeTable));
 	}
 
 	private TimeTable getTimeTable() {
-		TimeTable data = new TimeTable();
+		TimeTable data = (null == this.timetable.getSelectionModel()
+				.getSelectedItem()) ? new TimeTable() : this.timetable
+				.getSelectionModel().getSelectedItem();
 		data.setDays(super.getText(days));
 		data.setDescription(this.description.getText());
 		data.setTimeFrom(super.getText(timeFrom));
@@ -254,10 +266,9 @@ public class AdminController extends AbstractController {
 		timeTo.setValue(selectedItem.getTimeTo());
 	}
 
-
 	public void addTimeTable(ActionEvent event) {
 		Button btn = (Button) event.getSource();
-		if("Update".equalsIgnoreCase(btn.getText())) {
+		if ("Update".equalsIgnoreCase(btn.getText())) {
 			this.timeBroker.update(this.getTimeTable(), TimeTable.class);
 			btn.setText("Create");
 		} else {
@@ -267,14 +278,15 @@ public class AdminController extends AbstractController {
 		this.loadClassCombo();
 	}
 
+	@SuppressWarnings("unchecked")
 	private void loadCourse() {
 		this.courseTable.getItems().clear();
-		this.courseTable.getItems().addAll(this.courseBroker.getAll());
+		this.courseTable.getItems().addAll((List<Course>)ApplicationContext.get(CommonList.Course));
 	}
 
 	public void addCourse(ActionEvent event) {
 		Button btn = (Button) event.getSource();
-		if("Update".equalsIgnoreCase(btn.getText())) {
+		if ("Update".equalsIgnoreCase(btn.getText())) {
 			this.courseBroker.update(this.getCourse(), Course.class);
 			btn.setText("Create");
 		} else {
@@ -285,7 +297,9 @@ public class AdminController extends AbstractController {
 	}
 
 	private Course getCourse() {
-		Course data = new Course();
+		Course data = (null == this.courseTable.getSelectionModel()
+				.getSelectedItem()) ? new Course() : this.courseTable
+				.getSelectionModel().getSelectedItem();
 		data.setName(super.getText(courseName));
 		data.setDuration(duration.getValue());
 		data.setRequirement(requirement.getValue());
@@ -300,14 +314,17 @@ public class AdminController extends AbstractController {
 		courseDescription.setText(selectedItem.getDescription());
 	}
 
-
+	@SuppressWarnings("unchecked")
 	private void loadJdcClass() {
 		this.classTable.getItems().clear();
-		this.classTable.getItems().addAll(this.classBroker.getAll());
+		this.classTable.getItems().addAll((List<JdcClass>)ApplicationContext.get(CommonList.JdcClass));
 	}
 
 	private JdcClass getJdcClass() {
-		JdcClass data = new JdcClass();
+
+		JdcClass data = (null == this.classTable.getSelectionModel()
+				.getSelectedItem()) ? new JdcClass() : this.classTable
+				.getSelectionModel().getSelectedItem();
 		data.setCourse(this.courses.getValue());
 		data.setStatus(status.getValue());
 		data.setTimeTable(timeTables.getValue());
@@ -324,7 +341,7 @@ public class AdminController extends AbstractController {
 
 	public void addJdcClass(ActionEvent event) {
 		Button btn = (Button) event.getSource();
-		if("Update".equalsIgnoreCase(btn.getText())) {
+		if ("Update".equalsIgnoreCase(btn.getText())) {
 			this.classBroker.update(this.getJdcClass(), JdcClass.class);
 			btn.setText("Create");
 		} else {

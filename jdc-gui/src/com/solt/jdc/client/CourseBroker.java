@@ -9,8 +9,17 @@ import com.solt.jdc.entity.Course;
 
 public class CourseBroker extends AbstractBroker<Course> {
 
-	public CourseBroker() {
+	private static CourseBroker broker;
+	
+	private CourseBroker() {
 		super(Course.class);
+	}
+	
+	public synchronized static CourseBroker getInstance() {
+		if(null == broker) {
+			broker = new CourseBroker();
+		}
+		return broker;
 	}
 
 	@Override

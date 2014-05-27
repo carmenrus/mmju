@@ -1,6 +1,7 @@
 package com.solt.jdc.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -68,4 +69,8 @@ public class Course implements Serializable {
 		this.requirement = requirement;
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
 }

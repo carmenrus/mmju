@@ -8,9 +8,18 @@ import javax.ws.rs.core.MediaType;
 import com.solt.jdc.entity.Township;
 
 public class TownshipBroker extends AbstractBroker<Township> {
+	
+	private static TownshipBroker broker;
 
-	public TownshipBroker() {
+	private TownshipBroker() {
 		super(Township.class);
+	}
+	
+	public synchronized static TownshipBroker getInstance() {
+		if(null == broker) {
+			broker = new TownshipBroker();
+		}
+		return broker;
 	}
 
 	@Override

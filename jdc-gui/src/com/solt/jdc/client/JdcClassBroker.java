@@ -9,8 +9,17 @@ import com.solt.jdc.entity.JdcClass;
 
 public class JdcClassBroker extends AbstractBroker<JdcClass> {
 
-	public JdcClassBroker() {
+	private static JdcClassBroker broker;
+	
+	private JdcClassBroker() {
 		super(JdcClass.class);
+	}
+	
+	public synchronized static JdcClassBroker getInstancce() {
+		if(null == broker) {
+			broker = new JdcClassBroker();
+		}
+		return broker;
 	}
 
 	@Override

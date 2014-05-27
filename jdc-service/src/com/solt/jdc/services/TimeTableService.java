@@ -15,6 +15,7 @@ public class TimeTableService extends AbstractService<TimeTable> {
 
 	@Override
 	public TimeTable update(TimeTable t) {
+		System.out.println(t.getId());
 		TimeTable c = find(t.getId());
 		c.setDays(t.getDays());
 		c.setDescription(t.getDescription());
