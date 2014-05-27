@@ -19,6 +19,7 @@ public class CourseService extends AbstractService<Course>{
 		c.setDescription(t.getDescription());
 		c.setRequirement(t.getRequirement());
 		c.setDuration(t.getDuration());
+		c.setFee(t.getFee());
 		return dao.update(c);
 	}
 

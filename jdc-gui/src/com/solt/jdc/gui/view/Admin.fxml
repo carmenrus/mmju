@@ -88,8 +88,10 @@
 						                </FXCollections>
 						              </items>
                                     </ComboBox>
+                                    <Label text="Fee" />
+                                    <TextField fx:id="fee" />
                                     <Label text="Description" />
-                                    <TextArea fx:id="courseDescription" prefHeight="212.0" prefWidth="292.0" />
+                                    <TextArea fx:id="courseDescription" prefHeight="151.0" prefWidth="272.0" />
                                     <Button fx:id="courseButton" mnemonicParsing="false" prefHeight="53.0" prefWidth="152.0" text="Create" />
                                  </children>
                                  <padding>

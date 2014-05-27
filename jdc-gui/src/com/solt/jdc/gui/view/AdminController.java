@@ -64,6 +64,8 @@ public class AdminController extends AbstractController {
 	@FXML
 	private ComboBox<String> duration;
 	@FXML
+	private TextField fee;
+	@FXML
 	private TextArea courseDescription;
 	@FXML
 	private Button courseButton;
@@ -274,8 +276,11 @@ public class AdminController extends AbstractController {
 		} else {
 			this.timeBroker.persist(this.getTimeTable(), TimeTable.class);
 		}
+		ApplicationContext.put(CommonList.TimeTable, this.timeBroker.getAll());
+		ApplicationContext.put(CommonList.JdcClass, this.classBroker.getAll());
 		this.loadTimeTable();
 		this.loadClassCombo();
+		this.loadJdcClass();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -292,8 +297,11 @@ public class AdminController extends AbstractController {
 		} else {
 			this.courseBroker.persist(this.getCourse(), Course.class);
 		}
+		ApplicationContext.put(CommonList.Course, this.courseBroker.getAll());
+		ApplicationContext.put(CommonList.JdcClass, this.classBroker.getAll());
 		this.loadCourse();
 		this.loadClassCombo();
+		this.loadJdcClass();
 	}
 
 	private Course getCourse() {
@@ -302,12 +310,14 @@ public class AdminController extends AbstractController {
 				.getSelectionModel().getSelectedItem();
 		data.setName(super.getText(courseName));
 		data.setDuration(duration.getValue());
+		data.setFee(Integer.parseInt(this.fee.getText()));
 		data.setRequirement(requirement.getValue());
 		data.setDescription(courseDescription.getText());
 		return data;
 	}
 
 	private void setCourse(Course selectedItem) {
+		fee.setText(String.valueOf(selectedItem.getFee()));
 		courseName.setText(selectedItem.getName());
 		duration.setValue(selectedItem.getDuration());
 		requirement.setValue(selectedItem.getRequirement());
@@ -347,6 +357,7 @@ public class AdminController extends AbstractController {
 		} else {
 			this.classBroker.persist(this.getJdcClass(), JdcClass.class);
 		}
+		ApplicationContext.put(CommonList.JdcClass, classBroker.getAll());
 		this.loadJdcClass();
 	}
 

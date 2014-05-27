@@ -1,7 +1,9 @@
 package com.solt.jdc.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 
 
@@ -26,7 +28,7 @@ public class JdcClass implements Serializable {
 
 	@Enumerated
 	private Status status;
-
+	
 	//uni-directional many-to-one association to Course
 	@ManyToOne
 	private Course course;
@@ -79,4 +81,8 @@ public class JdcClass implements Serializable {
 		this.timeTable = timeTable;
 	}
 
+	@Override
+	public String toString() {
+		return  course.toString() + " " + timeTable.toString();
+	}
 }

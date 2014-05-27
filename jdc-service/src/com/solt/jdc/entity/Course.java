@@ -18,6 +18,8 @@ public class Course implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	private int fee;
+	
 	private String description;
 
 	private String duration;
@@ -27,6 +29,14 @@ public class Course implements Serializable {
 	private String requirement;
 
 	public Course() {
+	}
+
+	public int getFee() {
+		return fee;
+	}
+
+	public void setFee(int fee) {
+		this.fee = fee;
 	}
 
 	public int getId() {

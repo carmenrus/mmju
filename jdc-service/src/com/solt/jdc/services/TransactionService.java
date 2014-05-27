@@ -2,8 +2,11 @@ package com.solt.jdc.services;
 
 import java.util.Date;
 
+import javax.ws.rs.Path;
+
 import com.solt.jdc.entity.Transaction;
 
+@Path("/transaction")
 public class TransactionService extends AbstractService<Transaction> {
 
 	@Override

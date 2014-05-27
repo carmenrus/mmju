@@ -1,6 +1,7 @@
 package com.solt.jdc.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -38,4 +39,8 @@ public class Township implements Serializable {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
 }
