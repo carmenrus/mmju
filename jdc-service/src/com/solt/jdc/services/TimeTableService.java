@@ -13,15 +13,4 @@ public class TimeTableService extends AbstractService<TimeTable> {
 		super.entity = TimeTable.class;
 	}
 
-	@Override
-	public TimeTable update(TimeTable t) {
-		System.out.println(t.getId());
-		TimeTable c = find(t.getId());
-		c.setDays(t.getDays());
-		c.setDescription(t.getDescription());
-		c.setTimeFrom(t.getTimeFrom());
-		c.setTimeTo(t.getTimeTo());
-		return this.dao.update(c);
-	}
-
 }

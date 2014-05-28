@@ -12,11 +12,4 @@ public class TownshipService extends AbstractService<Township> {
 		super.entity = Township.class;
 	}
 
-	@Override
-	public Township update(Township t) {
-		Township c = find(t.getId());
-		c.setName(t.getName());
-		return dao.update(c);
-	}
-
 }

@@ -3,6 +3,9 @@ package com.solt.jdc.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.REFRESH;
+import static javax.persistence.CascadeType.MERGE;
 
 
 /**
@@ -44,7 +47,7 @@ public class Bill implements Serializable {
 	private Student student;
 
 	//uni-directional many-to-one association to Transaction
-	@ManyToOne
+	@ManyToOne(cascade = { PERSIST, MERGE, REFRESH })
 	private Transaction transaction;
 
 	public Bill() {

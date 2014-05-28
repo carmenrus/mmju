@@ -12,14 +12,4 @@ public class JdcClassService extends AbstractService<JdcClass> {
 		super.entity = JdcClass.class;
 	}
 
-	@Override
-	public JdcClass update(JdcClass t) {
-		JdcClass c = this.find(t.getId());
-		c.setCourse(t.getCourse());
-		c.setStart(t.getStart());
-		c.setStatus(t.getStatus());
-		c.setTimeTable(t.getTimeTable());
-		return this.dao.update(c);
-	}
-
 }

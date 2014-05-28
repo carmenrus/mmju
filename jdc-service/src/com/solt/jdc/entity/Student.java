@@ -1,7 +1,9 @@
 package com.solt.jdc.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 
 
@@ -19,6 +21,16 @@ public class Student implements Serializable {
 	private int id;
 
 	private String addres;
+	
+	private boolean gender;
+
+	public boolean isGender() {
+		return gender;
+	}
+
+	public void setGender(boolean gender) {
+		this.gender = gender;
+	}
 
 	@Temporal(TemporalType.DATE)
 	private Date creation;
@@ -127,4 +139,8 @@ public class Student implements Serializable {
 		this.township = township;
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
 }

@@ -12,15 +12,4 @@ public class CourseService extends AbstractService<Course>{
 		super.entity = Course.class;
 	}
 
-	@Override
-	public Course update(Course t) {
-		Course c = find(t.getId());
-		c.setName(t.getName());
-		c.setDescription(t.getDescription());
-		c.setRequirement(t.getRequirement());
-		c.setDuration(t.getDuration());
-		c.setFee(t.getFee());
-		return dao.update(c);
-	}
-
 }

@@ -14,12 +14,17 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
+import com.solt.jdc.client.BillBroker;
 import com.solt.jdc.client.JdcException;
+import com.solt.jdc.client.StudentBroker;
 import com.solt.jdc.common.ApplicationContext;
 import com.solt.jdc.common.ApplicationContext.CommonList;
+import com.solt.jdc.entity.Bill;
 import com.solt.jdc.entity.JdcClass;
 import com.solt.jdc.entity.Student;
 import com.solt.jdc.entity.Township;
+import com.solt.jdc.entity.Transaction;
+import com.solt.jdc.entity.Transaction.Type;
 
 public class RegistrationController extends AbstractController{
 	
@@ -67,6 +72,8 @@ public class RegistrationController extends AbstractController{
 	@FXML
 	private ListView<Student> studentList;
 	
+	private Student currentStudent;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -93,6 +100,108 @@ public class RegistrationController extends AbstractController{
 		this.student.setOnAction(RegistrationController.this::setFeesView);
 		
 		this.paid.textProperty().addListener(RegistrationController.this::setPaid);
+		this.studentList.getSelectionModel().selectedItemProperty().addListener(RegistrationController.this::selectStudent);
+
+		this.loadStudentList();
+	}
+	
+	private void loadStudentList() {
+		studentList.getItems().clear();
+		studentList.getItems().addAll(StudentBroker.getInstance().getAll());
+	}
+
+	private void setStudent(Student stu) {
+		this.currentStudent = stu;
+		if(null != stu) {
+			this.name.setText(stu.getName());
+			this.nrc.setText(stu.getNrcNumber());
+			if(stu.isGender()) {
+				this.male.setSelected(true);
+			} else {
+				this.female.setSelected(true);
+			}
+			this.dob.setValue(super.getLocalDate(stu.getDateOfBirth()));
+			this.phone.setText(stu.getPhone());
+			this.email.setText(stu.getEmail());
+			this.townships.setValue(stu.getTownship());
+			this.address.setText(stu.getAddres());
+		} else {
+			this.name.clear();
+			this.nrc.clear();
+			this.male.setSelected(true);
+			this.dob.setValue(null);
+			this.phone.clear();
+			this.email.clear();
+			this.townships.setValue(null);
+			this.address.clear();
+		}
+	}
+	
+	public Student getStudent() {
+		if(this.currentStudent == null) {
+			this.currentStudent = new Student();
+		}
+		
+		this.currentStudent.setName(this.name.getText());
+		this.currentStudent.setNrcNumber(this.nrc.getText());
+		this.currentStudent.setGender(this.male.isSelected());
+		this.currentStudent.setDateOfBirth(super.getDateFromPicker(dob));
+		this.currentStudent.setPhone(this.phone.getText());
+		this.currentStudent.setEmail(this.email.getText());
+		this.currentStudent.setTownship(this.townships.getValue());
+		this.currentStudent.setAddres(this.address.getText());
+		
+		return this.currentStudent;
+	}
+	
+	public Bill getBill() {
+		Bill bill = new Bill();
+		bill.setJdcClass(this.jdcClasses.getValue());
+		int fee = bill.getJdcClass().getCourse().getFee();
+		if(this.noDiscount.isSelected()) {
+			bill.setDiscount(0);
+			bill.setTotal(fee);
+		} else {
+			bill.setDiscount(fee / 10);
+			bill.setTotal(fee - bill.getDiscount());
+		}
+		
+		bill.setPaid(Integer.parseInt(this.paid.getText()));
+		bill.setRemain(Integer.parseInt(this.remain.getText()));
+		bill.setStudent(this.getStudent());
+		
+		Transaction tran = new Transaction();
+		tran.setIncome(bill.getPaid());
+		tran.setType(Type.IN);
+		tran.setComment(bill.getStudent().getName() + " paid for " + bill.getJdcClass().toString());
+		bill.setTransaction(tran);
+		return bill;
+	}
+	
+	public void clear() {
+		// clear list
+		this.loadStudentList();
+		// clear student
+		this.setStudent(null);
+		// clear bill info
+		this.jdcClasses.setValue(null);
+		this.fee.clear();
+		this.noDiscount.setSelected(true);
+		this.feesToPaid.clear();
+		this.paid.clear();
+		this.remain.clear();
+	}
+	
+	public void register() {
+		BillBroker.getInstance().persist(this.getBill(), Bill.class);
+		
+		// clear all inputs
+		this.clear();
+	}
+	
+	public void selectStudent(ObservableValue<? extends Student> observable,
+			Student oldValue, Student newValue) {
+		this.setStudent(newValue);
 	}
 	
 	private void setFeesView(ActionEvent ae) {

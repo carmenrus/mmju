@@ -67,8 +67,8 @@
                   <TextField fx:id="remain" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="17" />
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="18">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="CLEAR" />
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="REGISTER" />
+                        <Button mnemonicParsing="false" onAction="#clear" prefHeight="40.0" prefWidth="120.0" text="CLEAR" />
+                        <Button mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="120.0" text="REGISTER" />
                      </children>
                   </HBox>
                </children>

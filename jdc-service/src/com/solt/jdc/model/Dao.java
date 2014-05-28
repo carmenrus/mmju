@@ -1,12 +1,9 @@
 package com.solt.jdc.model;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 public class Dao<T> {
@@ -23,7 +20,6 @@ public class Dao<T> {
 		StringBuffer sb = new StringBuffer("select c from ");
 		sb.append(entityClass.getSimpleName());
 		sb.append(" c");
-		System.out.println(sb.toString());
 		return em.createQuery(sb.toString(), entityClass).getResultList();
 	}
 	
@@ -39,34 +35,9 @@ public class Dao<T> {
 	
 	
 	@Transactional
-	public void update(Class<T> entityClass, Object id, Map<String, Object> param) {
-		StringBuffer sb = new StringBuffer("update ");
-		sb.append(entityClass.getSimpleName());
-		sb.append(" c ");
-		sb.append(this.getSetParam(param));
-		sb.append(" where c.id = :id");
-		
-		Query q = em.createQuery(sb.toString());
-		q.setParameter("id", id);
-		this.setParam(q, param);
-		q.executeUpdate();
-		
-	}
-	
-	@Transactional
 	public T update(T t) {
 		this.em.merge(t);
 		return t;
-	}
-	
-	private String getSetParam(Map<String, Object> param) {
-		return null;
-	}
-	
-	private void setParam(Query q, Map<String, Object> param) {
-		for(Entry<String, Object> e : param.entrySet()) {
-			q.setParameter(e.getKey(), e.getValue());
-		}
 	}
 	
 }

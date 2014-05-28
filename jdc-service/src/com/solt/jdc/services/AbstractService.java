@@ -66,5 +66,8 @@ public abstract class AbstractService<T> {
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public abstract T update(T t);
+	public T update(T t) {
+		this.dao.update(t);
+		return t;
+	}
 }
