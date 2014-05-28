@@ -25,10 +25,9 @@ public class JdcClass implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	private Date start;
-
 	@Enumerated
 	private Status status;
-	
+
 	//uni-directional many-to-one association to Course
 	@ManyToOne
 	private Course course;
@@ -83,6 +82,6 @@ public class JdcClass implements Serializable {
 
 	@Override
 	public String toString() {
-		return  course.toString() + " " + timeTable.toString();
+		return this.course.getName() + " : " + this.timeTable.toString();
 	}
 }

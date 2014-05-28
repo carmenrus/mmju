@@ -4,28 +4,29 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+
 /**
  * The persistent class for the time_table database table.
  * 
  */
 @Entity
-@Table(name = "time_table")
-@NamedQuery(name = "TimeTable.findAll", query = "SELECT t FROM TimeTable t")
+@Table(name="time_table")
+@NamedQuery(name="TimeTable.findAll", query="SELECT t FROM TimeTable t")
 public class TimeTable implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String days;
 
 	private String description;
 
-	@Column(name = "time_from")
+	@Column(name="time_from")
 	private String timeFrom;
 
-	@Column(name = "time_to")
+	@Column(name="time_to")
 	private String timeTo;
 
 	public TimeTable() {
@@ -73,6 +74,6 @@ public class TimeTable implements Serializable {
 
 	@Override
 	public String toString() {
-		return days + " [" + timeFrom + "-" + timeTo + "]";
+		return this.days + " [" + this.timeFrom + "-" + this.timeTo + "]";
 	}
 }

@@ -13,15 +13,12 @@ import java.util.Date;
 @NamedQuery(name="Output.findAll", query="SELECT o FROM Output o")
 public class Output implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	public enum Category {Collect, Buy_Equipment}
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@Enumerated
-	private Category catagory;
+	private int catagory;
 
 	private String comment;
 
@@ -33,8 +30,6 @@ public class Output implements Serializable {
 
 	private int outcome;
 
-	private int status;
-
 	private String stuff;
 
 	//uni-directional many-to-one association to Transaction
@@ -42,6 +37,8 @@ public class Output implements Serializable {
 	private Transaction transaction;
 
 	public Output() {
+		this.creation = new Date();
+		this.modification = this.creation;
 	}
 
 	public int getId() {
@@ -52,11 +49,11 @@ public class Output implements Serializable {
 		this.id = id;
 	}
 
-	public Category getCatagory() {
+	public int getCatagory() {
 		return this.catagory;
 	}
 
-	public void setCatagory(Category catagory) {
+	public void setCatagory(int catagory) {
 		this.catagory = catagory;
 	}
 
@@ -90,14 +87,6 @@ public class Output implements Serializable {
 
 	public void setOutcome(int outcome) {
 		this.outcome = outcome;
-	}
-
-	public int getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
 	}
 
 	public String getStuff() {

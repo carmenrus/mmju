@@ -13,9 +13,7 @@ import java.util.Date;
 @NamedQuery(name="Transaction.findAll", query="SELECT t FROM Transaction t")
 public class Transaction implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	public enum Type {IN, OUT}
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -32,13 +30,9 @@ public class Transaction implements Serializable {
 
 	private int outcome;
 
-	private String status;
-
-	@Enumerated
-	private Type type;
-
 	public Transaction() {
 		this.creation = new Date();
+		this.modification = this.creation;
 	}
 
 	public int getId() {
@@ -87,22 +81,6 @@ public class Transaction implements Serializable {
 
 	public void setOutcome(int outcome) {
 		this.outcome = outcome;
-	}
-
-	public String getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Type getType() {
-		return this.type;
-	}
-
-	public void setType(Type type) {
-		this.type = type;
 	}
 
 }

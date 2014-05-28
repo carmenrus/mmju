@@ -1,14 +1,9 @@
 package com.solt.jdc.entity;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.Date;
-
 import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.CascadeType.REFRESH;
-import static javax.persistence.CascadeType.MERGE;
 
 
 /**
@@ -16,8 +11,7 @@ import static javax.persistence.CascadeType.MERGE;
  * 
  */
 @Entity
-@NamedQueries(value = { @NamedQuery(name="Bill.findAll", query="SELECT b FROM Bill b"),
-		@NamedQuery(name="Bill.findByStudent", query="SELECT b FROM Bill b where b.student.id =:student_id")})
+@NamedQuery(name="Bill.findAll", query="SELECT b FROM Bill b")
 public class Bill implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -37,25 +31,23 @@ public class Bill implements Serializable {
 
 	private int remain;
 
-	private int status;
-
 	private int total;
 
-	//uni-directional many-to-one association to JdcClass
-	@ManyToOne
-	@JoinColumn(name="jdc_class_id")
-	private JdcClass jdcClass;
-
-	//uni-directional many-to-one association to Student
-	@ManyToOne
-	private Student student;
+	//uni-directional many-to-one association to StudentJdc
+	@ManyToOne(cascade = PERSIST)
+	@JoinColumns({
+		@JoinColumn(name="jdc_class_id", referencedColumnName="jdc_class_id"),
+		@JoinColumn(name="student_id", referencedColumnName="student_id")
+		})
+	private StudentJdc studentJdc;
 
 	//uni-directional many-to-one association to Transaction
-	@ManyToOne(cascade = { PERSIST, MERGE, REFRESH })
+	@ManyToOne(cascade = PERSIST)
 	private Transaction transaction;
 
 	public Bill() {
 		this.creation = new Date();
+		this.modification = this.creation;
 	}
 
 	public int getId() {
@@ -106,14 +98,6 @@ public class Bill implements Serializable {
 		this.remain = remain;
 	}
 
-	public int getStatus() {
-		return this.status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
 	public int getTotal() {
 		return this.total;
 	}
@@ -122,20 +106,12 @@ public class Bill implements Serializable {
 		this.total = total;
 	}
 
-	public JdcClass getJdcClass() {
-		return this.jdcClass;
+	public StudentJdc getStudentJdc() {
+		return this.studentJdc;
 	}
 
-	public void setJdcClass(JdcClass jdcClass) {
-		this.jdcClass = jdcClass;
-	}
-
-	public Student getStudent() {
-		return this.student;
-	}
-
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setStudentJdc(StudentJdc studentJdc) {
+		this.studentJdc = studentJdc;
 	}
 
 	public Transaction getTransaction() {

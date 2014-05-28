@@ -21,16 +21,6 @@ public class Student implements Serializable {
 	private int id;
 
 	private String addres;
-	
-	private boolean gender;
-
-	public boolean isGender() {
-		return gender;
-	}
-
-	public void setGender(boolean gender) {
-		this.gender = gender;
-	}
 
 	@Temporal(TemporalType.DATE)
 	private Date creation;
@@ -40,6 +30,8 @@ public class Student implements Serializable {
 	private Date dateOfBirth;
 
 	private String email;
+
+	private boolean gender;
 
 	@Temporal(TemporalType.DATE)
 	private Date modification;
@@ -56,7 +48,6 @@ public class Student implements Serializable {
 	private Township township;
 
 	public Student() {
-		this.creation = new Date();
 	}
 
 	public int getId() {
@@ -97,6 +88,14 @@ public class Student implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public boolean isGender() {
+		return gender;
+	}
+
+	public void setGender(boolean gender) {
+		this.gender = gender;
 	}
 
 	public Date getModification() {

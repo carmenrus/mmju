@@ -7,6 +7,8 @@
 		<class>com.solt.jdc.entity.JdcClass</class>
 		<class>com.solt.jdc.entity.Output</class>
 		<class>com.solt.jdc.entity.Student</class>
+		<class>com.solt.jdc.entity.StudentJdc</class>
+		<class>com.solt.jdc.entity.StudentJdcPK</class>
 		<class>com.solt.jdc.entity.TimeTable</class>
 		<class>com.solt.jdc.entity.Township</class>
 		<class>com.solt.jdc.entity.Transaction</class>

@@ -22,9 +22,9 @@ import com.solt.jdc.common.ApplicationContext.CommonList;
 import com.solt.jdc.entity.Bill;
 import com.solt.jdc.entity.JdcClass;
 import com.solt.jdc.entity.Student;
+import com.solt.jdc.entity.StudentJdc;
 import com.solt.jdc.entity.Township;
 import com.solt.jdc.entity.Transaction;
-import com.solt.jdc.entity.Transaction.Type;
 
 public class RegistrationController extends AbstractController{
 	
@@ -105,9 +105,10 @@ public class RegistrationController extends AbstractController{
 		this.loadStudentList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void loadStudentList() {
 		studentList.getItems().clear();
-		studentList.getItems().addAll(StudentBroker.getInstance().getAll());
+		studentList.getItems().addAll((List<Student>)ApplicationContext.get(CommonList.Student));
 	}
 
 	private void setStudent(Student stu) {
@@ -156,8 +157,8 @@ public class RegistrationController extends AbstractController{
 	
 	public Bill getBill() {
 		Bill bill = new Bill();
-		bill.setJdcClass(this.jdcClasses.getValue());
-		int fee = bill.getJdcClass().getCourse().getFee();
+		JdcClass jdc = this.jdcClasses.getValue();
+		int fee = jdc.getCourse().getFee();
 		if(this.noDiscount.isSelected()) {
 			bill.setDiscount(0);
 			bill.setTotal(fee);
@@ -168,12 +169,17 @@ public class RegistrationController extends AbstractController{
 		
 		bill.setPaid(Integer.parseInt(this.paid.getText()));
 		bill.setRemain(Integer.parseInt(this.remain.getText()));
-		bill.setStudent(this.getStudent());
+		
+		Student student = this.getStudent();
+		
+		StudentJdc studentJdc = new StudentJdc();
+		studentJdc.setStudent(student);
+		studentJdc.setJdcClass(jdc);
+		bill.setStudentJdc(studentJdc);
 		
 		Transaction tran = new Transaction();
 		tran.setIncome(bill.getPaid());
-		tran.setType(Type.IN);
-		tran.setComment(bill.getStudent().getName() + " paid for " + bill.getJdcClass().toString());
+		tran.setComment(student.getName() + " paid for " + jdc.toString());
 		bill.setTransaction(tran);
 		return bill;
 	}
@@ -194,7 +200,7 @@ public class RegistrationController extends AbstractController{
 	
 	public void register() {
 		BillBroker.getInstance().persist(this.getBill(), Bill.class);
-		
+		ApplicationContext.put(CommonList.Student, StudentBroker.getInstance().getAll());
 		// clear all inputs
 		this.clear();
 	}

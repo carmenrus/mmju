@@ -4,14 +4,13 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 
 import com.solt.jdc.entity.Bill;
-import com.solt.jdc.entity.Student;
-import com.solt.jdc.model.Dao;
+import com.solt.jdc.model.BillModel;
 
 @Path("/bill")
 public class BillService extends AbstractService<Bill> {
 	
 	@Inject
-	Dao<Student> studentDao;
+	private BillModel billModel;
 	
 	@Override
 	public void setClass() {
@@ -20,9 +19,7 @@ public class BillService extends AbstractService<Bill> {
 	
 	@Override
 	public Bill create(Bill b) {
-		if(b.getStudent().getId() == 0) {
-			studentDao.persist(b.getStudent());
-		}
-		return super.create(b);
+		// student
+		return billModel.persist(b);
 	}
 }
