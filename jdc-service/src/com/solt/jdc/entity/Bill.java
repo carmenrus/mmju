@@ -1,8 +1,11 @@
 package com.solt.jdc.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
+
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REFRESH;
 import static javax.persistence.CascadeType.MERGE;
@@ -13,7 +16,8 @@ import static javax.persistence.CascadeType.MERGE;
  * 
  */
 @Entity
-@NamedQuery(name="Bill.findAll", query="SELECT b FROM Bill b")
+@NamedQueries(value = { @NamedQuery(name="Bill.findAll", query="SELECT b FROM Bill b"),
+		@NamedQuery(name="Bill.findByStudent", query="SELECT b FROM Bill b where b.student.id =:student_id")})
 public class Bill implements Serializable {
 	private static final long serialVersionUID = 1L;
 
