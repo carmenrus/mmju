@@ -32,7 +32,7 @@ public class MainFrame implements Initializable{
 		registration.setOnAction(MainFrame.this::loadView);
 		admin.setOnAction(MainFrame.this::loadView);
 		students.setOnAction(MainFrame.this::loadView);
-		
+		balance.setOnAction(MainFrame.this::loadView);
 		close.setOnAction(e -> System.exit(0));
 		this.loadView("Registration");
 	}

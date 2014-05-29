@@ -14,6 +14,7 @@ public class Main extends Application {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("MainFrame.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setTitle("Java Developer Class");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {

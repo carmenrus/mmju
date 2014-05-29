@@ -17,17 +17,17 @@
                   <Font name="Aharoni Bold" size="30.0" />
                </font>
             </Button>
-            <Button fx:id="admin" mnemonicParsing="false" prefHeight="100.0" prefWidth="256.0" text="Admin">
-               <font>
-                  <Font name="Aharoni Bold" size="30.0" />
-               </font>
-            </Button>
             <Button fx:id="students" mnemonicParsing="false" prefHeight="100.0" prefWidth="256.0" text="Students">
                <font>
                   <Font name="Aharoni Bold" size="30.0" />
                </font>
             </Button>
             <Button fx:id="balance" mnemonicParsing="false" prefHeight="100.0" prefWidth="256.0" text="Balance">
+               <font>
+                  <Font name="Aharoni Bold" size="30.0" />
+               </font>
+            </Button>
+            <Button fx:id="admin" mnemonicParsing="false" prefHeight="100.0" prefWidth="256.0" text="Admin">
                <font>
                   <Font name="Aharoni Bold" size="30.0" />
                </font>

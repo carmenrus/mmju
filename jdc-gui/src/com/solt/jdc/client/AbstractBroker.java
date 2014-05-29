@@ -11,11 +11,7 @@ public abstract class AbstractBroker<T> {
 
 	public abstract List<T> getAll();
 
-	public AbstractBroker(String resource) {
-		this.resource = resource;
-	}
-
-	public AbstractBroker(Class<T> resource) {
+	protected AbstractBroker(Class<T> resource) {
 		this.resource = resource.getSimpleName().toLowerCase();
 	}
 
