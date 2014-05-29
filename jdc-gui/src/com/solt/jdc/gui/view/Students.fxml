@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.solt.jdc.gui.view.StudentsController">
    <children>
       <AnchorPane prefHeight="780.0" prefWidth="880.0">
          <children>
@@ -23,7 +23,7 @@
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <children>
                         <TextField fx:id="name" editable="false" prefHeight="25.0" prefWidth="292.0" />
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Edit" />
+                        <Button mnemonicParsing="false" onAction="#edit" prefHeight="25.0" prefWidth="67.0" text="Edit" />
                      </children>
                   </HBox>
                   <TextField fx:id="nrc" editable="false" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
@@ -35,8 +35,8 @@
                   </HBox>
                   <DatePicker fx:id="dob" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                   <TextField fx:id="phone" editable="false" prefWidth="225.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                  <TextField fx:id="mail" editable="false" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                  <ComboBox fx:id="townshop" disable="true" prefHeight="28.0" prefWidth="177.0" promptText="Select Township" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                  <TextField fx:id="email" editable="false" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <ComboBox fx:id="townships" disable="true" prefHeight="28.0" prefWidth="177.0" promptText="Select Township" GridPane.columnIndex="2" GridPane.rowIndex="8">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
                            <String fx:value="Item 1" />
@@ -60,8 +60,8 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="18" />
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="12" GridPane.rowSpan="7">
                      <children>
-                        <ListView prefHeight="200.0" prefWidth="200.0" />
-                        <ListView prefHeight="288.0" prefWidth="218.0" />
+                        <ListView fx:id="classList" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="billList" prefHeight="288.0" prefWidth="218.0" />
                         <VBox prefHeight="288.0" prefWidth="262.0" spacing="10.0">
                            <children>
                               <Label text="Pay Course Fee">
@@ -90,13 +90,13 @@
                                     <Label text="Paid" GridPane.rowIndex="3" />
                                     <Label text="Remain" GridPane.rowIndex="4" />
                                     <Label text="Pay" GridPane.rowIndex="5" />
-                                    <TextField editable="false" GridPane.columnIndex="1" />
-                                    <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <TextField editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <TextField fx:id="courseFee" editable="false" GridPane.columnIndex="1" />
+                                    <TextField fx:id="discount" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="fee" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="paid" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="remain" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="pay" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Button mnemonicParsing="false" onAction="#paid" prefHeight="25.0" prefWidth="156.0" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                  </children>
                               </GridPane>
                            </children>
@@ -149,8 +149,8 @@
                   </Label>
                </children>
             </AnchorPane>
-            <TextField />
-            <ListView prefHeight="502.0" prefWidth="380.0" />
+            <TextField fx:id="filter" />
+            <ListView fx:id="studentList" prefHeight="502.0" prefWidth="380.0" />
          </children>
          <padding>
             <Insets left="10.0" right="10.0" />

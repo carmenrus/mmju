@@ -1,8 +1,12 @@
 package com.solt.jdc.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import static javax.persistence.CascadeType.PERSIST;
 
 
@@ -11,7 +15,10 @@ import static javax.persistence.CascadeType.PERSIST;
  * 
  */
 @Entity
-@NamedQuery(name="Bill.findAll", query="SELECT b FROM Bill b")
+@NamedQueries(value = { 
+		@NamedQuery(name="Bill.findAll", query="SELECT b FROM Bill b"),
+		@NamedQuery(name="Bill.getBillByStudentJdc", query="SELECT b FROM Bill b where b.studentJdc.id.studentId = :studentId and b.studentJdc.id.jdcClassId =:jdcClassId")
+})
 public class Bill implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,16 +29,12 @@ public class Bill implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date creation;
 
-	private int discount;
-
 	@Temporal(TemporalType.DATE)
 	private Date modification;
 
+	private int discount;
+
 	private int paid;
-
-	private int remain;
-
-	private int total;
 
 	//uni-directional many-to-one association to StudentJdc
 	@ManyToOne(cascade = PERSIST)
@@ -90,22 +93,6 @@ public class Bill implements Serializable {
 		this.paid = paid;
 	}
 
-	public int getRemain() {
-		return this.remain;
-	}
-
-	public void setRemain(int remain) {
-		this.remain = remain;
-	}
-
-	public int getTotal() {
-		return this.total;
-	}
-
-	public void setTotal(int total) {
-		this.total = total;
-	}
-
 	public StudentJdc getStudentJdc() {
 		return this.studentJdc;
 	}
@@ -122,4 +109,11 @@ public class Bill implements Serializable {
 		this.transaction = transaction;
 	}
 
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(new SimpleDateFormat("yyyy/MM/dd  : ").format(creation));
+		sb.append(this.paid);
+		return sb.toString();
+	}
 }

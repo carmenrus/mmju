@@ -1,6 +1,7 @@
 package com.solt.jdc.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,7 +11,9 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="student_jdc")
-@NamedQuery(name="StudentJdc.findAll", query="SELECT s FROM StudentJdc s")
+@NamedQueries(value = { 
+		@NamedQuery(name="StudentJdc.findAll", query="SELECT s FROM StudentJdc s"),
+		@NamedQuery(name = "StudentJdc.getClassesByStudentId", query = "SELECT s FROM StudentJdc s where s.id.studentId = :studentId")})
 public class StudentJdc implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -53,6 +56,11 @@ public class StudentJdc implements Serializable {
 
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+	
+	@Override
+	public String toString() {
+		return this.jdcClass.toString();
 	}
 
 }

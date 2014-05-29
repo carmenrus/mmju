@@ -23,8 +23,10 @@ public class MainFrame implements Initializable{
 	@FXML
 	private Button students;
 	@FXML
+	private Button balance;
+	@FXML
 	private StackPane container;
-
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		registration.setOnAction(MainFrame.this::loadView);
