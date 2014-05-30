@@ -139,8 +139,12 @@ public class RegistrationController extends AbstractController {
 				(List<Student>) ApplicationContext.get(CommonList.Student));
 	}
 
+	@SuppressWarnings("unchecked")
 	private void setStudent(Student stu) {
 		this.currentStudent = stu;
+		this.jdcClasses.getItems().clear();
+		this.jdcClasses.getItems().addAll(
+				(List<JdcClass>) ApplicationContext.get(CommonList.JdcClass));
 		if (null != stu) {
 			this.name.setText(stu.getName());
 			this.nrc.setText(stu.getNrcNumber());
@@ -154,6 +158,8 @@ public class RegistrationController extends AbstractController {
 			this.email.setText(stu.getEmail());
 			this.townships.setValue(stu.getTownship());
 			this.address.setText(stu.getAddres());
+			
+			this.filterClassList(StudentBroker.getInstance().getClassByStudent(stu.getId()));
 		} else {
 			this.male.setSelected(true);
 			this.dob.setValue(null);
@@ -161,6 +167,11 @@ public class RegistrationController extends AbstractController {
 			this.clearTextFields.accept(Arrays.asList(name, nrc, phone, email,
 					address).toArray(new TextField[5]));
 		}
+	}
+
+	
+	private void filterClassList(List<StudentJdc> classByStudent) {
+		classByStudent.forEach(sjc -> this.jdcClasses.getItems().remove(sjc.getJdcClass()));
 	}
 
 	public Student getStudent() {
