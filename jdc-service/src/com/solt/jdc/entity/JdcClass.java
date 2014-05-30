@@ -84,4 +84,50 @@ public class JdcClass implements Serializable {
 	public String toString() {
 		return this.course.getName() + " : " + this.timeTable.toString();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((course == null) ? 0 : course.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((start == null) ? 0 : start.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result
+				+ ((timeTable == null) ? 0 : timeTable.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		JdcClass other = (JdcClass) obj;
+		if (course == null) {
+			if (other.course != null)
+				return false;
+		} else if (!course.equals(other.course))
+			return false;
+		if (id != other.id)
+			return false;
+		if (start == null) {
+			if (other.start != null)
+				return false;
+		} else if (!start.equals(other.start))
+			return false;
+		if (status != other.status)
+			return false;
+		if (timeTable == null) {
+			if (other.timeTable != null)
+				return false;
+		} else if (!timeTable.equals(other.timeTable))
+			return false;
+		return true;
+	}
+	
+	
 }

@@ -1,6 +1,8 @@
 package com.solt.jdc.gui.view;
 
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -20,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 
 import com.solt.jdc.client.JdcException;
 import com.solt.jdc.common.ApplicationContext;
@@ -30,7 +33,7 @@ import com.solt.jdc.entity.TimeTable;
 
 public abstract class AbstractController implements Initializable {
 
-	protected Consumer<TextField[]> clearTextFields;
+	protected Consumer<TextInputControl[]> clearTextFields;
 	protected BiFunction<TextField, TextField, String> substract;
 	protected Function<Integer, String> intToString;
 	protected Function<String, Integer> stringToInt;
@@ -108,5 +111,21 @@ public abstract class AbstractController implements Initializable {
 		};
 
 	}
-
+	
+	protected Date getDefaultDateFrom() {
+		try {
+			return new SimpleDateFormat("yyyyMMdd").parse("20121201");
+		} catch (ParseException e) {
+			return null;
+		}
+	}
+	
+	protected Date getDefaultDateTo() {
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+		try {
+			return new SimpleDateFormat("yyyyMMddHHmm").parse(df.format(new Date()) + "2359");
+		} catch (ParseException e) {
+			return null;
+		}
+	}
 }

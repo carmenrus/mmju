@@ -2,7 +2,6 @@ package com.solt.jdc.gui.view;
 
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -15,6 +14,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
+import com.solt.jdc.client.BillBroker;
 import com.solt.jdc.client.StudentBroker;
 import com.solt.jdc.common.ApplicationContext;
 import com.solt.jdc.common.ApplicationContext.CommonList;
@@ -22,6 +22,7 @@ import com.solt.jdc.entity.Bill;
 import com.solt.jdc.entity.Student;
 import com.solt.jdc.entity.StudentJdc;
 import com.solt.jdc.entity.Township;
+import com.solt.jdc.entity.Transaction;
 
 public class StudentsController extends AbstractController {
 
@@ -94,10 +95,10 @@ public class StudentsController extends AbstractController {
 						this.billList.getItems().addAll(bills);
 						// set balance
 						if (null != bills && bills.size() > 0) {
-							this.courseFee.setText(String.valueOf(bills.get(0)
+							this.courseFee.setText(String.valueOf(bills.get(bills.size() -1)
 									.getStudentJdc().getJdcClass().getCourse()
 									.getFee()));
-							this.discount.setText(String.valueOf(bills.get(0)
+							this.discount.setText(String.valueOf(bills.get(bills.size() -1)
 									.getDiscount()));
 							this.fee.setText(substract.apply(this.courseFee,
 									this.discount));
@@ -105,6 +106,7 @@ public class StudentsController extends AbstractController {
 									.mapToInt(v -> v.getPaid()).sum()));
 							this.remain.setText(substract.apply(this.fee,
 									this.paid));
+							this.pay.clear();
 						} else {
 							clearTextFields.accept(Arrays.asList(courseFee,
 									discount, fee, paid, remain).toArray(
@@ -151,10 +153,30 @@ public class StudentsController extends AbstractController {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void paid() {
 		StudentJdc jdc = classList.getSelectionModel().getSelectedItem();
 		Bill bill = new Bill();
-		bill.setPaid(stringToInt.apply(paid.getText()));
+		bill.setPaid(stringToInt.apply(pay.getText()));
+		bill.setStudentJdc(jdc);
+		Transaction tran = new Transaction();
+		tran.setIncome(bill.getPaid());
+		tran.setComment(jdc.toString() + " -> " + jdc.getStudent().getName());
+		
+		bill.setTransaction(tran);
+		
+		BillBroker.getInstance().persist(bill, Bill.class);
+		
+		// referesh student
+		ApplicationContext.put(CommonList.Student, StudentBroker.getInstance().getAll());
+		
+		// select student
+		studentList.getItems().clear();
+		studentList.getItems().addAll((List<Student>)ApplicationContext.get(CommonList.Student));
+		studentList.getSelectionModel().select(jdc.getStudent());
+		
+		// select class
+		classList.getSelectionModel().select(jdc);
 	}
 
 	public void edit() {

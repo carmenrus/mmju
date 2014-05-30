@@ -142,4 +142,90 @@ public class Student implements Serializable {
 	public String toString() {
 		return name;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((addres == null) ? 0 : addres.hashCode());
+		result = prime * result
+				+ ((creation == null) ? 0 : creation.hashCode());
+		result = prime * result
+				+ ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + (gender ? 1231 : 1237);
+		result = prime * result + id;
+		result = prime * result
+				+ ((modification == null) ? 0 : modification.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((nrcNumber == null) ? 0 : nrcNumber.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result
+				+ ((township == null) ? 0 : township.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Student other = (Student) obj;
+		if (addres == null) {
+			if (other.addres != null)
+				return false;
+		} else if (!addres.equals(other.addres))
+			return false;
+		if (creation == null) {
+			if (other.creation != null)
+				return false;
+		} else if (!creation.equals(other.creation))
+			return false;
+		if (dateOfBirth == null) {
+			if (other.dateOfBirth != null)
+				return false;
+		} else if (!dateOfBirth.equals(other.dateOfBirth))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (gender != other.gender)
+			return false;
+		if (id != other.id)
+			return false;
+		if (modification == null) {
+			if (other.modification != null)
+				return false;
+		} else if (!modification.equals(other.modification))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (nrcNumber == null) {
+			if (other.nrcNumber != null)
+				return false;
+		} else if (!nrcNumber.equals(other.nrcNumber))
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (township == null) {
+			if (other.township != null)
+				return false;
+		} else if (!township.equals(other.township))
+			return false;
+		return true;
+	}
+	
+	
 }

@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import com.solt.jdc.entity.Bill;
 import com.solt.jdc.entity.Student;
+import com.solt.jdc.entity.StudentJdc;
 
 public class BillModel {
 	
@@ -18,6 +19,12 @@ public class BillModel {
 		Student st = b.getStudentJdc().getStudent();
 		if(st.getId() == 0) {
 			em.persist(st);
+		}
+		
+		StudentJdc jdc = em.find(StudentJdc.class, b.getStudentJdc().getId());
+		
+		if(null == jdc) {
+			em.persist(b.getStudentJdc());
 		}
 		
 		em.persist(b);

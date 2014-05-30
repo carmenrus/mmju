@@ -37,7 +37,7 @@ public class Bill implements Serializable {
 	private int paid;
 
 	//uni-directional many-to-one association to StudentJdc
-	@ManyToOne(cascade = PERSIST)
+	@ManyToOne
 	@JoinColumns({
 		@JoinColumn(name="jdc_class_id", referencedColumnName="jdc_class_id"),
 		@JoinColumn(name="student_id", referencedColumnName="student_id")

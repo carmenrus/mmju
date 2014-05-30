@@ -2,9 +2,12 @@ package com.solt.jdc.gui.view;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -13,9 +16,12 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import com.solt.jdc.client.OutputBroker;
 import com.solt.jdc.client.TransactionBroker;
+import com.solt.jdc.entity.Output;
 import com.solt.jdc.entity.Transaction;
 
 public class BalanceController extends AbstractController {
@@ -24,13 +30,12 @@ public class BalanceController extends AbstractController {
 	public void initialize(URL location, ResourceBundle resources) {
 		super.initialize(location, resources);
 
-		this.bal = new BalanceCalculator();
 		this.colComment.setCellValueFactory(new PropertyValueFactory<>(
 				"comment"));
 		this.colIncome
 				.setCellValueFactory(new PropertyValueFactory<>("income"));
-		this.colOutcome
-				.setCellValueFactory(new PropertyValueFactory<>("outcome"));
+		this.colOutcome.setCellValueFactory(new PropertyValueFactory<>(
+				"outcome"));
 		this.colDate.setCellValueFactory((
 				CellDataFeatures<Transaction, String> param) -> {
 			if (null != param) {
@@ -41,24 +46,53 @@ public class BalanceController extends AbstractController {
 			return null;
 		});
 
-		this.colBalance.setCellValueFactory(BalanceController.this::getBalance);
-		
+		this.colBalance.setCellValueFactory(new PropertyValueFactory<>(
+				"balance"));
+
 		this.loadTable();
-	}
-	
-	private void loadTable() {
-		this.table.getItems().clear();
-		this.table.getItems().addAll(TransactionBroker.getInstance().getAll());
+
+		clear.setOnAction(BalanceController.this::clear);
+
+		submit.setOnAction(e -> {
+			Output o = new Output();
+			o.setStuff(stuff.getText());
+			o.setOutcome(stringToInt.apply(amount.getText()));
+			o.setComment(comment.getText());
+
+			Transaction tran = new Transaction();
+			tran.setOutcome(o.getOutcome());
+			tran.setComment(o.getStuff() + " : " + o.getComment());
+			o.setTransaction(tran);
+			OutputBroker.getInstance().persist(o, Output.class);
+
+			this.clear(null);
+			this.loadTable();
+		});
+
+		this.from.setOnAction(e -> this.loadTable());
+		this.to.setOnAction(e -> this.loadTable());
 	}
 
-	private SimpleStringProperty getBalance(
-			CellDataFeatures<Transaction, String> param) {
-		if (null != param) {
-			Transaction t = param.getValue();
-			this.bal.addTransaction(t);
-			return new SimpleStringProperty(super.intToString.apply(this.bal.getTotal()));
-		}
-		return null;
+	private void clear(ActionEvent e) {
+		clearTextFields.accept(Arrays.asList(this.stuff, this.amount,
+				this.comment).toArray(new TextInputControl[3]));
+	}
+
+	private void loadTable() {
+		this.table.getItems().clear();
+		this.table.getItems().addAll(
+				TransactionBroker.getInstance().getAll(this.getFrom(),
+						this.getTo()));
+	}
+
+	private Date getFrom() {
+		return (this.from.getValue() == null) ? super.getDefaultDateFrom()
+				: super.getDateFromPicker(from);
+	}
+	
+	private Date getTo() {
+		return (this.to.getValue() == null) ? super.getDefaultDateTo()
+				: super.getDateFromPicker(to);
 	}
 
 	@FXML
@@ -88,20 +122,5 @@ public class BalanceController extends AbstractController {
 	private TableColumn<Transaction, String> colOutcome;
 	@FXML
 	private TableColumn<Transaction, String> colBalance;
-
-	private BalanceCalculator bal;
-
-	private static class BalanceCalculator {
-		private int total = 0;
-
-		public void addTransaction(Transaction t) {
-			total -= t.getOutcome();
-			total += t.getIncome();
-		}
-
-		public int getTotal() {
-			return this.total;
-		}
-	}
 
 }

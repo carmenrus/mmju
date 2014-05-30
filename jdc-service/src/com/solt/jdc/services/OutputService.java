@@ -11,5 +11,5 @@ public class OutputService extends AbstractService<Output> {
 	public void setClass() {
 		super.entity = Output.class;
 	}
-
+	
 }

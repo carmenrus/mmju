@@ -1,7 +1,9 @@
 package com.solt.jdc.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 
 
@@ -18,8 +20,6 @@ public class Output implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private int catagory;
-
 	private String comment;
 
 	@Temporal(TemporalType.DATE)
@@ -33,7 +33,7 @@ public class Output implements Serializable {
 	private String stuff;
 
 	//uni-directional many-to-one association to Transaction
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private Transaction transaction;
 
 	public Output() {
@@ -47,14 +47,6 @@ public class Output implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getCatagory() {
-		return this.catagory;
-	}
-
-	public void setCatagory(int catagory) {
-		this.catagory = catagory;
 	}
 
 	public String getComment() {
@@ -103,6 +95,64 @@ public class Output implements Serializable {
 
 	public void setTransaction(Transaction transaction) {
 		this.transaction = transaction;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
+		result = prime * result
+				+ ((creation == null) ? 0 : creation.hashCode());
+		result = prime * result + id;
+		result = prime * result
+				+ ((modification == null) ? 0 : modification.hashCode());
+		result = prime * result + outcome;
+		result = prime * result + ((stuff == null) ? 0 : stuff.hashCode());
+		result = prime * result
+				+ ((transaction == null) ? 0 : transaction.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Output other = (Output) obj;
+		if (comment == null) {
+			if (other.comment != null)
+				return false;
+		} else if (!comment.equals(other.comment))
+			return false;
+		if (creation == null) {
+			if (other.creation != null)
+				return false;
+		} else if (!creation.equals(other.creation))
+			return false;
+		if (id != other.id)
+			return false;
+		if (modification == null) {
+			if (other.modification != null)
+				return false;
+		} else if (!modification.equals(other.modification))
+			return false;
+		if (outcome != other.outcome)
+			return false;
+		if (stuff == null) {
+			if (other.stuff != null)
+				return false;
+		} else if (!stuff.equals(other.stuff))
+			return false;
+		if (transaction == null) {
+			if (other.transaction != null)
+				return false;
+		} else if (!transaction.equals(other.transaction))
+			return false;
+		return true;
 	}
 
 }

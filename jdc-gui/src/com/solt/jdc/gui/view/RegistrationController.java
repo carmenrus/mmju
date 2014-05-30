@@ -199,7 +199,7 @@ public class RegistrationController extends AbstractController {
 
 		Transaction tran = new Transaction();
 		tran.setIncome(bill.getPaid());
-		tran.setComment(student.getName() + " paid for " + jdc.toString());
+		tran.setComment(jdc.toString() + " -> " + student.getName());
 		bill.setTransaction(tran);
 		return bill;
 	}
