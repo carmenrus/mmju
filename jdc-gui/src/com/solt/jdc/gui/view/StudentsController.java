@@ -2,11 +2,14 @@ package com.solt.jdc.gui.view;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
@@ -65,6 +68,10 @@ public class StudentsController extends AbstractController {
 	private TextField pay;
 	@FXML
 	private TextField filter;
+	@FXML
+	private Button edit;
+	@FXML
+	private Button submit;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -86,6 +93,9 @@ public class StudentsController extends AbstractController {
 				.getSelectionModel()
 				.selectedItemProperty()
 				.addListener((a, b, c) -> {
+					this.edit.setDisable(false);
+					this.submit.setDisable(false);
+					this.pay.setEditable(true);
 					// set bills
 						StudentJdc jdc = classList.getSelectionModel()
 								.getSelectedItem();
@@ -95,11 +105,11 @@ public class StudentsController extends AbstractController {
 						this.billList.getItems().addAll(bills);
 						// set balance
 						if (null != bills && bills.size() > 0) {
-							this.courseFee.setText(String.valueOf(bills.get(bills.size() -1)
-									.getStudentJdc().getJdcClass().getCourse()
-									.getFee()));
-							this.discount.setText(String.valueOf(bills.get(bills.size() -1)
-									.getDiscount()));
+							this.courseFee.setText(String.valueOf(bills
+									.get(bills.size() - 1).getStudentJdc()
+									.getJdcClass().getCourse().getFee()));
+							this.discount.setText(String.valueOf(bills.get(
+									bills.size() - 1).getDiscount()));
 							this.fee.setText(substract.apply(this.courseFee,
 									this.discount));
 							this.paid.setText(String.valueOf(bills.stream()
@@ -107,15 +117,70 @@ public class StudentsController extends AbstractController {
 							this.remain.setText(substract.apply(this.fee,
 									this.paid));
 							this.pay.clear();
+							if ("0".equals(this.remain.getText())) {
+								this.pay.setEditable(false);
+								this.submit.setDisable(true);
+							}
 						} else {
 							clearTextFields.accept(Arrays.asList(courseFee,
 									discount, fee, paid, remain).toArray(
 									new TextField[5]));
 						}
 					});
-
+		
 		filter.textProperty().addListener(
 				(a, b, c) -> studentListFilter.accept(c, studentList));
+		
+		this.submit.setOnAction(StudentsController.this::paid);
+
+		this.edit.setOnAction(e -> {
+			if("Edit".equals(((Button)e.getSource()).getText())) {
+				this.setEditMode(true);
+				edit.setText("Save");
+			} else {
+				this.setEditMode(false);
+				Student stu = getStudent();
+				StudentBroker.getInstance().update(stu, Student.class);
+				ApplicationContext.put(CommonList.Student, StudentBroker.getInstance().getAll());
+				this.studentList.getItems().clear();
+				this.studentList.getItems().addAll(
+						(List<Student>) ApplicationContext.get(CommonList.Student));
+				this.studentList.getSelectionModel().select(stu);
+				edit.setText("Edit");
+			}
+		});
+	}
+	
+	private void setEditMode(boolean edit) {
+		studentList.setMouseTransparent(edit);
+		filter.setDisable(edit);
+		submit.setDisable(edit);
+		pay.setDisable(edit);
+		
+		name.setEditable(edit);
+		nrc.setEditable(edit);
+		phone.setEditable(edit);
+		email.setEditable(edit);
+		address.setEditable(edit);
+		
+		male.setDisable(!edit);
+		female.setDisable(!edit);
+		dob.setDisable(!edit);
+		townships.setDisable(!edit);
+	}
+	
+	private Student getStudent() {
+		Student stu = this.studentList.getSelectionModel().getSelectedItem();
+		stu.setName(name.getText());
+		stu.setAddres(address.getText());
+		stu.setDateOfBirth(super.getDateFromPicker(dob));
+		stu.setEmail(email.getText());
+		stu.setGender(male.isSelected());
+		stu.setModification(new Date());
+		stu.setNrcNumber(nrc.getText());
+		stu.setPhone(phone.getText());
+		stu.setTownship(townships.getValue());
+		return stu;
 	}
 
 	public void selectStudent(ObservableValue<? extends Student> observable,
@@ -154,7 +219,7 @@ public class StudentsController extends AbstractController {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void paid() {
+	public void paid(ActionEvent e) {
 		StudentJdc jdc = classList.getSelectionModel().getSelectedItem();
 		Bill bill = new Bill();
 		bill.setPaid(stringToInt.apply(pay.getText()));
@@ -162,25 +227,23 @@ public class StudentsController extends AbstractController {
 		Transaction tran = new Transaction();
 		tran.setIncome(bill.getPaid());
 		tran.setComment(jdc.toString() + " -> " + jdc.getStudent().getName());
-		
+
 		bill.setTransaction(tran);
-		
+
 		BillBroker.getInstance().persist(bill, Bill.class);
-		
+
 		// referesh student
-		ApplicationContext.put(CommonList.Student, StudentBroker.getInstance().getAll());
-		
+		ApplicationContext.put(CommonList.Student, StudentBroker.getInstance()
+				.getAll());
+
 		// select student
 		studentList.getItems().clear();
-		studentList.getItems().addAll((List<Student>)ApplicationContext.get(CommonList.Student));
+		studentList.getItems().addAll(
+				(List<Student>) ApplicationContext.get(CommonList.Student));
 		studentList.getSelectionModel().select(jdc.getStudent());
-		
+
 		// select class
 		classList.getSelectionModel().select(jdc);
-	}
-
-	public void edit() {
-
 	}
 
 }
