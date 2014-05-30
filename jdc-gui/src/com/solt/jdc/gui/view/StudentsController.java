@@ -1,12 +1,13 @@
 package com.solt.jdc.gui.view;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -72,6 +73,10 @@ public class StudentsController extends AbstractController {
 	private Button edit;
 	@FXML
 	private Button submit;
+	@FXML
+	private Button cancel;
+	@FXML
+	private ListView<Student> needToPay;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -83,10 +88,38 @@ public class StudentsController extends AbstractController {
 		male.setSelected(true);
 		this.townships.getItems().addAll(
 				(List<Township>) ApplicationContext.get(CommonList.Township));
+		// students
 		this.studentList.getItems().addAll(
 				(List<Student>) ApplicationContext.get(CommonList.Student));
-		this.studentList.getSelectionModel().selectedItemProperty()
-				.addListener(StudentsController.this::selectStudent);
+
+		this.studentList
+				.getSelectionModel()
+				.selectedItemProperty()
+				.addListener(
+						(a, b, c) -> {
+							if (null != c) {
+								setStudent(this.studentList.getSelectionModel()
+										.getSelectedItem());
+								needToPay.getSelectionModel().clearSelection();
+							}
+						});
+
+		// students to pay
+		this.needToPay.getItems().addAll(
+				StudentBroker.getInstance().getAllToPaid());
+
+		this.needToPay
+				.getSelectionModel()
+				.selectedItemProperty()
+				.addListener(
+						(a, b, c) -> {
+							if (null != c) {
+								setStudent(this.needToPay.getSelectionModel()
+										.getSelectedItem());
+								studentList.getSelectionModel()
+										.clearSelection();
+							}
+						});
 
 		// init list
 		this.classList
@@ -127,50 +160,90 @@ public class StudentsController extends AbstractController {
 									new TextField[5]));
 						}
 					});
-		
+
+		filter.textProperty().addListener(
+				(a, b, c) -> studentListFilter = (w, list) -> {
+					final List<Student> students = new ArrayList<>();
+					if (null == w || w.isEmpty()) {
+						students.addAll(StudentBroker.getInstance()
+								.getAllToPaid());
+					} else {
+						students.addAll(list.getItems().stream()
+								.filter(s -> s.getName().startsWith(w))
+								.collect(Collectors.toList()));
+					}
+					list.getItems().clear();
+					list.getItems().addAll(students);
+				});
+
 		filter.textProperty().addListener(
 				(a, b, c) -> studentListFilter.accept(c, studentList));
-		
+
+		cancel.setOnAction(e -> {
+			setEditMode(false);
+			edit.setText("Edit");
+		});
+
 		this.submit.setOnAction(StudentsController.this::paid);
 
 		this.edit.setOnAction(e -> {
-			if("Edit".equals(((Button)e.getSource()).getText())) {
+			if ("Edit".equals(((Button) e.getSource()).getText())) {
 				this.setEditMode(true);
 				edit.setText("Save");
 			} else {
+				boolean fromTop = this.needToPay.getSelectionModel()
+						.getSelectedItem() != null;
 				this.setEditMode(false);
 				Student stu = getStudent();
 				StudentBroker.getInstance().update(stu, Student.class);
-				ApplicationContext.put(CommonList.Student, StudentBroker.getInstance().getAll());
+				ApplicationContext.put(CommonList.Student, StudentBroker
+						.getInstance().getAll());
 				this.studentList.getItems().clear();
 				this.studentList.getItems().addAll(
-						(List<Student>) ApplicationContext.get(CommonList.Student));
-				this.studentList.getSelectionModel().select(stu);
+						(List<Student>) ApplicationContext
+								.get(CommonList.Student));
+				this.needToPay.getItems().clear();
+				this.needToPay.getItems().addAll(
+						StudentBroker.getInstance().getAllToPaid());
+				if (fromTop) {
+					this.selectById(stu.getId(), needToPay);
+				} else {
+					this.selectById(stu.getId(), studentList);
+				}
 				edit.setText("Edit");
 			}
 		});
 	}
-	
+
+	private void selectById(int id, ListView<Student> list) {
+		list.getItems().filtered(s -> s.getId() == id).stream()
+				.forEach(s -> list.getSelectionModel().select(s));
+	}
+
 	private void setEditMode(boolean edit) {
 		studentList.setMouseTransparent(edit);
+		needToPay.setMouseTransparent(edit);
 		filter.setDisable(edit);
 		submit.setDisable(edit);
 		pay.setDisable(edit);
-		
+		cancel.setVisible(edit);
+
 		name.setEditable(edit);
 		nrc.setEditable(edit);
 		phone.setEditable(edit);
 		email.setEditable(edit);
 		address.setEditable(edit);
-		
+
 		male.setDisable(!edit);
 		female.setDisable(!edit);
 		dob.setDisable(!edit);
 		townships.setDisable(!edit);
 	}
-	
+
 	private Student getStudent() {
-		Student stu = this.studentList.getSelectionModel().getSelectedItem();
+		Student stu = (this.studentList.getSelectionModel().getSelectedItem() != null) ? this.studentList
+				.getSelectionModel().getSelectedItem() : this.needToPay
+				.getSelectionModel().getSelectedItem();
 		stu.setName(name.getText());
 		stu.setAddres(address.getText());
 		stu.setDateOfBirth(super.getDateFromPicker(dob));
@@ -181,11 +254,6 @@ public class StudentsController extends AbstractController {
 		stu.setPhone(phone.getText());
 		stu.setTownship(townships.getValue());
 		return stu;
-	}
-
-	public void selectStudent(ObservableValue<? extends Student> observable,
-			Student oldValue, Student newValue) {
-		this.setStudent(newValue);
 	}
 
 	private void setStudent(Student stu) {
@@ -240,6 +308,8 @@ public class StudentsController extends AbstractController {
 		studentList.getItems().clear();
 		studentList.getItems().addAll(
 				(List<Student>) ApplicationContext.get(CommonList.Student));
+		needToPay.getItems().clear();
+		needToPay.getItems().addAll(StudentBroker.getInstance().getAllToPaid());
 		studentList.getSelectionModel().select(jdc.getStudent());
 
 		// select class

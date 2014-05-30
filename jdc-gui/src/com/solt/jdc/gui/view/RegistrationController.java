@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -68,6 +70,8 @@ public class RegistrationController extends AbstractController {
 	@FXML
 	private TextField remain;
 
+	private Function<List<JdcClass>, List<JdcClass>> filterClass;
+
 	@FXML
 	private TextField filter;
 	@FXML
@@ -79,6 +83,7 @@ public class RegistrationController extends AbstractController {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		super.initialize(location, resources);
+
 		ToggleGroup gender = new ToggleGroup();
 		gender.getToggles().add(male);
 		gender.getToggles().add(female);
@@ -91,8 +96,13 @@ public class RegistrationController extends AbstractController {
 		discount.getToggles().add(student);
 		noDiscount.setSelected(true);
 
+		filterClass = l -> l.stream()
+				.filter(c -> c.getStatus().equals(JdcClass.Status.ON))
+				.collect(Collectors.toList());
+
 		this.jdcClasses.getItems().addAll(
-				(List<JdcClass>) ApplicationContext.get(CommonList.JdcClass));
+				filterClass.apply((List<JdcClass>) ApplicationContext
+						.get(CommonList.JdcClass)));
 		this.townships.getItems().addAll(
 				(List<Township>) ApplicationContext.get(CommonList.Township));
 
@@ -144,7 +154,8 @@ public class RegistrationController extends AbstractController {
 		this.currentStudent = stu;
 		this.jdcClasses.getItems().clear();
 		this.jdcClasses.getItems().addAll(
-				(List<JdcClass>) ApplicationContext.get(CommonList.JdcClass));
+				filterClass.apply((List<JdcClass>) ApplicationContext
+						.get(CommonList.JdcClass)));
 		if (null != stu) {
 			this.name.setText(stu.getName());
 			this.nrc.setText(stu.getNrcNumber());
@@ -158,8 +169,9 @@ public class RegistrationController extends AbstractController {
 			this.email.setText(stu.getEmail());
 			this.townships.setValue(stu.getTownship());
 			this.address.setText(stu.getAddres());
-			
-			this.filterClassList(StudentBroker.getInstance().getClassByStudent(stu.getId()));
+
+			this.filterClassList(StudentBroker.getInstance().getClassByStudent(
+					stu.getId()));
 		} else {
 			this.male.setSelected(true);
 			this.dob.setValue(null);
@@ -169,9 +181,9 @@ public class RegistrationController extends AbstractController {
 		}
 	}
 
-	
 	private void filterClassList(List<StudentJdc> classByStudent) {
-		classByStudent.forEach(sjc -> this.jdcClasses.getItems().remove(sjc.getJdcClass()));
+		classByStudent.forEach(sjc -> this.jdcClasses.getItems().remove(
+				sjc.getJdcClass()));
 	}
 
 	public Student getStudent() {

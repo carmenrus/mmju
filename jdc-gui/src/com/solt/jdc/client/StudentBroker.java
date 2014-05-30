@@ -32,6 +32,14 @@ public class StudentBroker extends AbstractBroker<Student> {
 				});
 	}
 
+	public List<Student> getAllToPaid() {
+		return baseTarget().path("pay")
+				.request(MediaType.APPLICATION_JSON)
+				.buildGet()
+				.invoke().readEntity(new GenericType<List<Student>>() {
+				});
+	}
+	
 	public List<StudentJdc> getClassByStudent(int id) {
 		return baseTarget().path("jdc").path(String.valueOf(id))
 				.request(MediaType.APPLICATION_JSON).buildGet().invoke()

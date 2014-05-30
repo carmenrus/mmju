@@ -24,6 +24,7 @@
                      <children>
                         <TextField fx:id="name" editable="false" prefHeight="25.0" prefWidth="292.0" />
                         <Button fx:id="edit" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Edit" />
+                        <Button fx:id="cancel" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Cancel" visible="false" />
                      </children>
                   </HBox>
                   <TextField fx:id="nrc" editable="false" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
@@ -96,7 +97,7 @@
                                     <TextField fx:id="paid" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <TextField fx:id="remain" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <TextField fx:id="pay" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <Button fx:id="submit" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <Button fx:id="submit" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                  </children>
                               </GridPane>
                            </children>
@@ -150,7 +151,8 @@
                </children>
             </AnchorPane>
             <TextField fx:id="filter" />
-            <ListView fx:id="studentList" prefHeight="502.0" prefWidth="380.0" />
+            <ListView fx:id="needToPay" prefHeight="242.0" prefWidth="380.0" />
+            <ListView fx:id="studentList" prefHeight="246.0" prefWidth="380.0" />
          </children>
          <padding>
             <Insets left="10.0" right="10.0" />

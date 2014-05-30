@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -83,6 +84,7 @@ public class BalanceController extends AbstractController {
 		this.table.getItems().addAll(
 				TransactionBroker.getInstance().getAll(this.getFrom(),
 						this.getTo()));
+		this.total.setText(TransactionBroker.getInstance().getTotal());
 	}
 
 	private Date getFrom() {
@@ -122,5 +124,7 @@ public class BalanceController extends AbstractController {
 	private TableColumn<Transaction, String> colOutcome;
 	@FXML
 	private TableColumn<Transaction, String> colBalance;
+	@FXML
+	private Label total;
 
 }

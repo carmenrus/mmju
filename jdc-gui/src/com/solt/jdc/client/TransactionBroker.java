@@ -13,6 +13,7 @@ import com.solt.jdc.entity.Transaction;
 public class TransactionBroker extends AbstractBroker<Transaction> {
 
 	private static TransactionBroker broker;
+	private BalanceCalculator cal;
 	
 	private TransactionBroker() {
 		super(Transaction.class);
@@ -39,12 +40,16 @@ public class TransactionBroker extends AbstractBroker<Transaction> {
 				.invoke().readEntity(new GenericType<List<Transaction>>(){})); 
 	}
 	
+	public String getTotal() {
+		return String.valueOf(cal.getTotal());
+	}
+	
 	private String getString(Date date) {
 		return new SimpleDateFormat("yyyyMMdd").format(date);
 	}
 	
 	private List<Transaction> setBalance(List<Transaction> rawList) {
-		BalanceCalculator cal = new BalanceCalculator();
+		cal = new BalanceCalculator();
 		return rawList.stream().map(e -> {
 			cal.addTransaction(e);
 			e.setBalance(cal.getTotal());

@@ -16,12 +16,14 @@
                   <Font name="Agency FB Bold" size="30.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER_LEFT" layoutX="53.0" layoutY="86.0" prefHeight="37.0" prefWidth="546.0" spacing="10.0">
+            <HBox alignment="CENTER_LEFT" layoutX="53.0" layoutY="86.0" prefHeight="37.0" prefWidth="801.0" spacing="10.0">
                <children>
                   <Label text="Starting Point" />
                   <DatePicker fx:id="from" />
                   <Label text="Ending Point" />
                   <DatePicker fx:id="to" />
+                  <Label prefHeight="17.0" prefWidth="31.0" text="Total" />
+                  <Label fx:id="total" prefHeight="17.0" prefWidth="211.0" />
                </children>
             </HBox>
             <TableView fx:id="table" layoutX="53.0" layoutY="141.0" prefHeight="455.0" prefWidth="801.0">
