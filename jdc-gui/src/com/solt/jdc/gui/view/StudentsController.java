@@ -22,6 +22,7 @@ import com.solt.jdc.client.BillBroker;
 import com.solt.jdc.client.StudentBroker;
 import com.solt.jdc.common.ApplicationContext;
 import com.solt.jdc.common.ApplicationContext.CommonList;
+import com.solt.jdc.common.JdcException;
 import com.solt.jdc.entity.Bill;
 import com.solt.jdc.entity.Student;
 import com.solt.jdc.entity.StudentJdc;
@@ -288,32 +289,40 @@ public class StudentsController extends AbstractController {
 
 	@SuppressWarnings("unchecked")
 	public void paid(ActionEvent e) {
-		StudentJdc jdc = classList.getSelectionModel().getSelectedItem();
-		Bill bill = new Bill();
-		bill.setPaid(stringToInt.apply(pay.getText()));
-		bill.setStudentJdc(jdc);
-		Transaction tran = new Transaction();
-		tran.setIncome(bill.getPaid());
-		tran.setComment(jdc.toString() + " -> " + jdc.getStudent().getName());
+		try {
+			StudentJdc jdc = classList.getSelectionModel().getSelectedItem();
+			Bill bill = new Bill();
+			bill.setPaid(stringToInt.apply(pay.getText()));
+			bill.setStudentJdc(jdc);
+			Transaction tran = new Transaction();
+			tran.setIncome(bill.getPaid());
+			tran.setComment(jdc.toString() + " -> "
+					+ jdc.getStudent().getName());
 
-		bill.setTransaction(tran);
+			bill.setTransaction(tran);
 
-		BillBroker.getInstance().persist(bill, Bill.class);
+			BillBroker.getInstance().persist(bill, Bill.class);
 
-		// referesh student
-		ApplicationContext.put(CommonList.Student, StudentBroker.getInstance()
-				.getAll());
+			// referesh student
+			ApplicationContext.put(CommonList.Student, StudentBroker
+					.getInstance().getAll());
 
-		// select student
-		studentList.getItems().clear();
-		studentList.getItems().addAll(
-				(List<Student>) ApplicationContext.get(CommonList.Student));
-		needToPay.getItems().clear();
-		needToPay.getItems().addAll(StudentBroker.getInstance().getAllToPaid());
-		studentList.getSelectionModel().select(jdc.getStudent());
+			// select student
+			studentList.getItems().clear();
+			studentList.getItems().addAll(
+					(List<Student>) ApplicationContext.get(CommonList.Student));
+			needToPay.getItems().clear();
+			needToPay.getItems().addAll(
+					StudentBroker.getInstance().getAllToPaid());
+			studentList.getSelectionModel().select(jdc.getStudent());
 
-		// select class
-		classList.getSelectionModel().select(jdc);
+			// select class
+			classList.getSelectionModel().select(jdc);
+
+		} catch (JdcException je) {
+			if(je.isAlert())
+				showError("Error", je.getMessage());
+		}
 	}
 
 }

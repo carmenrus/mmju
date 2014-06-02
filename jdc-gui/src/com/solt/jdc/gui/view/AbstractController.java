@@ -24,8 +24,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
 
-import com.solt.jdc.client.JdcException;
+import org.controlsfx.dialog.Dialogs;
+
 import com.solt.jdc.common.ApplicationContext;
+import com.solt.jdc.common.JdcException;
 import com.solt.jdc.common.ApplicationContext.CommonList;
 import com.solt.jdc.entity.Course;
 import com.solt.jdc.entity.Student;
@@ -73,10 +75,10 @@ public abstract class AbstractController implements Initializable {
 		return str;
 	}
 
-	protected String getText(TextField text) {
+	protected String getText(String fieldName, TextInputControl text) {
 
 		if (null == text.getText() || text.getText().isEmpty()) {
-			throw new JdcException(true, "Please fill in the text field.");
+			throw new JdcException(true, "Please fill in the " + fieldName +" text field.");
 		}
 
 		return text.getText();
@@ -93,7 +95,13 @@ public abstract class AbstractController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		clearTextFields = tf -> Arrays.asList(tf).forEach(t -> t.clear());
 		intToString = v -> String.valueOf(v);
-		stringToInt = v -> Integer.parseInt(v);
+		stringToInt = v -> { 
+			try {
+				return Integer.parseInt(v);
+			} catch(NumberFormatException e) {
+				throw new JdcException(true, "Please Add Numbers correctly");
+			}
+		};
 		substract = (t1, t2) -> String.valueOf(Integer.parseInt(t1.getText())
 				- Integer.parseInt(t2.getText()));
 		
@@ -127,5 +135,9 @@ public abstract class AbstractController implements Initializable {
 		} catch (ParseException e) {
 			return null;
 		}
+	}
+	
+	protected void showError(String title, String message) {
+		Dialogs.create().owner(ApplicationContext.getStage()).title(title).message(message).showError();
 	}
 }

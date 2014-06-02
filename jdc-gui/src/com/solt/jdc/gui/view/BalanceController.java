@@ -22,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import com.solt.jdc.client.OutputBroker;
 import com.solt.jdc.client.TransactionBroker;
+import com.solt.jdc.common.JdcException;
 import com.solt.jdc.entity.Output;
 import com.solt.jdc.entity.Transaction;
 
@@ -55,19 +56,25 @@ public class BalanceController extends AbstractController {
 		clear.setOnAction(BalanceController.this::clear);
 
 		submit.setOnAction(e -> {
-			Output o = new Output();
-			o.setStuff(stuff.getText());
-			o.setOutcome(stringToInt.apply(amount.getText()));
-			o.setComment(comment.getText());
+			try {
+				Output o = new Output();
+				o.setStuff(getText("Stuff Name", stuff));
+				o.setOutcome(stringToInt.apply(getText("Ammount", amount)));
+				o.setComment(getText("Comment", comment));
 
-			Transaction tran = new Transaction();
-			tran.setOutcome(o.getOutcome());
-			tran.setComment(o.getStuff() + " : " + o.getComment());
-			o.setTransaction(tran);
-			OutputBroker.getInstance().persist(o, Output.class);
+				Transaction tran = new Transaction();
+				tran.setOutcome(o.getOutcome());
+				tran.setComment(o.getStuff() + " : " + o.getComment());
+				o.setTransaction(tran);
+				OutputBroker.getInstance().persist(o, Output.class);
 
-			this.clear(null);
-			this.loadTable();
+				this.clear(null);
+				this.loadTable();
+			} catch (JdcException je) {
+				if(je.isAlert()) {
+					showError("Input Error", je.getMessage());
+				}
+			}
 		});
 
 		this.from.setOnAction(e -> this.loadTable());
@@ -91,10 +98,10 @@ public class BalanceController extends AbstractController {
 		return (this.from.getValue() == null) ? super.getDefaultDateFrom()
 				: super.getDateFromPicker(from);
 	}
-	
+
 	private Date getTo() {
-		return (this.to.getValue() == null) ? super.getDefaultDateTo()
-				: super.getDateFromPicker(to);
+		return (this.to.getValue() == null) ? super.getDefaultDateTo() : super
+				.getDateFromPicker(to);
 	}
 
 	@FXML

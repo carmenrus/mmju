@@ -7,5 +7,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jaxrs-ri-2.7"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jsonp"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jsonp-jaxrs-1.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/controller-fx"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

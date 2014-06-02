@@ -1,4 +1,4 @@
-package com.solt.jdc.client;
+package com.solt.jdc.common;
 
 public class JdcException extends RuntimeException {
 

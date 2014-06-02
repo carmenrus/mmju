@@ -23,6 +23,7 @@ import com.solt.jdc.client.CourseBroker;
 import com.solt.jdc.client.JdcClassBroker;
 import com.solt.jdc.client.TimeTableBroker;
 import com.solt.jdc.common.ApplicationContext;
+import com.solt.jdc.common.JdcException;
 import com.solt.jdc.common.ApplicationContext.CommonList;
 import com.solt.jdc.entity.Course;
 import com.solt.jdc.entity.JdcClass;
@@ -239,15 +240,18 @@ public class AdminController extends AbstractController {
 		this.timeTables.getItems().clear();
 		this.status.getItems().clear();
 		this.courses.getItems().clear();
-		this.timeTables.getItems().addAll((List<TimeTable>)ApplicationContext.get(CommonList.TimeTable));
+		this.timeTables.getItems().addAll(
+				(List<TimeTable>) ApplicationContext.get(CommonList.TimeTable));
 		this.status.getItems().addAll(Status.values());
-		this.courses.getItems().addAll((List<Course>)ApplicationContext.get(CommonList.Course));
+		this.courses.getItems().addAll(
+				(List<Course>) ApplicationContext.get(CommonList.Course));
 	}
 
 	@SuppressWarnings("unchecked")
 	private void loadTimeTable() {
 		this.timetable.getItems().clear();
-		this.timetable.getItems().addAll((List<TimeTable>) ApplicationContext.get(CommonList.TimeTable));
+		this.timetable.getItems().addAll(
+				(List<TimeTable>) ApplicationContext.get(CommonList.TimeTable));
 	}
 
 	private TimeTable getTimeTable() {
@@ -269,46 +273,64 @@ public class AdminController extends AbstractController {
 	}
 
 	public void addTimeTable(ActionEvent event) {
-		Button btn = (Button) event.getSource();
-		if ("Update".equalsIgnoreCase(btn.getText())) {
-			this.timeBroker.update(this.getTimeTable(), TimeTable.class);
-			btn.setText("Create");
-		} else {
-			this.timeBroker.persist(this.getTimeTable(), TimeTable.class);
+		try {
+			Button btn = (Button) event.getSource();
+			if ("Update".equalsIgnoreCase(btn.getText())) {
+				this.timeBroker.update(this.getTimeTable(), TimeTable.class);
+				btn.setText("Create");
+			} else {
+				this.timeBroker.persist(this.getTimeTable(), TimeTable.class);
+			}
+			ApplicationContext.put(CommonList.TimeTable,
+					this.timeBroker.getAll());
+			ApplicationContext.put(CommonList.JdcClass,
+					this.classBroker.getAll());
+			this.loadTimeTable();
+			this.loadClassCombo();
+			this.loadJdcClass();
+		} catch (JdcException e) {
+			if (e.isAlert()) {
+				showError("Input Error", e.getMessage());
+			}
 		}
-		ApplicationContext.put(CommonList.TimeTable, this.timeBroker.getAll());
-		ApplicationContext.put(CommonList.JdcClass, this.classBroker.getAll());
-		this.loadTimeTable();
-		this.loadClassCombo();
-		this.loadJdcClass();
 	}
 
 	@SuppressWarnings("unchecked")
 	private void loadCourse() {
 		this.courseTable.getItems().clear();
-		this.courseTable.getItems().addAll((List<Course>)ApplicationContext.get(CommonList.Course));
+		this.courseTable.getItems().addAll(
+				(List<Course>) ApplicationContext.get(CommonList.Course));
 	}
 
 	public void addCourse(ActionEvent event) {
-		Button btn = (Button) event.getSource();
-		if ("Update".equalsIgnoreCase(btn.getText())) {
-			this.courseBroker.update(this.getCourse(), Course.class);
-			btn.setText("Create");
-		} else {
-			this.courseBroker.persist(this.getCourse(), Course.class);
+		try {
+			Button btn = (Button) event.getSource();
+			if ("Update".equalsIgnoreCase(btn.getText())) {
+				this.courseBroker.update(this.getCourse(), Course.class);
+				btn.setText("Create");
+			} else {
+				this.courseBroker.persist(this.getCourse(), Course.class);
+			}
+			ApplicationContext.put(CommonList.Course,
+					this.courseBroker.getAll());
+			ApplicationContext.put(CommonList.JdcClass,
+					this.classBroker.getAll());
+			this.loadCourse();
+			this.loadClassCombo();
+			this.loadJdcClass();
+		} catch (JdcException e) {
+			if (e.isAlert()) {
+				showError("Input Error", e.getMessage());
+			}
 		}
-		ApplicationContext.put(CommonList.Course, this.courseBroker.getAll());
-		ApplicationContext.put(CommonList.JdcClass, this.classBroker.getAll());
-		this.loadCourse();
-		this.loadClassCombo();
-		this.loadJdcClass();
+
 	}
 
 	private Course getCourse() {
 		Course data = (null == this.courseTable.getSelectionModel()
 				.getSelectedItem()) ? new Course() : this.courseTable
 				.getSelectionModel().getSelectedItem();
-		data.setName(super.getText(courseName));
+		data.setName(super.getText("Course Name", courseName));
 		data.setDuration(duration.getValue());
 		data.setFee(Integer.parseInt(this.fee.getText()));
 		data.setRequirement(requirement.getValue());
@@ -327,7 +349,8 @@ public class AdminController extends AbstractController {
 	@SuppressWarnings("unchecked")
 	private void loadJdcClass() {
 		this.classTable.getItems().clear();
-		this.classTable.getItems().addAll((List<JdcClass>)ApplicationContext.get(CommonList.JdcClass));
+		this.classTable.getItems().addAll(
+				(List<JdcClass>) ApplicationContext.get(CommonList.JdcClass));
 	}
 
 	private JdcClass getJdcClass() {
@@ -350,15 +373,22 @@ public class AdminController extends AbstractController {
 	}
 
 	public void addJdcClass(ActionEvent event) {
-		Button btn = (Button) event.getSource();
-		if ("Update".equalsIgnoreCase(btn.getText())) {
-			this.classBroker.update(this.getJdcClass(), JdcClass.class);
-			btn.setText("Create");
-		} else {
-			this.classBroker.persist(this.getJdcClass(), JdcClass.class);
+		try {
+			Button btn = (Button) event.getSource();
+			if ("Update".equalsIgnoreCase(btn.getText())) {
+				this.classBroker.update(this.getJdcClass(), JdcClass.class);
+				btn.setText("Create");
+			} else {
+				this.classBroker.persist(this.getJdcClass(), JdcClass.class);
+			}
+			ApplicationContext.put(CommonList.JdcClass, classBroker.getAll());
+			this.loadJdcClass();
+		} catch (JdcException e) {
+			if (e.isAlert()) {
+				showError("Input Error", e.getMessage());
+			}
 		}
-		ApplicationContext.put(CommonList.JdcClass, classBroker.getAll());
-		this.loadJdcClass();
+
 	}
 
 }

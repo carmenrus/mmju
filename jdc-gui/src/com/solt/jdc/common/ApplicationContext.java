@@ -3,6 +3,8 @@ package com.solt.jdc.common;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.stage.Stage;
+
 import com.solt.jdc.client.CourseBroker;
 import com.solt.jdc.client.JdcClassBroker;
 import com.solt.jdc.client.StudentBroker;
@@ -14,9 +16,19 @@ public class ApplicationContext {
 	public enum CommonList {
 		JdcClass, Course, TimeTable, Township, Student
 	}
+	
+	private static Stage stage;
 
 	private static Map<CommonList, Object> COMMON_LIST;
 
+	public static void setStage(Stage s) {
+		stage = s;
+	}
+	
+	public static Stage getStage() {
+		return stage;
+	}
+	
 	static {
 		COMMON_LIST = new HashMap<>();
 		COMMON_LIST.put(CommonList.JdcClass, JdcClassBroker.getInstancce()

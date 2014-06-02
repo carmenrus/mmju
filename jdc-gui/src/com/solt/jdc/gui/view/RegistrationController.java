@@ -18,9 +18,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 import com.solt.jdc.client.BillBroker;
-import com.solt.jdc.client.JdcException;
 import com.solt.jdc.client.StudentBroker;
 import com.solt.jdc.common.ApplicationContext;
+import com.solt.jdc.common.JdcException;
 import com.solt.jdc.common.ApplicationContext.CommonList;
 import com.solt.jdc.entity.Bill;
 import com.solt.jdc.entity.JdcClass;
@@ -186,26 +186,36 @@ public class RegistrationController extends AbstractController {
 				sjc.getJdcClass()));
 	}
 
-	public Student getStudent() {
+	private Student getStudent() {
 		if (this.currentStudent == null) {
 			this.currentStudent = new Student();
 		}
 
-		this.currentStudent.setName(this.name.getText());
-		this.currentStudent.setNrcNumber(this.nrc.getText());
+		this.currentStudent.setName(super.getText("Name", name));
+		this.currentStudent.setNrcNumber(super.getText("NRC Number", nrc));
 		this.currentStudent.setGender(this.male.isSelected());
 		this.currentStudent.setDateOfBirth(super.getDateFromPicker(dob));
-		this.currentStudent.setPhone(this.phone.getText());
-		this.currentStudent.setEmail(this.email.getText());
+		this.currentStudent.setPhone(super.getText("Phone Number" ,phone));
+		this.currentStudent.setEmail(super.getText("Email Address", this.email));
 		this.currentStudent.setTownship(this.townships.getValue());
-		this.currentStudent.setAddres(this.address.getText());
+		this.currentStudent.setAddres(super.getText("Address", this.address));
 
 		return this.currentStudent;
 	}
 
-	public Bill getBill() {
+	private Bill getBill() {
+		
 		Bill bill = new Bill();
+		// student
+		Student student = this.getStudent();
+		StudentJdc studentJdc = new StudentJdc();
+		studentJdc.setStudent(student);
+
+		// jdc class
 		JdcClass jdc = this.jdcClasses.getValue();
+		if(null == jdc) {
+			throw new JdcException(true, "Please select class.");
+		}
 		int fee = jdc.getCourse().getFee();
 		if (this.noDiscount.isSelected()) {
 			bill.setDiscount(0);
@@ -213,10 +223,7 @@ public class RegistrationController extends AbstractController {
 			bill.setDiscount(fee / 10);
 		}
 
-		bill.setPaid(Integer.parseInt(this.paid.getText()));
-		Student student = this.getStudent();
-		StudentJdc studentJdc = new StudentJdc();
-		studentJdc.setStudent(student);
+		bill.setPaid(stringToInt.apply(getText("Paid", paid)));
 		studentJdc.setJdcClass(jdc);
 		bill.setStudentJdc(studentJdc);
 
@@ -241,11 +248,17 @@ public class RegistrationController extends AbstractController {
 	}
 
 	public void register() {
+		try {
 		BillBroker.getInstance().persist(this.getBill(), Bill.class);
 		ApplicationContext.put(CommonList.Student, StudentBroker.getInstance()
 				.getAll());
 		// clear all inputs
 		this.clear();
+		} catch (JdcException je) {
+			if(je.isAlert()) {
+				showError("Input Error", je.getMessage());
+			}
+		}
 	}
 
 	public void selectStudent(ObservableValue<? extends Student> observable,
