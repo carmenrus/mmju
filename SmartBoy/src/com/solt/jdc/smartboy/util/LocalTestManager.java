@@ -24,6 +24,10 @@ public class LocalTestManager implements LocalManager {
 		ITEMS.add(new Item(2, "Tea (Cho Saint)", 1, 250));
 		ITEMS.add(new Item(3, "Ice Coffee (black)", 2, 500));
 		ITEMS.add(new Item(4, "Ice Tea", 2, 500));
+		ITEMS.add(new Item(5, "Cocala", 2, 500));
+		ITEMS.add(new Item(6, "Ice Lemon Tea", 2, 500));
+		ITEMS.add(new Item(7, "Ginger Ale", 2, 500));
+		ITEMS.add(new Item(8, "Cream Sodar", 2, 500));
 	}
 
 	@Override

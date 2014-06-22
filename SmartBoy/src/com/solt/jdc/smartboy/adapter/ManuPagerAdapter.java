@@ -23,7 +23,7 @@ public class ManuPagerAdapter extends FragmentPagerAdapter{
 
 	@Override
 	public Fragment getItem(int position) {
-		return ManuItemsFragment.newInstance(position + 1);
+		return ManuItemsFragment.newInstance(this.categories.get(position).getId());
 	}
 
 	@Override

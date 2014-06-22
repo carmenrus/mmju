@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -66,6 +67,7 @@ public class NewOrderActivity extends ActionBarActivity implements
 	@Override
 	public void onTabSelected(ActionBar.Tab tab,
 			FragmentTransaction fragmentTransaction) {
+		Log.d(MainActivity.TABLE, String.format("Tab Position : %d", tab.getPosition()));
 		mViewPager.setCurrentItem(tab.getPosition());
 	}
 
