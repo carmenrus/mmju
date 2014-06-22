@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<project name="jdc-gui" default="do-deploy" basedir="."  xmlns:fx="javafx:com.sun.javafx.tools.ant">
+	<target name="init-fx-tasks">
+		<path id="fxant">
+			<filelist>
+				<file name="${java.home}\..\lib\ant-javafx.jar"/>
+				<file name="${java.home}\lib\jfxrt.jar"/>
+			</filelist>
+		</path>
+	
+		<taskdef resource="com/sun/javafx/tools/ant/antlib.xml"      
+			uri="javafx:com.sun.javafx.tools.ant"
+			classpathref="fxant"/>
+	</target>
+	<target name="setup-staging-area">
+		<delete dir="externalLibs" />
+		<delete dir="project" />
+		<delete dir="projectRefs" />
+		
+		<mkdir dir="externalLibs" />
+		
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="ha-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="jaxb-api-2.2.7.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jasonp">
+				<filename name="javax.json-api-1.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="org.eclipse.persistence.jpa.jpql.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.security.jacc-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.management.j2ee-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-client.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jasonp">
+				<filename name="javax.json-1.0.4.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.interceptor-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\lib">
+				<filename name="jersey-common.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.faces.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="asm-all-repackaged-2.2.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="org.eclipse.persistence.jpa.modelgen.processor.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-media-json-jettison.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-container-grizzly2-http.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.servlet-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.resource-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="webservices-extra-jdk-packages.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules\endorsed">
+				<filename name="webservices-api-osgi.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-media-multipart.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="org.eclipse.persistence.antlr.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.ejb-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-container-servlet.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="aopalliance-repackaged-2.2.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.batch-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.json.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.persistence.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.servlet.jsp-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.inject.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules\endorsed">
+				<filename name="javax.annotation-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-mvc.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jaxb-extra-osgi.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-media-json-processing.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="org.eclipse.persistence.core.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.transaction-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="javax.annotation-api-1.2.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-container-servlet-core.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.mail.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\winuser\git\mmju\jdc-service\WebContent\WEB-INF\lib">
+				<filename name="mysql-connector-java-5.1.20-bin.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-mvc-jsp.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="hk2-locator-2.2.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-server.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="javassist-3.18.1-GA.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.security.auth.message-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\api">
+				<filename name="javax.ws.rs-api-2.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="webservices-osgi.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="org.eclipse.persistence.asm.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.enterprise.concurrent-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="hk2-utils-2.2.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\controlsfx-8.0.6">
+				<filename name="controlsfx-8.0.6.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.jms-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-media-json-jackson.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="osgi-resource-locator-1.0.1.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-media-sse.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\lib">
+				<filename name="jersey-container-servlet.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.servlet.jsp.jstl.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-common.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.enterprise.concurrent.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="org.eclipse.persistence.jpa.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\lib">
+				<filename name="jersey-client.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="jersey-guava-2.7.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\mq\lib">
+				<filename name="jaxm-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.servlet.jsp.jstl-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="validation-api-1.1.0.Final.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-mvc-connector.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="webservices.security.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="bean-validator.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="glassfish-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jsonp-jaxrs-1.0.jar">
+				<filename name="jsonp-jaxrs-1.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\lib">
+				<filename name="jersey-container-servlet-core.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.servlet.jsp.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.el.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="webservices-connector.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="org.eclipse.persistence.oracle.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.xml.registry-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-gf-ejb.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="persistence-api-1.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="javax.servlet-api-3.0.1.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="org.eclipse.persistence.dbws.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="hk2-api-2.2.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-media-moxy.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.ws.rs-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-gf-cdi.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.enterprise.deploy-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jersey-bean-validation.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules\endorsed">
+				<filename name="jaxb-api-osgi.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="org.osgi.core-4.2.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="org.eclipse.persistence.moxy.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.websocket-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="javax.xml.rpc-api.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="weld-osgi-bundle.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\ext">
+				<filename name="javax.inject-2.2.0.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\mylib\jaxrs-ri-2.7\jaxrs-ri\lib">
+				<filename name="jersey-server.jar"/>	
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="D:\glassfish\download\glassfish4\glassfish\modules">
+				<filename name="jaxb-osgi.jar"/>	
+			</fileset>
+		</copy>
+		
+		<mkdir dir="project" />
+		<copy todir="project">
+			<fileset dir="C:\Users\winuser\git\mmju\jdc-gui">
+				<include name="src/**" />
+			</fileset>
+		</copy>
+		
+		<mkdir dir="projectRefs" />
+		<copy todir="projectRefs">
+			<fileset dir="C:\Users\winuser\git\mmju">
+				<include name="jdc-service\src/**" />
+			</fileset>
+		</copy>
+	</target>
+	<target name='do-compile'>
+		<delete dir="build" />
+		<mkdir dir="build/src" />
+		<mkdir dir="build/libs" />
+		<mkdir dir="build/classes" />
+	
+		<!-- Copy project-libs references -->
+		<copy todir="build/libs">
+			<fileset dir="externalLibs">
+				<include name="weld-osgi-bundle.jar"/>
+				<include name="mysql-connector-java-5.1.20-bin.jar"/>
+				<include name="jersey-container-servlet-core.jar"/>
+				<include name="jersey-common.jar"/>
+				<include name="jersey-media-moxy.jar"/>
+				<include name="javax.jms-api.jar"/>
+				<include name="javax.ws.rs-api.jar"/>
+				<include name="javax.json-1.0.4.jar"/>
+				<include name="persistence-api-1.0.jar"/>
+				<include name="jaxb-api-2.2.7.jar"/>
+				<include name="jersey-mvc-jsp.jar"/>
+				<include name="javax.annotation-api.jar"/>
+				<include name="javax.json.jar"/>
+				<include name="jersey-mvc.jar"/>
+				<include name="osgi-resource-locator-1.0.1.jar"/>
+				<include name="hk2-locator-2.2.0.jar"/>
+				<include name="javax.management.j2ee-api.jar"/>
+				<include name="jersey-guava-2.7.jar"/>
+				<include name="jersey-container-grizzly2-http.jar"/>
+				<include name="javax.annotation-api-1.2.jar"/>
+				<include name="hk2-utils-2.2.0.jar"/>
+				<include name="org.eclipse.persistence.jpa.jar"/>
+				<include name="javax.servlet.jsp.jar"/>
+				<include name="jersey-bean-validation.jar"/>
+				<include name="jaxb-api-osgi.jar"/>
+				<include name="jersey-media-multipart.jar"/>
+				<include name="webservices-api-osgi.jar"/>
+				<include name="jersey-mvc-connector.jar"/>
+				<include name="aopalliance-repackaged-2.2.0.jar"/>
+				<include name="javax.mail.jar"/>
+				<include name="jersey-gf-ejb.jar"/>
+				<include name="javax.security.jacc-api.jar"/>
+				<include name="javax.xml.rpc-api.jar"/>
+				<include name="javax.servlet-api.jar"/>
+				<include name="jersey-container-servlet.jar"/>
+				<include name="javax.xml.registry-api.jar"/>
+				<include name="javax.transaction-api.jar"/>
+				<include name="javax.ejb-api.jar"/>
+				<include name="org.eclipse.persistence.core.jar"/>
+				<include name="webservices.security.jar"/>
+				<include name="javax.servlet.jsp.jstl-api.jar"/>
+				<include name="jersey-media-json-jettison.jar"/>
+				<include name="jersey-media-json-processing.jar"/>
+				<include name="jersey-server.jar"/>
+				<include name="org.eclipse.persistence.moxy.jar"/>
+				<include name="org.osgi.core-4.2.0.jar"/>
+				<include name="controlsfx-8.0.6.jar"/>
+				<include name="jaxb-osgi.jar"/>
+				<include name="javax.enterprise.concurrent.jar"/>
+				<include name="javax.inject-2.2.0.jar"/>
+				<include name="javassist-3.18.1-GA.jar"/>
+				<include name="jersey-media-sse.jar"/>
+				<include name="javax.websocket-api.jar"/>
+				<include name="jsonp-jaxrs-1.0.jar"/>
+				<include name="javax.security.auth.message-api.jar"/>
+				<include name="asm-all-repackaged-2.2.0.jar"/>
+				<include name="javax.enterprise.concurrent-api.jar"/>
+				<include name="jersey-client.jar"/>
+				<include name="jaxb-extra-osgi.jar"/>
+				<include name="webservices-osgi.jar"/>
+				<include name="org.eclipse.persistence.jpa.modelgen.processor.jar"/>
+				<include name="validation-api-1.1.0.Final.jar"/>
+				<include name="javax.ws.rs-api-2.0.jar"/>
+				<include name="org.eclipse.persistence.jpa.jpql.jar"/>
+				<include name="hk2-api-2.2.0.jar"/>
+				<include name="javax.inject.jar"/>
+				<include name="ha-api.jar"/>
+				<include name="jersey-gf-cdi.jar"/>
+				<include name="org.eclipse.persistence.antlr.jar"/>
+				<include name="javax.servlet-api-3.0.1.jar"/>
+				<include name="javax.interceptor-api.jar"/>
+				<include name="javax.json-api-1.0.jar"/>
+				<include name="javax.el.jar"/>
+				<include name="org.eclipse.persistence.dbws.jar"/>
+				<include name="javax.faces.jar"/>
+				<include name="javax.servlet.jsp-api.jar"/>
+				<include name="javax.persistence.jar"/>
+				<include name="jersey-media-json-jackson.jar"/>
+				<include name="javax.batch-api.jar"/>
+				<include name="jaxm-api.jar"/>
+				<include name="webservices-extra-jdk-packages.jar"/>
+				<include name="org.eclipse.persistence.oracle.jar"/>
+				<include name="webservices-connector.jar"/>
+				<include name="javax.resource-api.jar"/>
+				<include name="org.eclipse.persistence.asm.jar"/>
+				<include name="bean-validator.jar"/>
+				<include name="javax.servlet.jsp.jstl.jar"/>
+				<include name="glassfish-api.jar"/>
+				<include name="javax.enterprise.deploy-api.jar"/>
+			</fileset>
+		</copy>
+	
+		<!-- Copy project references -->
+		<copy todir="build/src">
+			<fileset dir="projectRefs/jdc-service/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	
+		<!-- Copy project sources itself -->
+		<copy todir="build/src">
+			<fileset dir="project/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+	
+		<javac includeantruntime="false" source="1.8" target="1.8" srcdir="build/src" destdir="build/classes" encoding="UTF-8">
+			<classpath>
+				<fileset dir="build/libs">
+					<include name="*"/>
+				</fileset>
+			</classpath>
+		</javac>
+		
+		<!-- Copy over none Java-Files -->
+		<copy todir="build/classes">
+		<fileset dir="project/src">
+			<exclude name="**/*.java"/>
+		</fileset>
+		</copy>
+	
+		<copy todir="build/classes">
+			<fileset dir="projectRefs/jdc-service/src">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+	
+	</target>
+	<target name="do-deploy" depends="setup-staging-area, do-compile, init-fx-tasks">
+		<delete file="dist"/>
+		<delete file="deploy" />
+		
+		<mkdir dir="dist" />
+		<mkdir dir="dist/libs" />
+		
+		<copy todir="dist/libs">
+			<fileset dir="externalLibs">
+				<include name="*" />
+			</fileset>
+		</copy>
+		
+		
+		<fx:resources id="appRes">
+			<fx:fileset dir="dist" includes="jdc-gui.jar"/>
+			<fx:fileset dir="dist" includes="libs/*"/>
+		</fx:resources> 
+		
+		<fx:application id="fxApplication"
+			name="JDC Manager"
+			mainClass="com.solt.jdc.gui.Main"
+			toolkit="fx"
+		/>
+	
+		<mkdir dir="build/classes/META-INF" />
+		
+		
+		
+		<fx:jar destfile="dist/jdc-gui.jar">
+			<fx:application refid="fxApplication"/>
+			<fileset dir="build/classes">
+			</fileset>
+			<fx:resources refid="appRes"/>
+			
+			<manifest>
+				<attribute name="Implementation-Vendor" value="Java Developer Class"/>
+				<attribute name="Implementation-Title" value="JDC Manager"/>
+				<attribute name="Implementation-Version" value="1.0_b"/>
+				<attribute name="JavaFX-Feature-Proxy" value="None"/>
+			</manifest>
+		</fx:jar>
+		
+	
+		<mkdir dir="deploy" />
+		<!-- Need to use ${basedir} because somehow the ant task is calculating the directory differently -->
+		<fx:deploy
+			embedJNLP="false"
+			extension="false"
+			includeDT="false"
+			offlineAllowed="true"
+			outdir="${basedir}/deploy"
+			outfile="jdc-gui" nativeBundles="exe"
+			updatemode="background" >
+	
+			<fx:info title="jdc-gui" vendor="Java Developer Class"/>
+			<fx:application refId="fxApplication"/>
+			<fx:resources refid="appRes"/>
+		</fx:deploy>
+		
+		
+	</target>
+</project>

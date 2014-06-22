@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="jdc-gui.jnlp">
+  <information>
+    <title>jdc-gui</title>
+    <vendor>Java Developer Class</vendor>
+    <description>Sample JavaFX 2.0 application.</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <jfx:javafx-runtime version="2.2+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+  </resources>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="jdc-gui.jar" size="61485" download="eager" />
+    <jar href="libs/aopalliance-repackaged-2.2.0.jar" size="14867" download="eager" />
+    <jar href="libs/asm-all-repackaged-2.2.0.jar" size="401855" download="eager" />
+    <jar href="libs/controlsfx-8.0.6.jar" size="848492" download="eager" />
+    <jar href="libs/hk2-api-2.2.0.jar" size="142439" download="eager" />
+    <jar href="libs/hk2-locator-2.2.0.jar" size="171588" download="eager" />
+    <jar href="libs/hk2-utils-2.2.0.jar" size="67151" download="eager" />
+    <jar href="libs/javassist-3.18.1-GA.jar" size="714194" download="eager" />
+    <jar href="libs/javax.annotation-api-1.2.jar" size="26366" download="eager" />
+    <jar href="libs/javax.inject-2.2.0.jar" size="5968" download="eager" />
+    <jar href="libs/javax.json-1.0.4.jar" size="85147" download="eager" />
+    <jar href="libs/javax.json-api-1.0.jar" size="19754" download="eager" />
+    <jar href="libs/javax.servlet-api-3.0.1.jar" size="85353" download="eager" />
+    <jar href="libs/javax.ws.rs-api-2.0.jar" size="112758" download="eager" />
+    <jar href="libs/jaxb-api-2.2.7.jar" size="100146" download="eager" />
+    <jar href="libs/jersey-client.jar" size="151688" download="eager" />
+    <jar href="libs/jersey-common.jar" size="708636" download="eager" />
+    <jar href="libs/jersey-container-servlet-core.jar" size="53866" download="eager" />
+    <jar href="libs/jersey-container-servlet.jar" size="15714" download="eager" />
+    <jar href="libs/jersey-guava-2.7.jar" size="962808" download="eager" />
+    <jar href="libs/jersey-server.jar" size="923051" download="eager" />
+    <jar href="libs/jsonp-jaxrs-1.0.jar" size="7814" download="eager" />
+    <jar href="libs/org.osgi.core-4.2.0.jar" size="246924" download="eager" />
+    <jar href="libs/osgi-resource-locator-1.0.1.jar" size="20235" download="eager" />
+    <jar href="libs/persistence-api-1.0.jar" size="52150" download="eager" />
+    <jar href="libs/validation-api-1.1.0.Final.jar" size="63777" download="eager" />
+  </resources>
+  <applet-desc  width="0" height="0" main-class="com.javafx.main.NoJavaFXFallback"  name="JDC Manager" >
+    <param name="requiredFXVersion" value="2.2+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="0" height="0" main-class="com.solt.jdc.gui.Main"  name="JDC Manager" />
+  <update check="background"/>
+</jnlp>

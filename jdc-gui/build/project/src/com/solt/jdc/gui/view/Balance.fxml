@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.solt.jdc.gui.view.BalanceController">
+   <children>
+      <AnchorPane prefHeight="780.0" prefWidth="880.0">
+         <children>
+            <Label layoutX="53.0" layoutY="32.0" text="Balance Sheet">
+               <font>
+                  <Font name="Agency FB Bold" size="30.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_LEFT" layoutX="53.0" layoutY="86.0" prefHeight="37.0" prefWidth="801.0" spacing="10.0">
+               <children>
+                  <Label text="Starting Point" />
+                  <DatePicker fx:id="from" />
+                  <Label text="Ending Point" />
+                  <DatePicker fx:id="to" />
+                  <Label prefHeight="17.0" prefWidth="31.0" text="Total" />
+                  <Label fx:id="total" prefHeight="17.0" prefWidth="211.0" />
+               </children>
+            </HBox>
+            <TableView fx:id="table" layoutX="53.0" layoutY="141.0" prefHeight="455.0" prefWidth="801.0">
+              <columns>
+                <TableColumn fx:id="colDate" prefWidth="144.0" text="Business Date" />
+                <TableColumn fx:id="colComment" minWidth="0.0" prefWidth="276.0" text="Comment" />
+                  <TableColumn fx:id="colIncome" prefWidth="122.0" text="Income" />
+                  <TableColumn fx:id="colOutcome" prefWidth="118.0" text="Outcome" />
+                  <TableColumn fx:id="colBalance" prefWidth="137.0" text="Balance" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <VBox prefHeight="780.0" prefWidth="400.0" spacing="10.0">
+         <children>
+            <Pane prefHeight="101.0" prefWidth="380.0" />
+            <AnchorPane prefHeight="72.0" prefWidth="400.0">
+               <children>
+                  <Label layoutY="27.0" text="Outcomes">
+                     <font>
+                        <Font name="Agency FB Bold" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="400.0" prefWidth="380.0">
+               <children>
+                  <VBox layoutY="-1.0" prefHeight="402.0" prefWidth="357.0" spacing="10.0">
+                     <children>
+                        <Label text="Stuff Name" />
+                        <TextField fx:id="stuff" />
+                        <Label text="Cash Ammount" />
+                        <TextField fx:id="amount" />
+                        <Label text="Comments" />
+                        <TextArea fx:id="comment" prefHeight="197.0" prefWidth="357.0" />
+                        <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="380.0" spacing="5.0">
+                           <children>
+                              <Button fx:id="clear" mnemonicParsing="false" prefHeight="42.0" prefWidth="140.0" text="Clear" />
+                              <Button fx:id="submit" mnemonicParsing="false" prefHeight="42.0" prefWidth="140.0" text="Submit" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding></VBox>
+   </children>
+</HBox>

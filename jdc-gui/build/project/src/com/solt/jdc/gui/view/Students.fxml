@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.solt.jdc.gui.view.StudentsController">
+   <children>
+      <AnchorPane prefHeight="780.0" prefWidth="880.0">
+         <children>
+            <GridPane hgap="20.0" prefHeight="680.0" prefWidth="786.0">
+               <children>
+                  <Label text="Name" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="NRC Number" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Gender" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Date of birth" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label text="Phone" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label text="Email" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label text="Address" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <children>
+                        <TextField fx:id="name" editable="false" prefHeight="25.0" prefWidth="292.0" />
+                        <Button fx:id="edit" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Edit" />
+                        <Button fx:id="cancel" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Cancel" visible="false" />
+                     </children>
+                  </HBox>
+                  <TextField fx:id="nrc" editable="false" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <children>
+                        <RadioButton fx:id="male" disable="true" mnemonicParsing="false" text="Male" />
+                        <RadioButton fx:id="female" disable="true" mnemonicParsing="false" text="Female" />
+                     </children>
+                  </HBox>
+                  <DatePicker fx:id="dob" disable="true" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <TextField fx:id="phone" editable="false" prefWidth="225.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <TextField fx:id="email" editable="false" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <ComboBox fx:id="townships" disable="true" prefHeight="28.0" prefWidth="177.0" promptText="Select Township" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Item 1" />
+                           <String fx:value="Item 2" />
+                           <String fx:value="Item 3" />
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
+                  <TextField fx:id="address" editable="false" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                  <Label text="Personal Information" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Agency FB Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label text="Billing Information" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="11">
+                     <font>
+                        <Font name="Agency FB Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="18" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="12" GridPane.rowSpan="7">
+                     <children>
+                        <ListView fx:id="classList" prefHeight="200.0" prefWidth="200.0" />
+                        <ListView fx:id="billList" prefHeight="288.0" prefWidth="218.0" />
+                        <VBox prefHeight="288.0" prefWidth="262.0" spacing="10.0">
+                           <children>
+                              <Label text="Pay Course Fee">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <GridPane prefHeight="186.0" prefWidth="254.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.0" minWidth="10.0" prefWidth="101.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.0" minWidth="10.0" prefWidth="153.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Course Fee" />
+                                    <Label text="Discount" GridPane.rowIndex="1" />
+                                    <Label text="Fee" GridPane.rowIndex="2" />
+                                    <Label text="Paid" GridPane.rowIndex="3" />
+                                    <Label text="Remain" GridPane.rowIndex="4" />
+                                    <Label text="Pay" GridPane.rowIndex="5" />
+                                    <TextField fx:id="courseFee" editable="false" GridPane.columnIndex="1" />
+                                    <TextField fx:id="discount" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="fee" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="paid" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="remain" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="pay" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Button fx:id="submit" disable="true" mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </children>
+                     <GridPane.margin>
+                        <Insets top="10.0" />
+                     </GridPane.margin>
+                  </HBox>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="86.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="134.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="517.0" minWidth="10.0" prefWidth="513.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <VBox prefHeight="780.0" prefWidth="400.0" spacing="10.0">
+         <children>
+            <AnchorPane prefHeight="72.0" prefWidth="400.0">
+               <children>
+                  <Label layoutY="27.0" text="Students">
+                     <font>
+                        <Font name="Agency FB Bold" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <TextField fx:id="filter" />
+            <ListView fx:id="needToPay" prefHeight="242.0" prefWidth="380.0" />
+            <ListView fx:id="studentList" prefHeight="246.0" prefWidth="380.0" />
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding></VBox>
+   </children>
+</HBox>

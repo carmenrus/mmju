@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.solt.jdc.smartboy.TabelActivity" >
+
+    <item
+        android:id="@+id/action_in_cart"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_action_list"
+        android:title="@string/act_order_list"
+        app:showAsAction="ifRoom"/>
+    
+    <item
+        android:id="@+id/action_check_out"
+        android:orderInCategory="101"
+        android:title="@string/act_check_out"
+        android:icon="@drawable/ic_action_check"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_new_order"
+        android:orderInCategory="102"
+        android:icon="@drawable/ic_action_new"
+        android:title="@string/act_order_new"
+        app:showAsAction="ifRoom"/>
+
+</menu>
