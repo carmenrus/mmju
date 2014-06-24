@@ -1,8 +1,5 @@
 package com.solt.jdc.smartboy.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -27,12 +24,12 @@ import com.solt.jdc.smartboy.adapter.TableDetailsAdapter;
 import com.solt.jdc.smartboy.dto.Item;
 import com.solt.jdc.smartboy.dto.OrderItem;
 import com.solt.jdc.smartboy.util.LocalTestManager;
+import com.solt.jdc.smartboy.util.SmartBoyApplication;
 
 public class ManuItemsFragment extends Fragment {
 
 	private static final String ARG_CATEGORY_ID = "ARG_CATEGORY_ID";
 	private int categoryId;
-	private List<OrderItem> orders;
 
 	public static ManuItemsFragment newInstance(int categoryId) {
 		ManuItemsFragment fragment = new ManuItemsFragment();
@@ -48,7 +45,7 @@ public class ManuItemsFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.orders = new ArrayList<OrderItem>();
+
 		if (getArguments() != null) {
 			this.categoryId = getArguments().getInt(ARG_CATEGORY_ID);
 		}
@@ -84,6 +81,8 @@ public class ManuItemsFragment extends Fragment {
 		AlertDialog.Builder b = new Builder(getActivity());
 		LayoutInflater inf = getActivity().getLayoutInflater();
 
+		final SmartBoyApplication service = (SmartBoyApplication) getActivity().getApplication();
+		
 		// item
 		final Item item = LocalTestManager.getTestLocalManaget()
 				.getItem(itemId);
@@ -102,7 +101,7 @@ public class ManuItemsFragment extends Fragment {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				orders.add(new OrderItem(item, num.getValue(), 0));
+				service.add(new OrderItem(item, num.getValue(), 0));
 				loadOrderListDialog();
 			}
 		});
@@ -111,7 +110,7 @@ public class ManuItemsFragment extends Fragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// order item
-				orders.add(new OrderItem(item, num.getValue(), 0));
+				service.add(new OrderItem(item, num.getValue(), 0));
 				Toast.makeText(getActivity(), "Add to Order List",
 						Toast.LENGTH_SHORT).show();
 			}
@@ -122,17 +121,18 @@ public class ManuItemsFragment extends Fragment {
 	private void loadOrderListDialog() {
 		LayoutInflater inf = getActivity().getLayoutInflater();
 		AlertDialog.Builder b = new Builder(getActivity());
+		final SmartBoyApplication service = (SmartBoyApplication) getActivity().getApplication();
 		
 		int total = 0;
 		
-		for(OrderItem o : orders) {
+		for(OrderItem o : service.getOrders()) {
 			total += (o.getCount() * o.getItem().getPrice());
 		}
 		
 		b.setTitle(String.format("Total : %d", total));
 		
 		View view = inf.inflate(R.layout.fragment_order_list, null);
-		TableDetailsAdapter adpater = new TableDetailsAdapter(orders, inf);
+		TableDetailsAdapter adpater = new TableDetailsAdapter(service.getOrders(), inf);
 		ListView listView = (ListView) view.findViewById(R.id.details_list);
 		listView.setAdapter(adpater);
 		
@@ -143,7 +143,7 @@ public class ManuItemsFragment extends Fragment {
 		b.setNeutralButton("Clear", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				orders.clear();
+				service.clear();
 				Toast.makeText(getActivity(), "Orders List has been cleared.", Toast.LENGTH_SHORT).show();
 			}
 		});

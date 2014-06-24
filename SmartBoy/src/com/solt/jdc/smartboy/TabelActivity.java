@@ -22,6 +22,7 @@ import com.solt.jdc.smartboy.adapter.TableDetailsAdapter;
 import com.solt.jdc.smartboy.dto.Order;
 import com.solt.jdc.smartboy.dto.OrderItem;
 import com.solt.jdc.smartboy.dto.Table;
+import com.solt.jdc.smartboy.util.SmartBoyApplication;
 import com.solt.jdc.smartboy.util.RestaurantBroker;
 import com.solt.jdc.smartboy.util.RestaurantTestBroker;
 
@@ -42,6 +43,13 @@ public class TabelActivity extends ActionBarActivity {
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		SmartBoyApplication service = (SmartBoyApplication) getApplication();
+		service.clear();
 	}
 
 	@Override

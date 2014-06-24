@@ -3,42 +3,38 @@ package com.solt.jdc.smartboy.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.solt.jdc.smartboy.dto.OrderItem;
-
-import android.app.Service;
-import android.content.Intent;
-import android.os.Binder;
-import android.os.IBinder;
+import android.app.Application;
 import android.widget.Toast;
 
-public class OrderService extends Service {
+import com.solt.jdc.smartboy.dto.OrderItem;
+
+public class SmartBoyApplication extends Application {
 
 	private List<OrderItem> orders;
-	private IBinder binder = new OrderBinder();
-	
-	public class OrderBinder extends Binder{
-		public OrderService getService() {
-			return OrderService.this;
-		}
-	}
-	
-	@Override
-	public IBinder onBind(Intent intent) {
-		return binder;
-	}
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		orders = new ArrayList<OrderItem>();
+		this.orders = new ArrayList<OrderItem>();
 	}
 
+	
+	@Override
+	public void onTerminate() {
+		super.onTerminate();
+		this.orders.clear();
+	}
+	
 	public void clear() {
 		this.orders.clear();
 	}
 
 	public void add(OrderItem item) {
 		this.orders.add(item);
+	}
+	
+	public List<OrderItem> getOrders() {
+		return this.orders;
 	}
 
 	public void send() {
