@@ -19,16 +19,19 @@ public class BillModel {
 		Student st = b.getStudentJdc().getStudent();
 		if(st.getId() == 0) {
 			em.persist(st);
+			em.flush();
 		}
 		
 		StudentJdc jdc = em.find(StudentJdc.class, b.getStudentJdc().getId());
 		
 		if(null == jdc) {
 			em.persist(b.getStudentJdc());
+			em.flush();
 		}
 		
 		em.persist(b);
 		
 		return b;
 	}
+	
 }

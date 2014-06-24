@@ -40,4 +40,9 @@ public class Dao<T> {
 		return t;
 	}
 	
+	public T referesh(T t) {
+		this.em.refresh(t);
+		return t;
+	}
+	
 }

@@ -3,6 +3,7 @@ package com.solt.jdc.entity;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import static javax.persistence.CascadeType.REFRESH;
 
 
 /**
@@ -21,12 +22,12 @@ public class StudentJdc implements Serializable {
 	private StudentJdcPK id = new StudentJdcPK();
 
 	//uni-directional many-to-one association to JdcClass
-	@ManyToOne
+	@ManyToOne(cascade = REFRESH)
 	@JoinColumn(name="jdc_class_id")
 	private JdcClass jdcClass;
 
 	//uni-directional many-to-one association to Student
-	@ManyToOne
+	@ManyToOne(cascade = REFRESH)
 	private Student student;
 
 	public StudentJdc() {

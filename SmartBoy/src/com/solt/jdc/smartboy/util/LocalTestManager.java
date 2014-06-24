@@ -28,6 +28,14 @@ public class LocalTestManager implements LocalManager {
 		ITEMS.add(new Item(6, "Ice Lemon Tea", 2, 500));
 		ITEMS.add(new Item(7, "Ginger Ale", 2, 500));
 		ITEMS.add(new Item(8, "Cream Sodar", 2, 500));
+		ITEMS.add(new Item(9, "Milk", 1, 300));
+		ITEMS.add(new Item(10, "Milo", 1, 350));
+		ITEMS.add(new Item(11, "Cocoa", 1, 400));
+		ITEMS.add(new Item(12, "Green Tea", 1, 250));
+		ITEMS.add(new Item(13, "Leamon Tea", 1, 200));
+		ITEMS.add(new Item(14, "Jasmine Tea", 1, 200));
+		ITEMS.add(new Item(15, "Honey Tea", 1, 200));
+		ITEMS.add(new Item(16, "Lime Tea", 1, 200));
 	}
 
 	@Override

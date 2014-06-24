@@ -11,7 +11,8 @@ import com.solt.jdc.smartboy.fragment.ManuItemsFragment;
 import com.solt.jdc.smartboy.util.LocalManager;
 import com.solt.jdc.smartboy.util.LocalTestManager;
 
-public class ManuPagerAdapter extends FragmentPagerAdapter{
+public class ManuPagerAdapter extends FragmentPagerAdapter {
+
 	private List<Category> categories;
 	private LocalManager manager;
 	
@@ -35,4 +36,5 @@ public class ManuPagerAdapter extends FragmentPagerAdapter{
 	public CharSequence getPageTitle(int position) {
 		return this.categories.get(position).getName();
 	}
+
 }

@@ -33,7 +33,7 @@
         </activity>
         <activity
             android:name="com.solt.jdc.smartboy.NewOrderActivity"
-            android:icon="@drawable/ic_launcher_new_orders"
+            android:icon="@drawable/ic_action_list"
             android:label="@string/title_activity_new_order"
             android:parentActivityName="com.solt.jdc.smartboy.MainActivity" >
             <meta-data

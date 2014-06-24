@@ -20,6 +20,8 @@ public class BillService extends AbstractService<Bill> {
 	@Override
 	public Bill create(Bill b) {
 		// student
-		return billModel.persist(b);
+		Bill bill = billModel.persist(b);
+		
+		return dao.find(Bill.class, bill.getId());
 	}
 }

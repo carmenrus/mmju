@@ -2,11 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/jdc-service"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jaxrs-ri-2.7"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jsonp"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jsonp-jaxrs-1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/controller-fx"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jdc-service"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

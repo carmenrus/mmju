@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.REFRESH;
 
 
 /**
@@ -37,7 +38,7 @@ public class Bill implements Serializable {
 	private int paid;
 
 	//uni-directional many-to-one association to StudentJdc
-	@ManyToOne
+	@ManyToOne(cascade = REFRESH)
 	@JoinColumns({
 		@JoinColumn(name="jdc_class_id", referencedColumnName="jdc_class_id"),
 		@JoinColumn(name="student_id", referencedColumnName="student_id")
@@ -45,7 +46,7 @@ public class Bill implements Serializable {
 	private StudentJdc studentJdc;
 
 	//uni-directional many-to-one association to Transaction
-	@ManyToOne(cascade = PERSIST)
+	@ManyToOne(cascade = { PERSIST, REFRESH })
 	private Transaction transaction;
 
 	public Bill() {
