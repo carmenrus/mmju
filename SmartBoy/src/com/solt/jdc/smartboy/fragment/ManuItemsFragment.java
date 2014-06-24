@@ -23,13 +23,14 @@ import com.solt.jdc.smartboy.adapter.MenuItemsAdapter;
 import com.solt.jdc.smartboy.adapter.TableDetailsAdapter;
 import com.solt.jdc.smartboy.dto.Item;
 import com.solt.jdc.smartboy.dto.OrderItem;
-import com.solt.jdc.smartboy.util.LocalTestManager;
+import com.solt.jdc.smartboy.util.LocalManager;
 import com.solt.jdc.smartboy.util.SmartBoyApplication;
 
 public class ManuItemsFragment extends Fragment {
 
 	private static final String ARG_CATEGORY_ID = "ARG_CATEGORY_ID";
 	private int categoryId;
+	private LocalManager local;
 
 	public static ManuItemsFragment newInstance(int categoryId) {
 		ManuItemsFragment fragment = new ManuItemsFragment();
@@ -45,7 +46,9 @@ public class ManuItemsFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
+		local = (LocalManager) getActivity().getApplication();
+		
 		if (getArguments() != null) {
 			this.categoryId = getArguments().getInt(ARG_CATEGORY_ID);
 		}
@@ -59,8 +62,7 @@ public class ManuItemsFragment extends Fragment {
 				container, false);
 		GridView grid = (GridView) rootView.findViewById(R.id.menu_items);
 
-		final MenuItemsAdapter adapter = new MenuItemsAdapter(LocalTestManager
-				.getTestLocalManaget().getItems(categoryId), inflater);
+		final MenuItemsAdapter adapter = new MenuItemsAdapter(local.getItems(categoryId), inflater);
 		grid.setAdapter(adapter);
 
 		grid.setOnItemClickListener(new OnItemClickListener() {
@@ -84,8 +86,7 @@ public class ManuItemsFragment extends Fragment {
 		final SmartBoyApplication service = (SmartBoyApplication) getActivity().getApplication();
 		
 		// item
-		final Item item = LocalTestManager.getTestLocalManaget()
-				.getItem(itemId);
+		final Item item = local.getItem(itemId);
 		b.setTitle(String.format("%s : %d", item.getName(), item.getPrice()));
 
 		// view

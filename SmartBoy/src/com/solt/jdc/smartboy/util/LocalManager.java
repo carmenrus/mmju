@@ -11,7 +11,8 @@ public interface LocalManager {
 	public List<Table> getTables();
 	public List<Category> getCategories();
 
-	public Table getTableInfo(int tableId);
+	public Table getTable(int tableId);
+	public List<Item> getItems();
 	public List<Item> getItems(int category);
 	public Item getItem(int id);
 

@@ -8,18 +8,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.solt.jdc.smartboy.dto.Category;
 import com.solt.jdc.smartboy.fragment.ManuItemsFragment;
-import com.solt.jdc.smartboy.util.LocalManager;
-import com.solt.jdc.smartboy.util.LocalTestManager;
 
 public class ManuPagerAdapter extends FragmentPagerAdapter {
 
 	private List<Category> categories;
-	private LocalManager manager;
 	
-	public ManuPagerAdapter(FragmentManager fm) {
+	public ManuPagerAdapter(FragmentManager fm, List<Category> categories) {
 		super(fm);
-		manager = LocalTestManager.getTestLocalManaget();
-		categories = manager.getCategories();
+		this.categories = categories;
 	}
 
 	@Override

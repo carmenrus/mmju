@@ -39,7 +39,7 @@ public class LocalTestManager implements LocalManager {
 	}
 
 	@Override
-	public Table getTableInfo(int tableId) {
+	public Table getTable(int tableId) {
 		return new Table(tableId, String.valueOf(tableId), 4);
 	}
 
@@ -81,6 +81,11 @@ public class LocalTestManager implements LocalManager {
 				return i;
 		}
 		return null;
+	}
+
+	@Override
+	public List<Item> getItems() {
+		return ITEMS;
 	}
 
 }

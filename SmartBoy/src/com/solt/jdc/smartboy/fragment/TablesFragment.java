@@ -18,7 +18,7 @@ import com.solt.jdc.smartboy.R;
 import com.solt.jdc.smartboy.TabelActivity;
 import com.solt.jdc.smartboy.adapter.TablesAdapter;
 import com.solt.jdc.smartboy.dto.Table;
-import com.solt.jdc.smartboy.util.LocalTestManager;
+import com.solt.jdc.smartboy.util.LocalManager;
 
 public class TablesFragment extends Fragment{
 	public TablesFragment() {
@@ -29,8 +29,7 @@ public class TablesFragment extends Fragment{
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_main, container,
 				false);
-		List<Table> tables = LocalTestManager.getTestLocalManaget()
-				.getTables();
+		List<Table> tables = ((LocalManager)getActivity().getApplication()).getTables();
 		final TablesAdapter adapter = new TablesAdapter(tables, (LayoutInflater) getActivity()
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
 		

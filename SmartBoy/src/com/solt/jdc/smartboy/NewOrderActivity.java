@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.solt.jdc.smartboy.adapter.ManuPagerAdapter;
+import com.solt.jdc.smartboy.util.LocalManager;
 
 public class NewOrderActivity extends ActionBarActivity implements
 		ActionBar.TabListener {
@@ -24,9 +25,11 @@ public class NewOrderActivity extends ActionBarActivity implements
 
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
+		LocalManager local = (LocalManager) getApplication();
+		
+		
 		menuPagerAdapter = new ManuPagerAdapter(
-				getSupportFragmentManager());
+				getSupportFragmentManager(), local.getCategories());
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
