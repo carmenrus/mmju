@@ -19,7 +19,7 @@ public class SmartBoyApplication extends Application implements LocalManager{
 	private List<Item> items;
 	
 	private void initData() {
-		LocalManager local = LocalTestManager.getTestLocalManaget();
+		LocalDatabaseManager local = new LocalDatabaseManager(getApplicationContext());
 		this.tables = local.getTables();
 		this.categories = local.getCategories();
 		this.items = local.getItems();

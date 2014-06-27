@@ -8,6 +8,8 @@
         android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name="com.solt.jdc.smartboy.util.SmartBoyApplication"
         android:allowBackup="true"
@@ -41,6 +43,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.solt.jdc.smartboy.MainActivity" />
         </activity>
+
     </application>
 
 </manifest>

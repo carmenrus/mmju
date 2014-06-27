@@ -103,7 +103,7 @@ public class TabelActivity extends ActionBarActivity {
 			View rootView = inflater.inflate(R.layout.fragment_order_list,
 					container, false);
 
-			RestaurantBroker broker = RestaurantTestBroker.getTestBroker();
+			RestaurantBroker broker = RestaurantTestBroker.getTestBroker(getActivity());
 			List<OrderItem> allOrders = new ArrayList<OrderItem>();
 			int total = 0;
 			for (Order o : broker.getOrders(table.getId())) {

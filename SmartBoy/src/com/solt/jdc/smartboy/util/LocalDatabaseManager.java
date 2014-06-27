@@ -3,6 +3,7 @@ package com.solt.jdc.smartboy.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -84,6 +85,29 @@ public class LocalDatabaseManager extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		createAllTables(db);
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		dropAllTables(db);
+		createAllTables(db);
+	}
+	
+	
+	public void reload(List<Category> categories, List<Item> items, List<Table> tables) {
+		SQLiteDatabase db = getWritableDatabase();
+		dropAllTables(db);
+		createAllTables(db);
+		db.close();
+		
+		insertCategories(categories);
+		insertItems(items);
+		insertTables(tables);
+	}
+	
+	
+	private void createAllTables(SQLiteDatabase db) {
 		// create category
 		db.execSQL(String.format(
 				"CREATE TABLE %s (%s INTEGER PRIMARY KEY, %s TEXT)",
@@ -91,7 +115,7 @@ public class LocalDatabaseManager extends SQLiteOpenHelper {
 		
 		// create item
 		db.execSQL(String
-				.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY, %s TEXT, %s INTEGER, % INTEGER)",
+				.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY, %s TEXT, %s INTEGER, %s INTEGER)",
 						TBL_ITEM, KEY_ID, KEY_NAME, KEY_PRICE, KEY_CATEGORY));
 
 		// create table
@@ -99,14 +123,59 @@ public class LocalDatabaseManager extends SQLiteOpenHelper {
 				.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY, %s TEXT, %s INTEGER)",
 						TBL_TABLE, KEY_ID, KEY_NAME, KEY_CHAIRS));
 	}
-
-	@Override
-	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL(String.format("DROP TABLE IF EXITS %s", TBL_CATEGORY));
-		db.execSQL(String.format("DROP TABLE IF EXITS %s", TBL_ITEM));
-		db.execSQL(String.format("DROP TABLE IF EXITS %s", TBL_TABLE));
-
-		onCreate(db);
+	
+	private void dropAllTables(SQLiteDatabase db) {
+		db.execSQL(String.format("DROP TABLE IF EXISTS %s", TBL_CATEGORY));
+		db.execSQL(String.format("DROP TABLE IF EXISTS %s", TBL_ITEM));
+		db.execSQL(String.format("DROP TABLE IF EXISTS %s", TBL_TABLE));
+	}
+	
+	private void insertItems(List<Item> items) {
+		
+		SQLiteDatabase db = getWritableDatabase();
+		
+		if(null != items) {
+			for(Item i : items) {
+				ContentValues v = new ContentValues();
+				v.put(KEY_ID, i.getId());
+				v.put(KEY_NAME, i.getName());
+				v.put(KEY_CATEGORY, i.getCategory());
+				v.put(KEY_PRICE, i.getPrice());
+				
+				db.insert(TBL_ITEM, null, v);
+			}
+		}
+		db.close();
+	}
+	
+	private void insertCategories(List<Category> items) {
+		SQLiteDatabase db = getWritableDatabase();
+		
+		if(null != items) {
+			for(Category i : items) {
+				ContentValues v = new ContentValues();
+				v.put(KEY_ID, i.getId());
+				v.put(KEY_NAME, i.getName());
+				
+				db.insert(TBL_ITEM, null, v);
+			}
+		}
+		db.close();
+	}
+	
+	private void insertTables(List<Table> items) {
+		SQLiteDatabase db = getWritableDatabase();
+		
+		if(null != items) {
+			for(Table i : items) {
+				ContentValues v = new ContentValues();
+				v.put(KEY_ID, i.getId());
+				v.put(KEY_NAME, i.getName());
+				v.put(KEY_CHAIRS, i.getChairs());
+				db.insert(TBL_ITEM, null, v);
+			}
+		}
+		db.close();
 	}
 
 }

@@ -3,18 +3,21 @@ package com.solt.jdc.smartboy.util;
 import java.util.Arrays;
 import java.util.List;
 
+import android.content.Context;
+
 import com.solt.jdc.smartboy.dto.Order;
 import com.solt.jdc.smartboy.dto.OrderItem;
 
 public class RestaurantTestBroker implements RestaurantBroker {
 
-	private LocalManager local = LocalTestManager.getTestLocalManaget();
-	
 	private RestaurantTestBroker(){}
 	private static RestaurantBroker broker;
+	private static Context CONTEXT;
+	private LocalDatabaseManager local = new LocalDatabaseManager(CONTEXT);
 	
-	public static RestaurantBroker getTestBroker() {
-		
+	
+	public static RestaurantBroker getTestBroker(Context context) {
+		CONTEXT = context;
 		broker = (null != broker)?broker:new RestaurantTestBroker();
 		return broker;
 	}
@@ -26,8 +29,8 @@ public class RestaurantTestBroker implements RestaurantBroker {
 
 		order.setId(1);
 		order.setTableId(tableId);
-		order.setItems(Arrays.asList(new OrderItem(local.getItem(1), 3, 0),
-				new OrderItem(local.getItem(3), 2, 0)));
+		order.setItems(Arrays.asList(new OrderItem(local.getItems().get(1), 3, 0),
+				new OrderItem(local.getItems().get(3), 2, 0)));
 
 		return Arrays.asList(order);
 	}
