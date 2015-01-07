@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="opp-web">
+		<jta-data-source>jdbc/__opp</jta-data-source>
+		<class>com.fob.opp.entity.Account</class>
+		<class>com.fob.opp.entity.AccountMessage</class>
+		<class>com.fob.opp.entity.AccountMessagePK</class>
+		<class>com.fob.opp.entity.Budget</class>
+		<class>com.fob.opp.entity.BudgetPK</class>
+		<class>com.fob.opp.entity.Category</class>
+		<class>com.fob.opp.entity.Employee</class>
+		<class>com.fob.opp.entity.Enterpreneur</class>
+		<class>com.fob.opp.entity.Expence</class>
+		<class>com.fob.opp.entity.FeeAgreement</class>
+		<class>com.fob.opp.entity.Loan</class>
+		<class>com.fob.opp.entity.LoanPK</class>
+		<class>com.fob.opp.entity.Message</class>
+		<class>com.fob.opp.entity.MonthlyExpence</class>
+		<class>com.fob.opp.entity.Payment</class>
+		<class>com.fob.opp.entity.Product</class>
+		<class>com.fob.opp.entity.Salary</class>
+		<class>com.fob.opp.entity.Sale</class>
+		<class>com.fob.opp.entity.StartupItem</class>
+	</persistence-unit>
+</persistence>

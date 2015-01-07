@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Welcome from Opp Now</title>
+        <link rel="shortcut icon" href="#{resource['images/favicon.ico']}" type="image/x-icon" />   
+    </h:head>
+    <h:body>
+        <b:container>
+			<div class="col-sm-6">
+			<h:form styleClass="form-horizontal">
+				<div class="form-group">
+				<h2 class="form-signin-heading">Please login</h2>
+				</div>
+				<div class="form-group">
+					<h:outputText value="Login ID" />
+					<h:inputText value="#{loginBean.name}" placeholder="Login ID"
+						styleClass="form-control" />
+				</div>
+
+				<div class="form-group">
+					<h:outputText value="Password" />
+					<h:inputSecret value="#{loginBean.pass}" styleClass="form-control" />
+				</div>
+
+				<div class="form-group">
+					<h:commandButton value="Login" action="#{loginBean.login}"
+						styleClass="btn btn-lg btn-primary btn-block"></h:commandButton>
+				</div>
+			</h:form>
+			</div>
+        </b:container>
+    </h:body>
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_ByuNYDUuEeSur55baTTBbA" name="Opportunity">
+  <packagedElement xmi:type="uml:Activity" xmi:id="_H4IFYDUuEeSur55baTTBbA" name="Opportunity"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_bxXEMDUvEeS4Q-ZAUJrEbg" name="Enterpreneur"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="__x-LsDUvEeS4Q-ZAUJrEbg" name="Initial Budget Creation"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_CCQMQDUwEeS4Q-ZAUJrEbg" name="Account Creation"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_D-WFgDUwEeS4Q-ZAUJrEbg" name="Opportunity"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_JlQqsDUwEeS4Q-ZAUJrEbg" name="Daily Expence Tracking"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_POQTgDUwEeS4Q-ZAUJrEbg" name="Daily Sale Tracking"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_VbGQQDUwEeS4Q-ZAUJrEbg" name="Alert Function"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_iLpxoDUwEeS4Q-ZAUJrEbg" name="Basic Reporting"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_oUEhYDUwEeS4Q-ZAUJrEbg" memberEnd="_oUEhYTUwEeS4Q-ZAUJrEbg _oUFIcDUwEeS4Q-ZAUJrEbg">
+    <name xsi:nil="true"/>
+    <ownedEnd xmi:id="_oUEhYTUwEeS4Q-ZAUJrEbg" type="_D-WFgDUwEeS4Q-ZAUJrEbg" association="_oUEhYDUwEeS4Q-ZAUJrEbg"/>
+    <ownedEnd xmi:id="_oUFIcDUwEeS4Q-ZAUJrEbg" type="_CCQMQDUwEeS4Q-ZAUJrEbg" association="_oUEhYDUwEeS4Q-ZAUJrEbg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_pANOoDUwEeS4Q-ZAUJrEbg" memberEnd="_pANOoTUwEeS4Q-ZAUJrEbg _pANOojUwEeS4Q-ZAUJrEbg">
+    <name xsi:nil="true"/>
+    <ownedEnd xmi:id="_pANOoTUwEeS4Q-ZAUJrEbg" type="_D-WFgDUwEeS4Q-ZAUJrEbg" association="_pANOoDUwEeS4Q-ZAUJrEbg"/>
+    <ownedEnd xmi:id="_pANOojUwEeS4Q-ZAUJrEbg" type="_iLpxoDUwEeS4Q-ZAUJrEbg" association="_pANOoDUwEeS4Q-ZAUJrEbg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_qbbPcDUwEeS4Q-ZAUJrEbg" memberEnd="_qbb2gDUwEeS4Q-ZAUJrEbg _qbb2gTUwEeS4Q-ZAUJrEbg">
+    <name xsi:nil="true"/>
+    <ownedEnd xmi:id="_qbb2gDUwEeS4Q-ZAUJrEbg" type="_bxXEMDUvEeS4Q-ZAUJrEbg" association="_qbbPcDUwEeS4Q-ZAUJrEbg"/>
+    <ownedEnd xmi:id="_qbb2gTUwEeS4Q-ZAUJrEbg" type="__x-LsDUvEeS4Q-ZAUJrEbg" association="_qbbPcDUwEeS4Q-ZAUJrEbg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_rCJ4QDUwEeS4Q-ZAUJrEbg" memberEnd="_rCJ4QTUwEeS4Q-ZAUJrEbg _rCJ4QjUwEeS4Q-ZAUJrEbg">
+    <name xsi:nil="true"/>
+    <ownedEnd xmi:id="_rCJ4QTUwEeS4Q-ZAUJrEbg" type="_bxXEMDUvEeS4Q-ZAUJrEbg" association="_rCJ4QDUwEeS4Q-ZAUJrEbg"/>
+    <ownedEnd xmi:id="_rCJ4QjUwEeS4Q-ZAUJrEbg" type="_JlQqsDUwEeS4Q-ZAUJrEbg" association="_rCJ4QDUwEeS4Q-ZAUJrEbg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_r0nP8DUwEeS4Q-ZAUJrEbg" memberEnd="_r0nP8TUwEeS4Q-ZAUJrEbg _r0nP8jUwEeS4Q-ZAUJrEbg">
+    <name xsi:nil="true"/>
+    <ownedEnd xmi:id="_r0nP8TUwEeS4Q-ZAUJrEbg" type="_bxXEMDUvEeS4Q-ZAUJrEbg" association="_r0nP8DUwEeS4Q-ZAUJrEbg"/>
+    <ownedEnd xmi:id="_r0nP8jUwEeS4Q-ZAUJrEbg" type="_POQTgDUwEeS4Q-ZAUJrEbg" association="_r0nP8DUwEeS4Q-ZAUJrEbg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_tLCQUDUwEeS4Q-ZAUJrEbg" name="Use Case" memberEnd="_tLCQUTUwEeS4Q-ZAUJrEbg _tLC3YDUwEeS4Q-ZAUJrEbg">
+    <ownedEnd xmi:id="_tLCQUTUwEeS4Q-ZAUJrEbg" type="_bxXEMDUvEeS4Q-ZAUJrEbg" association="_tLCQUDUwEeS4Q-ZAUJrEbg"/>
+    <ownedEnd xmi:id="_tLC3YDUwEeS4Q-ZAUJrEbg" type="_iLpxoDUwEeS4Q-ZAUJrEbg" association="_tLCQUDUwEeS4Q-ZAUJrEbg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_JcM_4DUxEeS4Q-ZAUJrEbg" name="Enterprenur List"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_P16T8DUxEeS4Q-ZAUJrEbg" memberEnd="_P16T8TUxEeS4Q-ZAUJrEbg _P16T8jUxEeS4Q-ZAUJrEbg">
+    <name xsi:nil="true"/>
+    <ownedEnd xmi:id="_P16T8TUxEeS4Q-ZAUJrEbg" type="_D-WFgDUwEeS4Q-ZAUJrEbg" association="_P16T8DUxEeS4Q-ZAUJrEbg"/>
+    <ownedEnd xmi:id="_P16T8jUxEeS4Q-ZAUJrEbg" type="_JcM_4DUxEeS4Q-ZAUJrEbg" association="_P16T8DUxEeS4Q-ZAUJrEbg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:StateMachine" xmi:id="_XdBPQDUxEeS4Q-ZAUJrEbg" name="Opportunity statemachine">
+    <region xmi:id="_XdBPQTUxEeS4Q-ZAUJrEbg" name="Acount Creation">
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_oBVWIDUxEeS4Q-ZAUJrEbg" name="Initial1"/>
+      <subvertex xmi:type="uml:State" xmi:id="_spl6sDUxEeS4Q-ZAUJrEbg" name="No Member"/>
+    </region>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_dHBvoDV8EeSzkurySswoKg" name="System Alert">
+    <extend xmi:id="_kObQIDV8EeSzkurySswoKg" extendedCase="_VbGQQDUwEeS4Q-ZAUJrEbg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_gbRuoDV8EeSzkurySswoKg" name="Head Quarter">
+    <extend xmi:id="_ihvr4DV8EeSzkurySswoKg" extendedCase="_VbGQQDUwEeS4Q-ZAUJrEbg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_ltWFMDV8EeSzkurySswoKg" name="message"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_nUnlADV8EeSzkurySswoKg" memberEnd="_nUnlATV8EeSzkurySswoKg _nUnlAjV8EeSzkurySswoKg">
+    <name xsi:nil="true"/>
+    <ownedEnd xmi:id="_nUnlATV8EeSzkurySswoKg" type="_ltWFMDV8EeSzkurySswoKg" association="_nUnlADV8EeSzkurySswoKg"/>
+    <ownedEnd xmi:id="_nUnlAjV8EeSzkurySswoKg" type="_VbGQQDUwEeS4Q-ZAUJrEbg" association="_nUnlADV8EeSzkurySswoKg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_q5L38DV8EeSzkurySswoKg" name="Start Up">
+    <include xmi:id="_0qkScDV8EeSzkurySswoKg" addition="__x-LsDUvEeS4Q-ZAUJrEbg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_udPNgDV8EeSzkurySswoKg" name="Expeted Monthly Expence">
+    <include xmi:id="_1tnD0DV8EeSzkurySswoKg" addition="__x-LsDUvEeS4Q-ZAUJrEbg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_3MKFcDV8EeSzkurySswoKg" name="Product List">
+    <include xmi:id="_4_mZADV8EeSzkurySswoKg" addition="__x-LsDUvEeS4Q-ZAUJrEbg"/>
+  </packagedElement>
+</uml:Model>

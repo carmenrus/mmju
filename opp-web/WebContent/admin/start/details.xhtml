@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+<ui:composition template="/WEB-INF/enter-template.xhtml">
+	<ui:define name="content">
+	
+    <div class="container">
+	    <div class="page-header">
+			<h1>New Start Up Item</h1>
+		</div>	
+
+		<div class="col-sm-6">
+		
+		<h:form styleClass="form-horizontal">
+		
+		<div class="form-group">
+        <h:outputText value="Category"/>
+		<select class="form-control" id="role" name="gender" disabled="disabled">
+		<option value="1">Tools and Equipment (see below)</option>
+		<option value="1">Equipment Installation &amp; Preparation</option>
+		<option value="1">Starting Inventory</option>
+		<option value="1">Advance Rent</option>
+		<option value="1">Licenses &amp; Permits</option>
+		<option value="1">Other Fees (legal, etc.)</option>
+		</select>
+		</div>
+
+		<div class="form-group">
+        <h:outputText value="Item"/>
+        <h:inputText styleClass="form-control" value="1 Horsepower Drill" disabled="true"/>
+		</div>
+		
+		<div class="form-group">
+        <h:outputText value="Unit Price"/>
+        <h:inputText placeholder="Title" styleClass="form-control" value="165,000" disabled="true"/>
+		</div>
+
+		<div class="form-group">
+        <h:outputText value="Amount"/>
+        <h:inputText placeholder="Title" styleClass="form-control" value="165,000" disabled="true"/>
+		</div>
+
+		<div class="form-group">
+        <h:outputText value="Total"/>
+        <h:inputText placeholder="Title" styleClass="form-control" value="165,000" disabled="true"/>
+		</div>
+
+		<div class="form-group">
+        <h:outputText value="Remark" />
+        <h:inputTextarea styleClass="form-control" rows="5" disabled="true"/>
+		</div>
+
+	  <div class="form-group">
+      <a href="/opp-web/enter/start_up.xhtml" class="btn btn-default">Cancel</a>
+      <a href="/opp-web/enter/start/edit.xhtml" class="btn btn-default">Edit</a>
+	  </div>
+
+		</h:form>
+		</div>
+	
+	</div>
+		
+	</ui:define>
+</ui:composition>
+
+</html>

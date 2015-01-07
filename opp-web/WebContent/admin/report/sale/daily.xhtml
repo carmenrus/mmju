@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+<ui:composition template="/WEB-INF/enter-template.xhtml">
+	<ui:define name="content">
+	
+    <div class="container">
+	    <div class="page-header">
+			<h1>Sale Summary</h1>
+		</div>	
+
+		<div class="row">
+
+			<ul class="nav nav-tabs" role="tablist">
+			  <li class="active"><a href="#">Daily</a></li>
+			  <li><a href="/opp-web/enter/report/sale/monthly.xhtml">Monthly</a></li>
+			  <li><a href="/opp-web/enter/report/sale/yearly.xhtml">Yearly</a></li>
+			</ul>
+
+			<div class="col-sm-8">		
+			<table class="table table-striped table-hover top-buffer">
+				<tr class="header-left">
+					<td>Sale Item</td>
+					<td>Date</td>
+					<td>Unit Price</td>
+					<td>Amount</td>
+					<td>Total</td>
+				</tr>
+				<tr>
+					<td>Revenue Tax</td>
+					<td>2014-10-10</td>
+					<td>5000Ks</td>
+					<td>1</td>
+					<td>5000Ks</td>
+				</tr>
+				<tr>
+					<td>Transportation</td>
+					<td>2014-10-10</td>
+					<td>10000Ks</td>
+					<td>1</td>
+					<td>10000Ks</td>
+
+				</tr>
+				<tr>
+					<td>Transportation</td>
+					<td>2014-10-10</td>
+					<td>10000Ks</td>
+					<td>1</td>
+					<td>10000Ks</td>
+
+				</tr>
+				<tr>
+					<td>Transportation</td>
+					<td>2014-10-10</td>
+					<td>10000Ks</td>
+					<td>1</td>
+					<td>10000Ks</td>
+
+				</tr>
+				<tr>
+					<td>Transportation</td>
+					<td>2014-10-10</td>
+					<td>10000Ks</td>
+					<td>1</td>
+					<td>10000Ks</td>
+
+				</tr>
+				<tr>
+					<td>Transportation</td>
+					<td>2014-10-10</td>
+					<td>10000Ks</td>
+					<td>1</td>
+					<td>10000Ks</td>
+
+				</tr>
+				<tr>
+					<td>Transportation</td>
+					<td>2014-10-10</td>
+					<td>10000Ks</td>
+					<td>1</td>
+					<td>10000Ks</td>
+
+				</tr>
+				<tr>
+					<td>Transportation</td>
+					<td>2014-10-10</td>
+					<td>10000Ks</td>
+					<td>1</td>
+					<td>10000Ks</td>
+
+				</tr>
+				<tr>
+					<td>Transportation</td>
+					<td>2014-10-10</td>
+					<td>10000Ks</td>
+					<td>1</td>
+					<td>10000Ks</td>
+
+				</tr>
+				<tr>
+					<td>Transportation</td>
+					<td>2014-10-10</td>
+					<td>10000Ks</td>
+					<td>1</td>
+					<td>10000Ks</td>
+
+				</tr>
+				<tr>
+					<td>Transportation</td>
+					<td>2014-10-10</td>
+					<td>10000Ks</td>
+					<td>1</td>
+					<td>10000Ks</td>
+
+				</tr>
+		</table>
+		</div>
+		
+		<div class="col-sm-4 top-buffer">
+		
+		<h:form>
+			<div class="form-group">
+				<h:outputLabel value="Date From" />
+				<h:inputText styleClass="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Date To" />
+				<h:inputText styleClass="form-control" />
+			</div>
+			<div class="form-group">
+			<h:outputLabel value="Sale Item" />
+			<select class="form-control" id="role" name="gender">
+			<option value="0">All Items</option>
+			<option value="1">Wages</option>
+			<option value="1">Revenue Tax</option>
+			<option value="1">Paint</option>
+			<option value="1">Woods</option>
+			<option value="1">Transportations</option>
+			</select>
+			</div>
+			<div class="form-group top-buffer">
+				<h:outputLabel value="Total Amount" />
+				<h:outputText styleClass="form-control" value="500"/>
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Total Price" />
+				<h:outputText styleClass="form-control" value="760500"/>
+			</div>
+		</h:form>		
+		
+		</div>
+		
+		
+		</div>
+	</div>
+	</ui:define>
+</ui:composition>
+</html>

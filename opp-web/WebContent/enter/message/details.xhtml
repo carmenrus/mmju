@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+<ui:composition template="/WEB-INF/enter-template.xhtml">
+	<ui:define name="content">
+	
+    <div class="container">
+	    <div class="page-header">
+			<h1>Message To Head Office</h1>
+		</div>	
+
+		<div class="col-sm-10">
+		
+		<h:form styleClass="form-horizontal">
+		
+		<div class="form-group">
+        <h:outputText value="Title"/>
+        <h:inputText placeholder="Title" styleClass="form-control" value="System Alert" disabled="true"/>
+		</div>
+		
+		<div class="form-group">
+        <h:outputText value="Message" />
+        <h:inputTextarea styleClass="form-control" rows="10" disabled="true"
+        	value="Your Transportation Expenese has been exceed over expected monthly expenese."/>
+		</div>
+
+	  <div class="form-group">
+      <a href="/opp-web/enter/home.xhtml" class="btn btn-default">Back</a>
+      <a href="/opp-web/enter/home.xhtml" class="btn btn-default">Confirm</a>
+	  </div>
+
+		</h:form>
+		</div>
+	
+	</div>
+		
+	</ui:define>
+</ui:composition>
+
+</html>

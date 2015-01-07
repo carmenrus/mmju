@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+  <title><ui:insert name="title">Opp Now</ui:insert></title>
+  <link rel="shortcut icon" href="#{resource['images/favicon.ico']}" type="image/x-icon" />   
+  <h:outputStylesheet name="css/common.css" />
+</h:head>
+
+<h:body>
+
+<div id="header">
+
+<b:navBar brand="Home" brandHref="#" >
+    <b:navbarLinks>
+	    <b:navLink value="Enterpreneur" href="/admin/home.xhtml"></b:navLink>
+        <b:navLink value="Daily Sales" href="/admin/daily/sale.xhtml"></b:navLink>
+        <b:navLink value="Daily Expenses" href="/admin/daily/expense.xhtml"></b:navLink>
+        <b:dropMenu value="Reports">
+	        <b:navLink value="Expenses" href="/admin/report/expense/daily.xhtml" />
+	        <b:navLink value="Sales" href="/admin/report/sale/daily.xhtml" />
+	        <b:navLink value="Profit &amp; Loose" href="/admin/report/profit/daily.xhtml" />
+	        <b:navLink value="Projection" href="/admin/report/projection.xhtml" />
+        </b:dropMenu>
+        <b:dropMenu value="Initial Budget Creation">
+	        <b:navLink value="Start Up" href="/admin/start_up.xhtml" />
+	        <b:navLink value="Expeted Monthly Expenses" href="/admin/expected_expense.xhtml" />
+	        <b:navLink value="Product List" href="/admin/product.xhtml" />
+        </b:dropMenu>
+    </b:navbarLinks>
+    <b:navbarLinks pull="right">
+        <b:dropMenu value="Admin">
+	        <b:navLink value="Message" href="/admin/message/list.xhtml"></b:navLink>
+	        <b:navLink value="Logout" href="/login.xhtml" />
+        </b:dropMenu>
+    </b:navbarLinks>
+</b:navBar>
+
+
+</div>
+
+
+<div id="content">
+  <ui:insert name="content">
+    	Dummy Contents
+  </ui:insert>
+</div>
+
+</h:body>
+
+</html>
