@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>POST</title>
+</head>
+<body>
+<header>
+	<h1>User Form</h1>
+</header>
+<article>
+	<form method="post" action="/webservice/rs/users">
+		<label for="name">Name
+			<input id="name" type="text" name="name" />
+		</label>
+		<label for="pass">Password
+			<input id="pass" type="password" name="pass" />
+		</label>
+		<input type="submit" value="POST" />
+	</form>
+</article>
+<header>
+	<h1>Role Form</h1>
+</header>
+<article>
+	<form method="post" action="/webservice/rs/roles">
+		<label for="rolename">Name
+			<input id="rolename" type="text" name="name" />
+		</label>
+		<input type="submit" value="POST" />
+	</form>
+</article>
+
+</body>
+</html>

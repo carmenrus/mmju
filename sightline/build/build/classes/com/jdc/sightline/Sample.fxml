@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="679.0" prefWidth="1103.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jdc.sightline.SampleController">
+   <children>
+      <Label layoutX="31.0" layoutY="28.0" text="Find Words">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <effect>
+            <Reflection />
+         </effect>
+      </Label>
+      <TableView fx:id="words" layoutX="29.0" layoutY="82.0" prefHeight="172.0" prefWidth="637.0">
+        <columns>
+          <TableColumn fx:id="product" prefWidth="122.81068801879883" text="Product" />
+          <TableColumn fx:id="english" prefWidth="206.5582275390625" text="English" />
+            <TableColumn fx:id="japanese" prefWidth="305.3737487792969" text="Japanese" />
+        </columns>
+      </TableView>
+      <TableView fx:id="choise" layoutX="686.0" layoutY="80.0" prefHeight="542.0" prefWidth="376.0">
+        <columns>
+          <TableColumn fx:id="origin" prefWidth="162.8155517578125" text="Original" />
+          <TableColumn fx:id="choice" prefWidth="209.7183837890625" text="Convert" />
+        </columns>
+      </TableView>
+      <TextArea fx:id="text" layoutX="28.0" layoutY="445.0" prefHeight="176.0" prefWidth="639.0" />
+      <TableView fx:id="review" layoutX="29.0" layoutY="263.0" prefHeight="172.0" prefWidth="637.0">
+         <columns>
+            <TableColumn fx:id="rProduct" prefWidth="122.81068801879883" text="Product" />
+            <TableColumn fx:id="rEnglish" prefWidth="206.5582275390625" text="English" />
+            <TableColumn fx:id="rJapanese" prefWidth="305.3737487792969" text="Japanese" />
+         </columns>
+      </TableView>
+      <Button layoutX="27.0" layoutY="626.0" mnemonicParsing="false" onAction="#loadGlosary" prefHeight="26.0" prefWidth="139.0" text="Glossary" />
+      <Button layoutX="173.0" layoutY="626.0" mnemonicParsing="false" onAction="#loadReviewData" prefHeight="26.0" prefWidth="139.0" text="Review Data" />
+      <Button layoutX="316.0" layoutY="626.0" mnemonicParsing="false" onAction="#check" prefHeight="26.0" prefWidth="139.0" text="Check" />
+   </children>
+</AnchorPane>
